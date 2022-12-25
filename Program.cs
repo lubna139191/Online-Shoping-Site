@@ -1,4 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+
+
 
 namespace Online_Shoping_Site
 {
@@ -20,7 +25,7 @@ Console.WriteLine("4. View/Edit added listings to their cart.");
 Console.WriteLine("5. Checkout listings.");
 Console.WriteLine("6. Change account information.");
 Console.WriteLine("7. search for a listing.");
-Console.WriteLine("5. logout.");
+Console.WriteLine("8. logout.");
 Console.Write("\nEnter your choice: ");
 choice = Convert.ToInt16(Console.ReadLine());
 switch (choice)
@@ -60,7 +65,15 @@ while (choice != 8);
 
 static void Main(string[] args)
 {
-    Console.WriteLine("Hello World!");
-}
-}
+            FileStream SD = new FileStream("SellerData.txt", FileMode.Create, FileAccess.ReadWrite);
+            BinaryFormatter SDformatter = new BinaryFormatter();
+            
+            FileStream CD = new FileStream("CustomerData.txt", FileMode.Create, FileAccess.ReadWrite);
+            BinaryFormatter CDformatter = new BinaryFormatter();
+            
+
+
+
+        }
+    }
 }
