@@ -7,9 +7,9 @@ using System.Runtime.Serialization;
 
 namespace Online_Shoping_Site
 {
-//***************************************************
+//******************************************************************************************************
 //class just for using global function:
-class GlobalFun
+    class GlobalFun
     {
 //Welcoming screen:
         public static void Welcoming()
@@ -68,7 +68,7 @@ class GlobalFun
                         }
                         break;
                 }
-}
+            }
              else
              {
                 Console.WriteLine("Invalid Choice, please try agian...");
@@ -76,8 +76,7 @@ class GlobalFun
              }
         }
     }
-//***************************************************
-
+//******************************************************************************************************
     class Seller
     {
         int PhoneNumber;
@@ -91,7 +90,7 @@ class GlobalFun
         {
 
         }
-        public void LogInInfoSeller()
+        public void LogInSeller()
         {
 
             int choice = 0;
@@ -141,7 +140,7 @@ class GlobalFun
         }
        
     }
-//***************************************************
+//******************************************************************************************************
     class customer
     {
         int CustomerId;
@@ -157,7 +156,7 @@ class GlobalFun
 
         }
 
-        public void LogInInfoCustomer()
+        public void LogInCustomer()
         {
             int choice = 0;
             do
@@ -205,26 +204,22 @@ class GlobalFun
             while (choice != 8);
         }
     }
-
-//***************************************************
-        class Payment
+//******************************************************************************************************
+    class Payment
     {
   
     }
-//***************************************************
-        class Listings
+//******************************************************************************************************
+    class Listings
     {
        
     }
- //***************************************************
+//******************************************************************************************************
 
     class Program
     {
-        //First comment test 
-        //second comment test
-        //third comment test
-        //comment tset
-        //***************************************************
+//******************************************************************************************************
+//Main:
         static void Main(string[] args)
         {
 //File creation: 
