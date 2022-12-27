@@ -7,6 +7,77 @@ using System.Runtime.Serialization;
 
 namespace Online_Shoping_Site
 {
+//***************************************************
+//class just for using global function:
+class GlobalFun
+    {
+//Welcoming screen:
+        public static void Welcoming()
+        {
+            Console.WriteLine("Welcome To The Online shopping site, Please select the USER TYPE:");
+            Console.WriteLine("1. Seller.");
+            Console.WriteLine("2. customer.");
+            Console.WriteLine("Enter your choice: ");
+            int user = Convert.ToInt32(Console.ReadLine());
+
+            if (user == 1 || user == 2)
+            {
+                switch (user)
+                {
+                    case 1:
+                        Console.WriteLine("If this is your first visit to the site,");
+                        Console.WriteLine("choose the first option (Sign Up),");
+                        Console.WriteLine("If you have already registered, choose the second option (Log In).");
+                        Console.WriteLine("1. SignUp.");
+                        Console.WriteLine("2. Login.");
+                        int Action = Convert.ToInt32(Console.ReadLine());
+                        if (Action == 1)
+                        {
+                            //SignUpSeller();
+                        }
+                        else if (Action == 2)
+                        {
+                            //LogInSeller();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Choice, please try agian...");
+                            GlobalFun.Welcoming();
+                        }
+                        break;
+
+                    case 2:
+                        Console.WriteLine("If this is your first visit to the site,");
+                        Console.WriteLine("choose the first option (Sign Up),");
+                        Console.WriteLine("If you have already registered, choose the second option (Log In).");
+                        Console.WriteLine("1. SignUp.");
+                        Console.WriteLine("2. Login.");
+                        int Choice = Convert.ToInt32(Console.ReadLine());
+                        if (Choice == 1)
+                        {
+                            //SignUpCustomer();
+                        }
+                        else if (Choice == 2)
+                        {
+                            //LogInCustomer();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid Choice, please try agian...");
+                            GlobalFun.Welcoming();
+                        }
+                        break;
+                }
+}
+             else
+             {
+                Console.WriteLine("Invalid Choice, please try agian...");
+                GlobalFun.Welcoming();
+             }
+        }
+    }
+//***************************************************
+
     class Seller
     {
         int PhoneNumber;
@@ -23,10 +94,6 @@ namespace Online_Shoping_Site
         public void LogInInfoSeller()
         {
 
-        }
-
-        public void loggedSeller()
-        {
             int choice = 0;
             do
             {
@@ -63,6 +130,7 @@ namespace Online_Shoping_Site
                         //ViewSoldListingsInformation();                   
                         break;
                     case 8:
+                        //RETURN TO THE LOGIN SCREEN TO ENABLE YOU TO LOG IN WITH DIFFERENT USER TYPE.
                         break;
                     default:
                         Console.WriteLine("Invalid Choice, please try agian...");
@@ -90,11 +158,6 @@ namespace Online_Shoping_Site
         }
 
         public void LogInInfoCustomer()
-        {
-
-        }
-
-        public void LoggedAsCustomer()
         {
             int choice = 0;
             do
@@ -161,65 +224,20 @@ namespace Online_Shoping_Site
         //second comment test
         //third comment test
         //comment tset
-
+        //***************************************************
         static void Main(string[] args)
         {
+//File creation: 
             FileStream SD = new FileStream("SellerData.txt", FileMode.Create, FileAccess.ReadWrite);
             BinaryFormatter SDformatter = new BinaryFormatter();
 
             FileStream CD = new FileStream("CustomerData.txt", FileMode.Create, FileAccess.ReadWrite);
             BinaryFormatter CDformatter = new BinaryFormatter();
 
-            Console.WriteLine("Welcome To The Online shopping site, Please select the USER TYPE:");
-            Console.WriteLine("1. Seller.");
-            Console.WriteLine("2. customer.");
-            Console.WriteLine("Enter your choice: ");
-            int user = Convert.ToInt32(Console.ReadLine());
+//Welcoming screen:
+            GlobalFun.Welcoming();
 
-            if (user == 1 || user == 2)
-            {
-                switch (user)
-                {
-                    case 1:
-                        Console.WriteLine("If this is your first visit to the site,");
-                        Console.WriteLine("choose the first option (Sign Up),");
-                        Console.WriteLine("If you have already registered, choose the second option (Log In).");
-                        Console.WriteLine("1. SignUp.");
-                        Console.WriteLine("2. Login.");
-                        int Action = Convert.ToInt32(Console.ReadLine());
-                        if (Action == 1)
-                        {
-                            //SignUpSeller()
-                        }
-                        else if (Action == 2)
-                        {
-                            //LogInSeller()
-                        }
-                        else
-                            Console.WriteLine("Invalid Choice, please try agian...");
-                        break;
-                    case 2:
-                        Console.WriteLine("If this is your first visit to the site,");
-                        Console.WriteLine("choose the first option (Sign Up),");
-                        Console.WriteLine("If you have already registered, choose the second option (Log In).");
-                        Console.WriteLine("1. SignUp.");
-                        Console.WriteLine("2. Login.");
-                        int Choice = Convert.ToInt32(Console.ReadLine());
-                        if (Choice == 1)
-                        {
-                            //SignUpCustomer()
-                        }
-                        else if (Choice == 2)
-                        {
-                            //LogInCustomer()
-                        }
-                        else
-                            Console.WriteLine("Invalid Choice, please try agian...");
-                        break;
-                }
-            }
-            else
-                Console.WriteLine("Invalid Choice, please try agian...");
+
         }
 
     }
