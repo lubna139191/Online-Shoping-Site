@@ -69,11 +69,11 @@ namespace Online_Shoping_Site
                         Console.WriteLine("(Any Data You Enterd Will Be Lost)");
                         Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
                         string Answer = Console.ReadLine();
-                        if (Answer == "Y")
+                        if (Answer == "Y" || Answer == "y")
                         { GlobalFun.Welcoming(); }
                         else
                         {
-                            int choice = Convert.ToInt32(x);
+                            
                             Console.WriteLine("Enter Full Name:");
                             Name = Console.ReadLine();
                         }
@@ -130,20 +130,20 @@ namespace Online_Shoping_Site
                     {
                         int choice = Convert.ToInt32(x);
                         Console.WriteLine("Enter Country:");
-                        Name = Console.ReadLine();
+                        Country = Console.ReadLine();
                     }
                     else
                     {
                         Console.WriteLine("(Any Data You Enterd Will Be Lost)");
                         Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
                         string Answer = Console.ReadLine();
-                        if (Answer == "Y")
+                        if (Answer == "Y" || Answer == "y")
                         { GlobalFun.Welcoming(); }
                         else
                         {
-                            int choice = Convert.ToInt32(x);
+                            
                             Console.WriteLine("Enter Country:");
-                            Name = Console.ReadLine();
+                            Country = Console.ReadLine();
                         }
                     }
                 }
@@ -194,20 +194,20 @@ namespace Online_Shoping_Site
                     {
                         int choice = Convert.ToInt32(x);
                         Console.WriteLine("Enter City:");
-                        Name = Console.ReadLine();
+                        City = Console.ReadLine();
                     }
                     else
                     {
                         Console.WriteLine("(Any Data You Enterd Will Be Lost)");
                         Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
                         string Answer = Console.ReadLine();
-                        if (Answer == "Y")
+                        if (Answer == "Y" || Answer == "y")
                         { GlobalFun.Welcoming(); }
                         else
                         {
-                            int choice = Convert.ToInt32(x);
+                            
                             Console.WriteLine("Enter City:");
-                            Name = Console.ReadLine();
+                            City = Console.ReadLine();
                         }
                     }
                 }
@@ -258,20 +258,20 @@ namespace Online_Shoping_Site
                     {
                         int choice = Convert.ToInt32(x);
                         Console.WriteLine("Enter Street:");
-                        Name = Console.ReadLine();
+                        Street = Console.ReadLine();
                     }
                     else
                     {
                         Console.WriteLine("(Any Data You Enterd Will Be Lost)");
                         Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
                         string Answer = Console.ReadLine();
-                        if (Answer == "Y")
+                        if (Answer == "Y" || Answer == "y")
                         { GlobalFun.Welcoming(); }
                         else
                         {
-                            int choice = Convert.ToInt32(x);
+                            
                             Console.WriteLine("Enter Street:");
-                            Name = Console.ReadLine();
+                            Street = Console.ReadLine();
                         }
                     }
                 }
@@ -304,20 +304,20 @@ namespace Online_Shoping_Site
                     {
                         int choice = Convert.ToInt32(x);
                         Console.WriteLine("Enter Apartment Number:");
-                        Name = Console.ReadLine();
+                        ApartmentN = Console.ReadLine();
                     }
                     else
                     {
                         Console.WriteLine("(Any Data You Enterd Will Be Lost)");
                         Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
                         string Answer = Console.ReadLine();
-                        if (Answer == "Y")
+                        if (Answer == "Y" || Answer == "y")
                         { GlobalFun.Welcoming(); }
                         else
                         {
-                            int choice = Convert.ToInt32(x);
+                            
                             Console.WriteLine("Enter Apartment Number:");
-                            Name = Console.ReadLine();
+                            ApartmentN = Console.ReadLine();
                         }
                     }
                 }
@@ -345,20 +345,20 @@ namespace Online_Shoping_Site
                     {
                         int choice = Convert.ToInt32(x);
                         Console.WriteLine("Enter Email Address:");
-                        Name = Console.ReadLine();
+                        EmailAddress = Console.ReadLine();
                     }
                     else
                     {
                         Console.WriteLine("(Any Data You Enterd Will Be Lost)");
                         Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
                         string Answer = Console.ReadLine();
-                        if (Answer == "Y")
+                        if (Answer == "Y" || Answer == "y")
                         { GlobalFun.Welcoming(); }
                         else
                         {
-                            int choice = Convert.ToInt32(x);
+                            
                             Console.WriteLine("Enter Email Address:");
-                            Name = Console.ReadLine();
+                            EmailAddress = Console.ReadLine();
                         }
                     }
                 }
@@ -412,20 +412,20 @@ namespace Online_Shoping_Site
                     {
                         int choice = Convert.ToInt32(x);
                         Console.WriteLine("Enter Phone Number:");
-                        Name = Console.ReadLine();
+                        PhoneNumber = Console.ReadLine();
                     }
                     else
                     {
                         Console.WriteLine("(Any Data You Enterd Will Be Lost)");
                         Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
                         string Answer = Console.ReadLine();
-                        if (Answer == "Y")
+                        if (Answer == "Y"||Answer == "y")
                         { GlobalFun.Welcoming(); }
                         else
                         {
-                            int choice = Convert.ToInt32(x);
+                            
                             Console.WriteLine("Enter Phone Number:");
-                            Name = Console.ReadLine();
+                            PhoneNumber = Console.ReadLine();
                         }
                     }
                 }
@@ -460,20 +460,20 @@ namespace Online_Shoping_Site
                     {
                         int choice = Convert.ToInt32(x);
                         Console.WriteLine("Enter Store Number:");
-                        Name = Console.ReadLine();
+                        StoreNumber = Console.ReadLine();
                     }
                     else
                     {
                         Console.WriteLine("(Any Data You Enterd Will Be Lost)");
                         Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
                         string Answer = Console.ReadLine();
-                        if (Answer == "Y")
+                        if (Answer == "Y" || Answer == "y")
                         { GlobalFun.Welcoming(); }
                         else
                         {
-                            int choice = Convert.ToInt32(x);
+                            
                             Console.WriteLine("Enter Store Number:");
-                            Name = Console.ReadLine();
+                            StoreNumber = Console.ReadLine();
                         }
                     }
                 }
@@ -548,19 +548,19 @@ namespace Online_Shoping_Site
                             {
                                 int choice = Convert.ToInt32(x);
                                 Console.WriteLine("Enter Password:");
-                                Name = Console.ReadLine();
+                                Password = Console.ReadLine();
                             }
                             else {
                                 Console.WriteLine("(Any Data You Enterd Will Be Lost)");
                                 Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
                                 string Answer = Console.ReadLine();
-                                if (Answer == "Y")
+                                if (Answer == "Y" || Answer == "y")
                                 { GlobalFun.Welcoming(); }
                                 else
                                 {
-                                    int choice = Convert.ToInt32(x);
+                                    
                                     Console.WriteLine("Enter Password:");
-                                    Name = Console.ReadLine();
+                                    Password = Console.ReadLine();
                                 }
                             }
                         }
