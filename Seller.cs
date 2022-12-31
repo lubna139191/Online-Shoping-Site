@@ -15,7 +15,7 @@ namespace Online_Shoping_Site
     {
 
         string Name;
-        string Address;
+        Address addrees;
         string EmailAddress;
         string PhoneNumber;
         string StoreNumber;
@@ -57,22 +57,272 @@ namespace Online_Shoping_Site
 
                 if (condition == false) {
                     Console.WriteLine("The Name You Enterd Does Not Meet The Requirements");
-                    Console.WriteLine("To Enter Anthor Name Enter 1");
-                    Console.WriteLine("To Exit This Page Enter 2");
-                    int choice= Convert.ToInt32(Console.ReadLine());
-                    if (choice == 1)
-                    {
+                    Console.WriteLine("To Enter Anthor Name Enter (1)");
+                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                    string x = Console.ReadLine();
+                    if (x == "1") { int choice = Convert.ToInt32(x);
                         Console.WriteLine("Enter Full Name:");
                         Name = Console.ReadLine();
                     }
-                    else if (choice == 2) { GlobalFun.Welcoming(); }
+                    else
+                    {
+                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                        Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
+                        string Answer = Console.ReadLine();
+                        if (Answer == "Y")
+                        { GlobalFun.Welcoming(); }
+                        else
+                        {
+                            int choice = Convert.ToInt32(x);
+                            Console.WriteLine("Enter Full Name:");
+                            Name = Console.ReadLine();
+                        }
+                    }
                 }
             }
             this.Name = Name;
         }
 
-        public void SetAddress(string Address) {
-            this.Address = Address;
+        public void SetAddress(string Country,string City,String Street,String ApartmentN) {
+            addrees = new Address();
+            ////Check Country
+            bool condition = false;
+            while (condition == false)
+            {
+                condition = true;
+
+                //check if enterd Country contains any nmubers
+                for (int i = 0; i < Country.Length; i++)
+                {
+                    string x = Convert.ToString(Country[i]);
+                    if (x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
+                        || x == Convert.ToString("3") || x == Convert.ToString("4") || x == Convert.ToString("5")
+                       || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8") || x == Convert.ToString("9"))
+                    {
+                        condition = false;
+                    }
+
+                }
+
+                //check if enterd Country contains any Spaces 
+                if (Country.ToLower().Contains(" ")) { condition = false; }
+
+                //check if enterd Country contains any special charachters
+                if (Country.ToLower().Contains('~') || Country.ToLower().Contains('!') || Country.ToLower().Contains('@') || Country.ToLower().Contains('#') ||
+                       Country.ToLower().Contains('$') || Country.ToLower().Contains('^')
+                    || Country.ToLower().Contains('&') || Country.ToLower().Contains('*') || Country.ToLower().Contains('(') || Country.ToLower().Contains(')')
+                    || Country.ToLower().Contains('_') || Country.ToLower().Contains('-') || Country.ToLower().Contains('=') || Country.ToLower().Contains('+')
+                    || Country.ToLower().Contains('{') || Country.ToLower().Contains('[') || Country.ToLower().Contains(']') || Country.ToLower().Contains('}')
+                    || Country.ToLower().Contains(';') || Country.ToLower().Contains(';') || Country.ToLower().Contains('\"') || Country.ToLower().Contains('\'')
+                    || Country.ToLower().Contains('<') || Country.ToLower().Contains(',') || Country.ToLower().Contains('.') || Country.ToLower().Contains('<')
+                    || Country.ToLower().Contains('/') || Country.ToLower().Contains('?') || Country.ToLower().Contains('\\') || Country.ToLower().Contains('|'))
+                {
+                    condition = false;
+                }
+
+                if (condition == false)
+                {
+                    Console.WriteLine("The Country You Enterd Does Not Meet The Requirements");
+                    Console.WriteLine("To Enter Anthor Country Enter (1)");
+                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                    string x = Console.ReadLine();
+                    if (x == "1")
+                    {
+                        int choice = Convert.ToInt32(x);
+                        Console.WriteLine("Enter Country:");
+                        Name = Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                        Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
+                        string Answer = Console.ReadLine();
+                        if (Answer == "Y")
+                        { GlobalFun.Welcoming(); }
+                        else
+                        {
+                            int choice = Convert.ToInt32(x);
+                            Console.WriteLine("Enter Country:");
+                            Name = Console.ReadLine();
+                        }
+                    }
+                }
+            }
+            this.addrees.SetCountry(Country);
+
+            ////Check City
+             condition = false;
+            while (condition == false)
+            {
+                condition = true;
+
+                //check if enterd City contains any nmubers
+                for (int i = 0; i < City.Length; i++)
+                {
+                    string x = Convert.ToString(City[i]);
+                    if (x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
+                        || x == Convert.ToString("3") || x == Convert.ToString("4") || x == Convert.ToString("5")
+                       || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8") || x == Convert.ToString("9"))
+                    {
+                        condition = false;
+                    }
+
+                }
+
+                //check if enterd City contains any Spaces 
+                if (City.ToLower().Contains(" ")) { condition = false; }
+
+                //check if enterd City contains any special charachters
+                if (City.ToLower().Contains('~') || City.ToLower().Contains('!') || City.ToLower().Contains('@') || City.ToLower().Contains('#') || City.ToLower().Contains('$') || City.ToLower().Contains('^')
+                    || City.ToLower().Contains('&') || City.ToLower().Contains('*') || City.ToLower().Contains('(') || City.ToLower().Contains(')')
+                    || City.ToLower().Contains('_') || City.ToLower().Contains('-') || City.ToLower().Contains('=') || City.ToLower().Contains('+')
+                    || City.ToLower().Contains('{') || City.ToLower().Contains('[') || City.ToLower().Contains(']') || City.ToLower().Contains('}')
+                    || City.ToLower().Contains(';') || City.ToLower().Contains(';') || City.ToLower().Contains('\"') || City.ToLower().Contains('\'')
+                    || City.ToLower().Contains('<') || City.ToLower().Contains(',') || City.ToLower().Contains('.') || City.ToLower().Contains('<')
+                    || City.ToLower().Contains('/') || City.ToLower().Contains('?') || City.ToLower().Contains('\\') || City.ToLower().Contains('|'))
+                {
+                    condition = false;
+                }
+
+                if (condition == false)
+                {
+                    Console.WriteLine("The City You Enterd Does Not Meet The Requirements");
+                    Console.WriteLine("To Enter Anthor City Enter (1)");
+                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                    string x = Console.ReadLine();
+                    if (x == "1")
+                    {
+                        int choice = Convert.ToInt32(x);
+                        Console.WriteLine("Enter City:");
+                        Name = Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                        Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
+                        string Answer = Console.ReadLine();
+                        if (Answer == "Y")
+                        { GlobalFun.Welcoming(); }
+                        else
+                        {
+                            int choice = Convert.ToInt32(x);
+                            Console.WriteLine("Enter City:");
+                            Name = Console.ReadLine();
+                        }
+                    }
+                }
+            }
+            this.addrees.SetCity(City);
+
+            ////Check Street
+            condition = false;
+            while (condition == false)
+            {
+                condition = true;
+
+                //check if enterd Street contains any nmubers
+                for (int i = 0; i < Street.Length; i++)
+                {
+                    string x = Convert.ToString(Street[i]);
+                    if (x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
+                        || x == Convert.ToString("3") || x == Convert.ToString("4") || x == Convert.ToString("5")
+                       || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8") || x == Convert.ToString("9"))
+                    {
+                        condition = false;
+                    }
+
+                }
+
+                //check if enterd Street contains any Spaces 
+                if (Street.ToLower().Contains(" ")) { condition = false; }
+
+                //check if enterd City contains any special charachters
+                if (Street.ToLower().Contains('~') || Street.ToLower().Contains('!') || Street.ToLower().Contains('@') || Street.ToLower().Contains('#') || Street.ToLower().Contains('$') || Street.ToLower().Contains('^')
+                    || Street.ToLower().Contains('&') || Street.ToLower().Contains('*') || Street.ToLower().Contains('(') || Street.ToLower().Contains(')')
+                    || Street.ToLower().Contains('_') || Street.ToLower().Contains('-') || Street.ToLower().Contains('=') || Street.ToLower().Contains('+')
+                    || Street.ToLower().Contains('{') || Street.ToLower().Contains('[') || Street.ToLower().Contains(']') || Street.ToLower().Contains('}')
+                    || Street.ToLower().Contains(';') || Street.ToLower().Contains(';') || Street.ToLower().Contains('\"') || Street.ToLower().Contains('\'')
+                    || Street.ToLower().Contains('<') || Street.ToLower().Contains(',') || Street.ToLower().Contains('.') || Street.ToLower().Contains('<')
+                    || Street.ToLower().Contains('/') || Street.ToLower().Contains('?') || Street.ToLower().Contains('\\') || Street.ToLower().Contains('|'))
+                {
+                    condition = false;
+                }
+
+                if (condition == false)
+                {
+                    Console.WriteLine("The Street You Enterd Does Not Meet The Requirements");
+                    Console.WriteLine("To Enter Anthor Street Enter (1)");
+                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                    string x = Console.ReadLine();
+                    if (x == "1")
+                    {
+                        int choice = Convert.ToInt32(x);
+                        Console.WriteLine("Enter Street:");
+                        Name = Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                        Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
+                        string Answer = Console.ReadLine();
+                        if (Answer == "Y")
+                        { GlobalFun.Welcoming(); }
+                        else
+                        {
+                            int choice = Convert.ToInt32(x);
+                            Console.WriteLine("Enter Street:");
+                            Name = Console.ReadLine();
+                        }
+                    }
+                }
+            }
+            this.addrees.SetStreet(Street);
+
+            //Check Apartment Number
+            condition = false;
+            while (condition == false)
+            {
+                condition = true;
+                //check if the Apartment Number is number & Does not Contains any space or letter or special charachters
+                for (int i = 0; i < ApartmentN.Length; i++)
+                {
+                    string x = Convert.ToString(ApartmentN[i]);
+                    if (x != Convert.ToString("0") && x != Convert.ToString("1") && x != Convert.ToString("2")
+                    && x != Convert.ToString("3") && x != Convert.ToString("4") && x != Convert.ToString("5")
+                    && x != Convert.ToString("6") && x != Convert.ToString("7") && x != Convert.ToString("8")
+                    && x != Convert.ToString("9")) { condition = false; }
+
+                }
+
+                if (condition == false)
+                {
+                    Console.WriteLine("The Apartment Number You Enterd Is Not valid");
+                    Console.WriteLine("To Enter Anthor Apartment Number Enter (1)");
+                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                    string x = Console.ReadLine();
+                    if (x == "1")
+                    {
+                        int choice = Convert.ToInt32(x);
+                        Console.WriteLine("Enter Apartment Number:");
+                        Name = Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                        Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
+                        string Answer = Console.ReadLine();
+                        if (Answer == "Y")
+                        { GlobalFun.Welcoming(); }
+                        else
+                        {
+                            int choice = Convert.ToInt32(x);
+                            Console.WriteLine("Enter Apartment Number:");
+                            Name = Console.ReadLine();
+                        }
+                    }
+                }
+            }
+            this.addrees.SetApartment(ApartmentN);
         }
 
         public void SetEmailAddress(string EmailAddress)
@@ -88,15 +338,29 @@ namespace Online_Shoping_Site
                 if (condition == false)
                 {
                     Console.WriteLine("The Email You Enterd Is Not A Vaild Email");
-                    Console.WriteLine("To Enter Anthor Email Enter 1");
-                    Console.WriteLine("To Exit This Page Enter 2");
-                    int choice = Convert.ToInt32(Console.ReadLine());
-                    if (choice == 1)
+                    Console.WriteLine("To Enter Anthor Email Enter (1)");
+                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                    string x = Console.ReadLine();
+                    if (x == "1")
                     {
-                        Console.WriteLine("Enter Your EmailAddress:");
-                        EmailAddress = Console.ReadLine();
+                        int choice = Convert.ToInt32(x);
+                        Console.WriteLine("Enter Email Address:");
+                        Name = Console.ReadLine();
                     }
-                    else if (choice == 2) { GlobalFun.Welcoming(); }
+                    else
+                    {
+                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                        Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
+                        string Answer = Console.ReadLine();
+                        if (Answer == "Y")
+                        { GlobalFun.Welcoming(); }
+                        else
+                        {
+                            int choice = Convert.ToInt32(x);
+                            Console.WriteLine("Enter Email Address:");
+                            Name = Console.ReadLine();
+                        }
+                    }
                 }
             }
             this.EmailAddress = EmailAddress;
@@ -141,15 +405,29 @@ namespace Online_Shoping_Site
                 if (condition == false)
                 {
                     Console.WriteLine("The Phone Number You Enterd Is Not valid");
-                    Console.WriteLine("To Enter Anthor Phone Number Enter 1");
-                    Console.WriteLine("To Exit This Page Enter 2");
-                    int choice = Convert.ToInt32(Console.ReadLine());
-                    if (choice == 1)
+                    Console.WriteLine("To Enter Anthor Phone Number Enter (1)");
+                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                    string x = Console.ReadLine();
+                    if (x == "1")
                     {
+                        int choice = Convert.ToInt32(x);
                         Console.WriteLine("Enter Phone Number:");
-                        PhoneNumber = Console.ReadLine();
+                        Name = Console.ReadLine();
                     }
-                    else if (choice == 2) { GlobalFun.Welcoming(); }
+                    else
+                    {
+                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                        Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
+                        string Answer = Console.ReadLine();
+                        if (Answer == "Y")
+                        { GlobalFun.Welcoming(); }
+                        else
+                        {
+                            int choice = Convert.ToInt32(x);
+                            Console.WriteLine("Enter Phone Number:");
+                            Name = Console.ReadLine();
+                        }
+                    }
                 }
             }
                 this.PhoneNumber = PhoneNumber;
@@ -175,16 +453,30 @@ namespace Online_Shoping_Site
                     if (condition == false)
                     {
                         Console.WriteLine("The Store Number You Enterd Is Not valid");
-                        Console.WriteLine("To Enter Anthor Store Number Enter 1");
-                        Console.WriteLine("To Exit This Page Enter 2");
-                        int choice = Convert.ToInt32(Console.ReadLine());
-                        if (choice == 1)
-                        {
-                            Console.WriteLine("Enter Store Number:");
-                        StoreNumber = Console.ReadLine();
-                        }
-                        else if (choice == 2) { GlobalFun.Welcoming(); }
+                        Console.WriteLine("To Enter Anthor Store Number Enter (1)");
+                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                    string x = Console.ReadLine();
+                    if (x == "1")
+                    {
+                        int choice = Convert.ToInt32(x);
+                        Console.WriteLine("Enter Store Number:");
+                        Name = Console.ReadLine();
                     }
+                    else
+                    {
+                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                        Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
+                        string Answer = Console.ReadLine();
+                        if (Answer == "Y")
+                        { GlobalFun.Welcoming(); }
+                        else
+                        {
+                            int choice = Convert.ToInt32(x);
+                            Console.WriteLine("Enter Store Number:");
+                            Name = Console.ReadLine();
+                        }
+                    }
+                }
             }
             this.StoreNumber = StoreNumber;
         }
@@ -249,15 +541,28 @@ namespace Online_Shoping_Site
                         if (condition == false)
                         {
                             Console.WriteLine("The Password You Enterd Does Not Meet The Requirements");
-                            Console.WriteLine("To Enter Anthor Password Enter 1");
-                            Console.WriteLine("To Exit This Page Enter 2");
-                            int choice = Convert.ToInt32(Console.ReadLine());
-                            if (choice == 1)
+                            Console.WriteLine("To Enter Anthor Password Enter (1)");
+                            Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                            string x = Console.ReadLine();
+                            if (x == "1")
                             {
+                                int choice = Convert.ToInt32(x);
                                 Console.WriteLine("Enter Password:");
-                                Password = Console.ReadLine();
+                                Name = Console.ReadLine();
                             }
-                            else if (choice == 2) { GlobalFun.Welcoming(); }
+                            else {
+                                Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                                Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
+                                string Answer = Console.ReadLine();
+                                if (Answer == "Y")
+                                { GlobalFun.Welcoming(); }
+                                else
+                                {
+                                    int choice = Convert.ToInt32(x);
+                                    Console.WriteLine("Enter Password:");
+                                    Name = Console.ReadLine();
+                                }
+                            }
                         }
                     }
                 }
@@ -348,10 +653,21 @@ namespace Online_Shoping_Site
             this.SetName(SName);
 
             //Seller Address
-            string Saddress;
-            Console.WriteLine("Address:");
-            Saddress = Console.ReadLine();
-            this.SetAddress(Saddress);
+            
+            Console.WriteLine("Address");
+            Console.WriteLine("Country (Make Sure It Does Not Contains Any Numbers Or Special Charaters) :");
+            string SCountry;
+            SCountry = Console.ReadLine();
+            Console.WriteLine("City (Make Sure It Does Not Contains Any Numbers Or Special Charaters) :");
+            string SCity;
+            SCity = Console.ReadLine();
+            Console.WriteLine("Street (Make Sure It Does Not Contains Any Numbers Or Special Charaters) :");
+            string SStreet;
+            SStreet = Console.ReadLine();
+            Console.WriteLine("Apartment Number (Make Sure It Does Not Contains Any Letters Or Special Charaters Or Spaces) :");
+            string SApartmentN;
+            SApartmentN = Console.ReadLine();
+            this.SetAddress(SCountry, SCity, SStreet, SApartmentN);
 
             //Seller Email Address
             string SEmailAddress;
