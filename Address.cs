@@ -11,14 +11,22 @@ namespace Online_Shoping_Site
         string city;
         string street;
         string apartmentN;
-        public void SetCountry(string country) { this.country = country; }
-        public void SetCity(string city) { this.city = city; }
-        public void SetStreet(string street) { this.street = street; }
-        public void SetApartment(string apartmentN) { this.apartmentN = apartmentN; }
-        public string GetCountry() {return this.country; }
-        public string GetCity() { return this.city; }
-        public string GetStreet() { return this.street; }
-        public string GetApartmentN() { return this.apartmentN; }
+        public void SetCountry(string country) 
+        { this.country = country; }
+        public void SetCity(string city) 
+        { this.city = city; }
+        public void SetStreet(string street) 
+        { this.street = street; }
+        public void SetApartment(string apartmentN) 
+        { this.apartmentN = apartmentN; }
+        public string GetCountry() 
+        {return this.country; }
+        public string GetCity() 
+        { return this.city; }
+        public string GetStreet() 
+        { return this.street; }
+        public string GetApartmentN() 
+        { return this.apartmentN; }
         
 
     }

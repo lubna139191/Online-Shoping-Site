@@ -7,7 +7,7 @@ namespace Online_Shoping_Site
     //class just for using global function:
     class GlobalFun
     {
-        //Welcoming screen:
+    //Welcoming screen:
         public static void Welcoming()
         {
             Console.WriteLine("Welcome To Our Online shopping site, Please select the USER TYPE:");
@@ -31,18 +31,18 @@ namespace Online_Shoping_Site
                         int Action = Convert.ToInt32(Console.ReadLine());
                         if (Action == 1)
                         {   
-                            //New Seller Account
+                        //New Seller Account
 
                             Seller NewAccount= new Seller();
-                            NewAccount.SignUpSeller( );
+                            NewAccount.SignUpSeller();
                         }
                         else if (Action == 2)
                         {
-                            //LogInSeller();
+                        //LogInSeller();
                         }
                         else
                         {
-                            Console.WriteLine("Invalid Choice, please try agian...");
+                            Console.WriteLine("Invalid Choice, please try agian.");
                             GlobalFun.Welcoming();
                         }
                         break;
@@ -57,21 +57,26 @@ namespace Online_Shoping_Site
                         int Choice = Convert.ToInt32(Console.ReadLine());
                         if (Choice == 1)
                         {
-                            //SignUpCustomer();
+                         //New Customer Account
+                             Customer NewAccount = new Customer();
+                             NewAccount.SignUpCustomer();
                         }
+
                         else if (Choice == 2)
                         {
                             //LogInCustomer();
                         }
                         else
                         {
-                            Console.WriteLine("Invalid Choice, please try agian...");
+                            Console.WriteLine("Invalid Choice, please try agian.");
                             GlobalFun.Welcoming();
                         }
                         break;
+
                     case 3:
                         System.Environment.Exit(0);
                         break;
+
                     case 4:
                         Console.Clear();
                         GlobalFun.Welcoming();
@@ -80,10 +85,9 @@ namespace Online_Shoping_Site
             }
             else
             {
-                Console.WriteLine("Invalid Choice, please try agian...");
+                Console.WriteLine("Invalid Choice, please try agian.");
                 GlobalFun.Welcoming();
             }
         }
     }
-    //******************************************************************************************************
 }

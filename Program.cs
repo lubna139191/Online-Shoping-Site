@@ -9,15 +9,10 @@ namespace Online_Shoping_Site
 {
     class Program
     {
-        //test
-//******************************************************************************************************
-//Main:
         static void Main(string[] args)
         {
             //Welcoming screen:
             GlobalFun.Welcoming();
-
-
         }
 
     }
