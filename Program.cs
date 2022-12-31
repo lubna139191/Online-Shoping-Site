@@ -13,10 +13,6 @@ namespace Online_Shoping_Site
 //Main:
         static void Main(string[] args)
         {
-            //File creation: 
-            Files.CreateFiles();
-
-
             //Welcoming screen:
             GlobalFun.Welcoming();
 
