@@ -56,9 +56,16 @@ namespace Online_Shoping_Site
                 }
 
                 if (condition == false) {
-                    Console.WriteLine("Please ReEnter Your Full Name & Make Sure It Does Not Contains Any Numbers Or Special Charachters..");
-                    Console.WriteLine("Full Name:");
-                    Name = Console.ReadLine();
+                    Console.WriteLine("The Name You Enterd Does Not Meet The Requirements");
+                    Console.WriteLine("To Enter Anthor Name Enter 1");
+                    Console.WriteLine("To Exit This Page Enter 2");
+                    int choice= Convert.ToInt32(Console.ReadLine());
+                    if (choice == 1)
+                    {
+                        Console.WriteLine("Enter Full Name:");
+                        Name = Console.ReadLine();
+                    }
+                    else if (choice == 2) { GlobalFun.Welcoming(); }
                 }
             }
             this.Name = Name;
@@ -78,10 +85,18 @@ namespace Online_Shoping_Site
                 string regex = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$";
 
                 condition = Regex.IsMatch(EmailAddress, regex, RegexOptions.IgnoreCase);
-                if (condition == false) {
-                    Console.WriteLine("Please ReEnter Your EmailAddress & Make Sure Its Valid");
-                    Console.WriteLine("EmailAddress:");
-                    EmailAddress = Console.ReadLine();
+                if (condition == false)
+                {
+                    Console.WriteLine("The Email You Enterd Is Not A Vaild Email");
+                    Console.WriteLine("To Enter Anthor Email Enter 1");
+                    Console.WriteLine("To Exit This Page Enter 2");
+                    int choice = Convert.ToInt32(Console.ReadLine());
+                    if (choice == 1)
+                    {
+                        Console.WriteLine("Enter Your EmailAddress:");
+                        EmailAddress = Console.ReadLine();
+                    }
+                    else if (choice == 2) { GlobalFun.Welcoming(); }
                 }
             }
             this.EmailAddress = EmailAddress;
@@ -123,13 +138,20 @@ namespace Online_Shoping_Site
 
                         }
                     }
-                    if (condition == false)
+                if (condition == false)
+                {
+                    Console.WriteLine("The Phone Number You Enterd Is Not valid");
+                    Console.WriteLine("To Enter Anthor Phone Number Enter 1");
+                    Console.WriteLine("To Exit This Page Enter 2");
+                    int choice = Convert.ToInt32(Console.ReadLine());
+                    if (choice == 1)
                     {
-                        Console.WriteLine("Please ReEnter Your Phone Number & Make Sure Its Valid");
-                        Console.WriteLine("PhoneNumber:");
+                        Console.WriteLine("Enter Phone Number:");
                         PhoneNumber = Console.ReadLine();
                     }
+                    else if (choice == 2) { GlobalFun.Welcoming(); }
                 }
+            }
                 this.PhoneNumber = PhoneNumber;
         
         }
@@ -149,12 +171,20 @@ namespace Online_Shoping_Site
                     && x != Convert.ToString("9")) { condition = false; }
 
                 }
-                if (condition == false)
-                {
-                    Console.WriteLine("Please ReEnter Your Store Number & Make Sure It Does Not Contains Any Number Or Special Chrachters:");
-                    Console.WriteLine("StoreNumber:");
-                    StoreNumber = Console.ReadLine();
-                }
+                
+                    if (condition == false)
+                    {
+                        Console.WriteLine("The Store Number You Enterd Is Not valid");
+                        Console.WriteLine("To Enter Anthor Store Number Enter 1");
+                        Console.WriteLine("To Exit This Page Enter 2");
+                        int choice = Convert.ToInt32(Console.ReadLine());
+                        if (choice == 1)
+                        {
+                            Console.WriteLine("Enter Store Number:");
+                        StoreNumber = Console.ReadLine();
+                        }
+                        else if (choice == 2) { GlobalFun.Welcoming(); }
+                    }
             }
             this.StoreNumber = StoreNumber;
         }
@@ -191,6 +221,7 @@ namespace Online_Shoping_Site
                 {
                     condition = false;
                 }
+                if (Password.ToLower().Contains(" ")){ condition = false; }
                 for (int i = 0; i < Password.Length; i++) {
                     if (Char.IsUpper(Password[i])) { break; }
                     else if (i == Password.Length - 1) { condition = false; }
@@ -215,13 +246,18 @@ namespace Online_Shoping_Site
                         confirm = true;
                         if (Password != ConfirmSPassword) { confirm = false; }
 
-                        if (confirm == false)
+                        if (condition == false)
                         {
-                            Console.WriteLine("Password Does not Match, ReEnter Password Please:");
-                            Console.WriteLine("Password:");
-                            Password = Console.ReadLine();
-                            Console.WriteLine("Confirm Password:");
-                            ConfirmSPassword = Console.ReadLine();
+                            Console.WriteLine("The Password You Enterd Does Not Meet The Requirements");
+                            Console.WriteLine("To Enter Anthor Password Enter 1");
+                            Console.WriteLine("To Exit This Page Enter 2");
+                            int choice = Convert.ToInt32(Console.ReadLine());
+                            if (choice == 1)
+                            {
+                                Console.WriteLine("Enter Password:");
+                                Password = Console.ReadLine();
+                            }
+                            else if (choice == 2) { GlobalFun.Welcoming(); }
                         }
                     }
                 }
@@ -307,7 +343,7 @@ namespace Online_Shoping_Site
 
             //Seller Name
             string SName;
-            Console.WriteLine("Full Name:");
+            Console.WriteLine("Full Name(Make Sure It Does Not Contains Any Numbers or Special Charachters):");
             SName = Console.ReadLine();
             this.SetName(SName);
 
@@ -319,25 +355,25 @@ namespace Online_Shoping_Site
 
             //Seller Email Address
             string SEmailAddress;
-            Console.WriteLine("Email Address:");
+            Console.WriteLine("Email Address(Make Sure Its A Vaild Email Ex:xxx@xxx.com):");
             SEmailAddress = Console.ReadLine();
             this.SetEmailAddress(SEmailAddress);
 
             //Seller Phone Number
             string SPhoneNumber;
-            Console.WriteLine("PhoneNumber:");
+            Console.WriteLine("PhoneNumber(Make Sure It Does Not Contains Any Letters or Special Charachters & Valid Ex:07(7|8|9)*******):");
             SPhoneNumber = Console.ReadLine();
             this.SetPhoneNumber(SPhoneNumber);
 
             //Seller StoreNumber 
             string SStoreNumber;
-            Console.WriteLine("StoreNumber:");
+            Console.WriteLine("StoreNumber(Make Sure It Does Not Contains Any Letters or Special Charachters):");
             SStoreNumber = Console.ReadLine();
             this.SetStoreNumber(SStoreNumber);
 
             //Seller Password
             string SPassword;
-            Console.WriteLine("Password:");
+            Console.WriteLine("Password(Make Sure It is Not Less Than 8 Charachters\nAnd Contains One UpperCase & One LowerCase & one Special Charachters At Least):");
             SPassword = Console.ReadLine();
             string ConfirmSPassword;
             Console.WriteLine("Confirm Password:");

@@ -12,10 +12,12 @@ namespace Online_Shoping_Site
         {
             Console.WriteLine("Welcome To Our Online shopping site, Please select the USER TYPE:");
             Console.WriteLine("1. Seller.");
-            Console.WriteLine("2. customer.");
+            Console.WriteLine("2. Customer.");
+            Console.WriteLine("3. Exit The System.");
+            Console.WriteLine("4. Clear Screen And Start Again.");
             Console.WriteLine("Enter your choice: ");
             int user = Convert.ToInt32(Console.ReadLine());
-            if (user == 1 || user == 2)
+            if (user == 1 || user == 2 || user == 3 || user==4)
             {
                 switch (user)
                 {
@@ -66,6 +68,13 @@ namespace Online_Shoping_Site
                             Console.WriteLine("Invalid Choice, please try agian...");
                             GlobalFun.Welcoming();
                         }
+                        break;
+                    case 3:
+                        System.Environment.Exit(0);
+                        break;
+                    case 4:
+                        Console.Clear();
+                        GlobalFun.Welcoming();
                         break;
                 }
             }
