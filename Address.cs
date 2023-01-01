@@ -27,7 +27,5 @@ namespace Online_Shoping_Site
         { return this.street; }
         public string GetApartmentN() 
         { return this.apartmentN; }
-        
-
     }
 }
