@@ -405,12 +405,11 @@ namespace Online_Shoping_Site
 
                         //check if the third phone number is 7 or 8 or 9:
                         if (Convert.ToString(PhoneNumber[2]) != Convert.ToString("7") 
-                         || Convert.ToString(PhoneNumber[2]) != Convert.ToString("8") 
-                         || Convert.ToString(PhoneNumber[2]) != Convert.ToString("9")) 
+                         && Convert.ToString(PhoneNumber[2]) != Convert.ToString("8") 
+                         && Convert.ToString(PhoneNumber[2]) != Convert.ToString("9")) 
                         { condition = false; }
 
-                        else 
-                        { condition = false; }
+                       
 
                         //check if the rest of the phone number are numbers:
                         for (int i = 3; i < PhoneNumber.Length; i++)
@@ -693,7 +692,7 @@ namespace Online_Shoping_Site
                             Console.WriteLine("Do You Want To Log In? Answer by(Y:N):");
                             string Answer = Console.ReadLine();
 
-                            if (Answer == "Y") 
+                            if (Answer == "Y"|| Answer == "y") 
                             { this.LogInSeller(); }
 
                             else 
@@ -710,7 +709,7 @@ namespace Online_Shoping_Site
                     Console.WriteLine("Do You Want To Log In? Answer by(Y:N):");
                     string Answer = Console.ReadLine();
 
-                    if (Answer == "Y") 
+                    if (Answer == "Y" || Answer == "y") 
                     { this.LogInSeller(); }
 
                     else 
