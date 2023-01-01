@@ -735,9 +735,6 @@ namespace Online_Shoping_Site
             ConfirmCPassword = Console.ReadLine();
             this.SetPassword(CPassword, ConfirmCPassword);
 
-            //Check if the customer already exist & if the user is new Give uniqe ID then save to file:
-            this.CheckCustomer();
-
             //Customer Address:
             Console.WriteLine("Address");
             Console.WriteLine("Country (Make Sure It Does Not Contains Spaces or Any Numbers Or Special Charaters):");
@@ -753,6 +750,10 @@ namespace Online_Shoping_Site
             string CApartmentN;
             CApartmentN = Console.ReadLine();
             this.SetShippingAddress(CCountry, CCity, CStreet, CApartmentN);
+
+            //Check if the customer already exist & if the user is new Give uniqe ID then save to file:
+            this.CheckCustomer();
+
         }
 
         //Fun14: 
