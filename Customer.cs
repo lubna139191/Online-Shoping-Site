@@ -18,7 +18,7 @@ namespace Online_Shoping_Site
         string Password;
         string CustomerId;
         Address ShippingAddress;
-        string PaymentInformation;
+        Payment PaymentInformation;
         public static int counter = 0;
 
 

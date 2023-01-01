@@ -11,6 +11,8 @@ namespace Online_Shoping_Site
         string city;
         string street;
         string apartmentN;
+
+        //Set:
         public void SetCountry(string country) 
         { this.country = country; }
         public void SetCity(string city) 
@@ -19,6 +21,8 @@ namespace Online_Shoping_Site
         { this.street = street; }
         public void SetApartment(string apartmentN) 
         { this.apartmentN = apartmentN; }
+
+        //Get:
         public string GetCountry() 
         {return this.country; }
         public string GetCity() 
