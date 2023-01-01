@@ -23,8 +23,7 @@ namespace Online_Shoping_Site
 
 
 
-        //Listings listings;
-        //Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
+//Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
         public void SetName(string Name)
         {
             bool condition = false;
@@ -92,7 +91,7 @@ namespace Online_Shoping_Site
             this.Name = Name;
         }
 
-        //Fun2 (Set Email Address: Email is valid):
+//Fun2 (Set Email Address: Email is valid):
         public void SetEmailAddress(string EmailAddress)
         {
             bool condition = false;
@@ -136,7 +135,7 @@ namespace Online_Shoping_Site
             this.EmailAddress = EmailAddress;
         }
 
-        //Fun3 (Set Phone Number: 10 Numbers, start with 0, second number is 7, third number 7/8/9, the reset are numbers):
+//Fun3 (Set Phone Number: 10 Numbers, start with 0, second number is 7, third number 7/8/9, the reset are numbers):
         public void SetPhoneNumber(string PhoneNumber)
         {
             bool condition = false;
@@ -210,7 +209,7 @@ namespace Online_Shoping_Site
 
         }
 
-        //Fun4 (Set Password: Password Confirm, 8 charchters, special charchter, capital & small letters): 
+//Fun4 (Set Password: Password Confirm, 8 charchters, special charchter, capital & small letters): 
         public void SetPassword(string Password, string ConfirmSPassword)
         {
             bool condition = false;
@@ -331,18 +330,18 @@ namespace Online_Shoping_Site
             this.Password = Password;
         }
 
-        //Fun5 (Set Customer ID):
+//Fun5 (Set Customer ID):
         public void SetCustomerID()
         {
             counter++;
             this.CustomerId = Convert.ToString(counter);
         }
 
-        //Fun6 (set Shipping Address: Country, City, Street, Apartment):
-        //Country: No number, No space, No special charachters.
-        //City: No number, No space, No special charachters.
-        //Street: No number, No space, No special charachters.
-        //Apartment: No number, No space, No special charachters.
+//Fun6 (set Shipping Address: Country, City, Street, Apartment):
+//Country: No number, No space, No special charachters.
+//City: No number, No space, No special charachters.
+//Street: No number, No space, No special charachters.
+//Apartment: No number, No space, No special charachters.
         public void SetShippingAddress(string Country, string City, String Street, String ApartmentN)
         {
             ShippingAddress = new Address();
@@ -610,19 +609,20 @@ namespace Online_Shoping_Site
             this.ShippingAddress.SetApartment(ApartmentN);
         }
 
-        //Fun8:
+//Get Functions:
+//Fun8:
         public string GetName()
         { return Name; }
 
-        //Fun9:
+//Fun9:
         public string GetEmailAddress()
         { return EmailAddress; }
 
-        //Fun10:
+//Fun10:
         public string GetPhoneNumber()
         { return PhoneNumber; }
 
-        //Fun11 (Check Seller: Exist or not, empty or not, save object, equality):
+//Fun11 (Check Seller: Exist or not, empty or not, save object, equality):
         public void CheckCustomer()
         {
             //Exist or not:
@@ -693,7 +693,7 @@ namespace Online_Shoping_Site
             }
         }
 
-        //Fun12 (Seve To File):
+//Fun12 (Seve To File):
         public void SaveToFile()
         {
             FileStream FC = new FileStream("CustomerData.txt", FileMode.Append, FileAccess.Write);
@@ -702,7 +702,7 @@ namespace Online_Shoping_Site
             FC.Close();
         }
 
-        //Fun13 (Sign Up Customer):
+//Fun13 (Sign Up Customer):
         public void SignUpCustomer()
         {
             Console.WriteLine("Fill The Following To Create Your New Account As A Customer.");
@@ -756,7 +756,7 @@ namespace Online_Shoping_Site
 
         }
 
-        //Fun14: 
+//Fun14 (Log In Customer): 
         public void LogInCustomer()
         {
             int choice = 0;

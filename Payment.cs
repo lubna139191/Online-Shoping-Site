@@ -10,7 +10,7 @@ namespace Online_Shoping_Site
         String PinCode;
         string BillingAddress;
 
-        //Set:
+//Set Functions:
         public void SetCardNumber(string CardNumber)
         { this.CardNumber = CardNumber; }
 
@@ -20,7 +20,7 @@ namespace Online_Shoping_Site
         public void SetBillingAddress(string BillingAddress)
         { this.BillingAddress = BillingAddress; }
 
-        //Get:
+//Get Functions:
         public string GetCardNumber()
         { return this.CardNumber; }
 

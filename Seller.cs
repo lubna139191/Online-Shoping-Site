@@ -24,8 +24,8 @@ namespace Online_Shoping_Site
 
         public static int counter = 0;
 
-        //Listings listings;
-        //Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
+//Listings listings;
+//Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
         public void SetName(string Name)
         {
             bool condition = false;
@@ -93,7 +93,11 @@ namespace Online_Shoping_Site
             this.Name = Name;
         }
 
-        //Fun2:
+//Fun2 (set Shipping Address: Country, City, Street, Apartment):
+//Country: No number, No space, No special charachters.
+//City: No number, No space, No special charachters.
+//Street: No number, No space, No special charachters.
+//Apartment: No number, No space, No special charachters.
         public void SetAddress(string Country, string City, String Street, String ApartmentN)
         {
             addrees = new Address();
@@ -107,9 +111,10 @@ namespace Online_Shoping_Site
                 for (int i = 0; i < Country.Length; i++)
                 {
                     string x = Convert.ToString(Country[i]);
-                    if (x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
+                    if (   x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
                         || x == Convert.ToString("3") || x == Convert.ToString("4") || x == Convert.ToString("5")
-                       || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8") || x == Convert.ToString("9"))
+                        || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8") 
+                        || x == Convert.ToString("9"))
                     {
                         condition = false;
                     }
@@ -337,7 +342,7 @@ namespace Online_Shoping_Site
             this.addrees.SetApartment(ApartmentN);
         }
 
-        //Fun3 (Set Email Address: Email is valid):
+//Fun3 (Set Email Address: Email is valid):
         public void SetEmailAddress(string EmailAddress)
         {
             bool condition = false;
@@ -381,7 +386,7 @@ namespace Online_Shoping_Site
             this.EmailAddress = EmailAddress;
         }
 
-        //Fun4 (Set Phone Number: 10 Numbers, start with 0, second number is 7, third number 7/8/9, the reset are numbers):
+//Fun4 (Set Phone Number: 10 Numbers, start with 0, second number is 7, third number 7/8/9, the reset are numbers):
         public void SetPhoneNumber(string PhoneNumber)
         {
                 bool condition = false;
@@ -457,21 +462,22 @@ namespace Online_Shoping_Site
         
         }
 
-        //Fun5:
+//Fun5 (set Store number: Number, ):
         public void SetStoreNumber(string StoreNumber) 
         {
             bool condition = false;
             while (condition == false)
             {
                 condition = true;
-                //check if the store number is number
+                //check if the store number is number:
                 for (int i = 0; i < StoreNumber.Length; i++)
                 {
                     string x = Convert.ToString(StoreNumber[i]);
                     if (x != Convert.ToString("0") && x != Convert.ToString("1") && x != Convert.ToString("2")
-                    && x != Convert.ToString("3") && x != Convert.ToString("4") && x != Convert.ToString("5")
-                    && x != Convert.ToString("6") && x != Convert.ToString("7") && x != Convert.ToString("8")
-                    && x != Convert.ToString("9")) { condition = false; }
+                    &&  x != Convert.ToString("3") && x != Convert.ToString("4") && x != Convert.ToString("5")
+                    &&  x != Convert.ToString("6") && x != Convert.ToString("7") && x != Convert.ToString("8")
+                    &&  x != Convert.ToString("9")) 
+                    { condition = false; }
 
                 }
                 
@@ -479,34 +485,35 @@ namespace Online_Shoping_Site
                     {
                         Console.WriteLine("The Store Number You Enterd Is Not valid");
                         Console.WriteLine("To Enter Anthor Store Number Enter (1)");
-                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
-                    string x = Console.ReadLine();
-                    if (x == "1")
-                    {
-                        int choice = Convert.ToInt32(x);
-                        Console.WriteLine("Enter Store Number:");
-                        StoreNumber = Console.ReadLine();
-                    }
-                    else
-                    {
-                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
-                        Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
-                        string Answer = Console.ReadLine();
-                        if (Answer == "Y" || Answer == "y")
-                        { GlobalFun.Welcoming(); }
+                        Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                        string x = Console.ReadLine();
+                        if (x == "1")
+                        {
+                          int choice = Convert.ToInt32(x);
+                          Console.WriteLine("Enter Store Number:");
+                          StoreNumber = Console.ReadLine();
+                        }
+
                         else
                         {
-                            
+                          Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                          Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
+                          string Answer = Console.ReadLine();
+                          if (Answer == "Y" || Answer == "y")
+                          { GlobalFun.Welcoming(); }
+
+                          else
+                          {
                             Console.WriteLine("Enter Store Number:");
                             StoreNumber = Console.ReadLine();
+                          }
                         }
                     }
-                }
             }
             this.StoreNumber = StoreNumber;
         }
 
-        //Fun6 (Set Password: Password Confirm, 8 charchters, special charchter, capital & small letters): 
+//Fun6 (Set Password: Password Confirm, 8 charchters, special charchter, capital & small letters): 
         public void SetPassword(string Password, string ConfirmSPassword) 
         {
             bool condition = false;
@@ -627,26 +634,28 @@ namespace Online_Shoping_Site
             this.Password = Password;
         }
 
-        //Fun7:
+//Fun7 (Set seller ID):
         public void SetSellerID() 
         {
             counter++;
             this.SellerID = Convert.ToString(counter);
         }
 
-        //Fun8:
+
+//Get Functions:
+//Fun8:
         public string GetName() 
         { return Name; }
 
-        //Fun9:
+//Fun9:
         public string GetEmailAddress() 
         { return EmailAddress; }
 
-        //Fun10:
+//Fun10:
         public string GetPhoneNumber() 
         { return PhoneNumber; }
 
-        //Fun11 (Check Seller: Exist or not, empty or not, save object, equality):
+//Fun11 (Check Seller: Exist or not, empty or not, save object, equality):
         public void CheckSeller() 
         {
             //Exist or not:
@@ -717,7 +726,7 @@ namespace Online_Shoping_Site
                 }
         }
 
-        //Fun12 (Seve To File):
+//Fun12 (Seve To File):
         public void SaveToFile() 
         {
             FileStream FS = new FileStream("SellerData.txt", FileMode.Append, FileAccess.Write);
@@ -726,7 +735,7 @@ namespace Online_Shoping_Site
             FS.Close();
         }
 
-        //Fun13 (Sign Up Seller):
+//Fun13 (Sign Up Seller):
         public void SignUpSeller()
         {
             Console.WriteLine("Fill The Following To Create Your New Account As A Seller.");
@@ -784,7 +793,7 @@ namespace Online_Shoping_Site
             this.CheckSeller();
         }
 
-        //Fun14:
+//Fun14:
         public void LogInSeller()
         {
 
