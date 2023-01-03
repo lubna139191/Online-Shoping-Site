@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 
 namespace Online_Shoping_Site
 {
-    
+
     [Serializable]
     class Seller
     {
@@ -24,8 +24,8 @@ namespace Online_Shoping_Site
 
         public static int counter = 0;
 
-//Listings listings;
-//Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
+        //Listings listings;
+        //Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
         public void SetName(string Name)
         {
             bool condition = false;
@@ -93,11 +93,11 @@ namespace Online_Shoping_Site
             this.Name = Name;
         }
 
-//Fun2 (set Shipping Address: Country, City, Street, Apartment):
-//Country: No number, No space, No special charachters.
-//City: No number, No space, No special charachters.
-//Street: No number, No space, No special charachters.
-//Apartment: No number, No space, No special charachters.
+        //Fun2 (set Shipping Address: Country, City, Street, Apartment):
+        //Country: No number, No space, No special charachters.
+        //City: No number, No space, No special charachters.
+        //Street: No number, No space, No special charachters.
+        //Apartment: No number, No space, No special charachters.
         public void SetAddress(string Country, string City, String Street, String ApartmentN)
         {
             addrees = new Address();
@@ -111,9 +111,9 @@ namespace Online_Shoping_Site
                 for (int i = 0; i < Country.Length; i++)
                 {
                     string x = Convert.ToString(Country[i]);
-                    if (   x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
+                    if (x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
                         || x == Convert.ToString("3") || x == Convert.ToString("4") || x == Convert.ToString("5")
-                        || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8") 
+                        || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8")
                         || x == Convert.ToString("9"))
                     {
                         condition = false;
@@ -342,7 +342,7 @@ namespace Online_Shoping_Site
             this.addrees.SetApartment(ApartmentN);
         }
 
-//Fun3 (Set Email Address: Email is valid):
+        //Fun3 (Set Email Address: Email is valid):
         public void SetEmailAddress(string EmailAddress)
         {
             bool condition = false;
@@ -386,48 +386,48 @@ namespace Online_Shoping_Site
             this.EmailAddress = EmailAddress;
         }
 
-//Fun4 (Set Phone Number: 10 Numbers, start with 0, second number is 7, third number 7/8/9, the reset are numbers):
+        //Fun4 (Set Phone Number: 10 Numbers, start with 0, second number is 7, third number 7/8/9, the reset are numbers):
         public void SetPhoneNumber(string PhoneNumber)
         {
-                bool condition = false;
-                while (condition == false)
-                {
-                    condition = true;
+            bool condition = false;
+            while (condition == false)
+            {
+                condition = true;
 
-                    //check if the phone number is 10 Numbers:
-                    if (PhoneNumber.Length != 10) 
+                //check if the phone number is 10 Numbers:
+                if (PhoneNumber.Length != 10)
+                { condition = false; }
+
+                //check if the phone number start with 0:
+                if (PhoneNumber.Length == 10)
+                {
+                    if (Convert.ToString(PhoneNumber[0]) != Convert.ToString("0"))
                     { condition = false; }
 
-                    //check if the phone number start with 0:
-                    if (PhoneNumber.Length == 10)
+                    //check if the second phone number is 7:
+                    if (Convert.ToString(PhoneNumber[1]) != Convert.ToString("7"))
+                    { condition = false; }
+
+                    //check if the third phone number is 7 or 8 or 9:
+                    if (Convert.ToString(PhoneNumber[2]) != Convert.ToString("7")
+                     && Convert.ToString(PhoneNumber[2]) != Convert.ToString("8")
+                     && Convert.ToString(PhoneNumber[2]) != Convert.ToString("9"))
+                    { condition = false; }
+
+
+
+                    //check if the rest of the phone number are numbers:
+                    for (int i = 3; i < PhoneNumber.Length; i++)
                     {
-                        if (Convert.ToString(PhoneNumber[0]) != Convert.ToString("0")) 
+                        string x = Convert.ToString(PhoneNumber[i]);
+                        if (x != Convert.ToString("0") && x != Convert.ToString("1") && x != Convert.ToString("2")
+                        && x != Convert.ToString("3") && x != Convert.ToString("4") && x != Convert.ToString("5")
+                        && x != Convert.ToString("6") && x != Convert.ToString("7") && x != Convert.ToString("8")
+                        && x != Convert.ToString("9"))
                         { condition = false; }
 
-                        //check if the second phone number is 7:
-                        if (Convert.ToString(PhoneNumber[1]) != Convert.ToString("7")) 
-                        { condition = false; }
-
-                        //check if the third phone number is 7 or 8 or 9:
-                        if (Convert.ToString(PhoneNumber[2]) != Convert.ToString("7") 
-                         && Convert.ToString(PhoneNumber[2]) != Convert.ToString("8") 
-                         && Convert.ToString(PhoneNumber[2]) != Convert.ToString("9")) 
-                        { condition = false; }
-
-                       
-
-                        //check if the rest of the phone number are numbers:
-                        for (int i = 3; i < PhoneNumber.Length; i++)
-                        {
-                            string x = Convert.ToString(PhoneNumber[i]);
-                            if (x != Convert.ToString("0") && x != Convert.ToString("1") && x != Convert.ToString("2")
-                            &&  x != Convert.ToString("3") && x != Convert.ToString("4") && x != Convert.ToString("5")
-                            &&  x != Convert.ToString("6") && x != Convert.ToString("7") && x != Convert.ToString("8")
-                            &&  x != Convert.ToString("9")) 
-                            { condition = false; }
-
-                        }
                     }
+                }
 
                 if (condition == false)
                 {
@@ -447,7 +447,7 @@ namespace Online_Shoping_Site
                         Console.WriteLine("(Any Data You Enterd Will Be Lost)");
                         Console.WriteLine("Are You Sure You Want To Exit? Answer By(Y:N)");
                         string Answer = Console.ReadLine();
-                        if (Answer == "Y"||Answer == "y")
+                        if (Answer == "Y" || Answer == "y")
                         { GlobalFun.Welcoming(); }
 
                         else
@@ -458,12 +458,12 @@ namespace Online_Shoping_Site
                     }
                 }
             }
-                this.PhoneNumber = PhoneNumber;
-        
+            this.PhoneNumber = PhoneNumber;
+
         }
 
-//Fun5 (set Store number: Number, ):
-        public void SetStoreNumber(string StoreNumber) 
+        //Fun5 (set Store number: Number, ):
+        public void SetStoreNumber(string StoreNumber)
         {
             bool condition = false;
             while (condition == false)
@@ -474,55 +474,55 @@ namespace Online_Shoping_Site
                 {
                     string x = Convert.ToString(StoreNumber[i]);
                     if (x != Convert.ToString("0") && x != Convert.ToString("1") && x != Convert.ToString("2")
-                    &&  x != Convert.ToString("3") && x != Convert.ToString("4") && x != Convert.ToString("5")
-                    &&  x != Convert.ToString("6") && x != Convert.ToString("7") && x != Convert.ToString("8")
-                    &&  x != Convert.ToString("9")) 
+                    && x != Convert.ToString("3") && x != Convert.ToString("4") && x != Convert.ToString("5")
+                    && x != Convert.ToString("6") && x != Convert.ToString("7") && x != Convert.ToString("8")
+                    && x != Convert.ToString("9"))
                     { condition = false; }
 
                 }
-                
-                    if (condition == false)
+
+                if (condition == false)
+                {
+                    Console.WriteLine("The Store Number You Enterd Is Not valid");
+                    Console.WriteLine("To Enter Anthor Store Number Enter (1)");
+                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                    string x = Console.ReadLine();
+                    if (x == "1")
                     {
-                        Console.WriteLine("The Store Number You Enterd Is Not valid");
-                        Console.WriteLine("To Enter Anthor Store Number Enter (1)");
-                        Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
-                        string x = Console.ReadLine();
-                        if (x == "1")
-                        {
-                          int choice = Convert.ToInt32(x);
-                          Console.WriteLine("Enter Store Number:");
-                          StoreNumber = Console.ReadLine();
-                        }
+                        int choice = Convert.ToInt32(x);
+                        Console.WriteLine("Enter Store Number:");
+                        StoreNumber = Console.ReadLine();
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                        Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
+                        string Answer = Console.ReadLine();
+                        if (Answer == "Y" || Answer == "y")
+                        { GlobalFun.Welcoming(); }
 
                         else
                         {
-                          Console.WriteLine("(Any Data You Enterd Will Be Lost)");
-                          Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
-                          string Answer = Console.ReadLine();
-                          if (Answer == "Y" || Answer == "y")
-                          { GlobalFun.Welcoming(); }
-
-                          else
-                          {
                             Console.WriteLine("Enter Store Number:");
                             StoreNumber = Console.ReadLine();
-                          }
                         }
                     }
+                }
             }
             this.StoreNumber = StoreNumber;
         }
 
-//Fun6 (Set Password: Password Confirm, 8 charchters, special charchter, capital & small letters): 
-        public void SetPassword(string Password, string ConfirmSPassword) 
+        //Fun6 (Set Password: Password Confirm, 8 charchters, special charchter, capital & small letters): 
+        public void SetPassword(string Password, string ConfirmSPassword)
         {
             bool condition = false;
 
             //confirm password:
-            while (condition == false) 
+            while (condition == false)
             {
                 condition = true;
-                if (Password != ConfirmSPassword) 
+                if (Password != ConfirmSPassword)
                 { condition = false; }
 
                 if (condition == false)
@@ -541,19 +541,19 @@ namespace Online_Shoping_Site
                 condition = true;
 
                 //Check if password 8 charchters:
-                if (Password.Length < 8) 
+                if (Password.Length < 8)
                 { condition = false; }
 
                 //Check if password contains one special charachter at least
-                if (!(Password.ToLower().Contains('~') || Password.ToLower().Contains('!') || Password.ToLower().Contains('@') 
+                if (!(Password.ToLower().Contains('~') || Password.ToLower().Contains('!') || Password.ToLower().Contains('@')
                    || Password.ToLower().Contains('#') || Password.ToLower().Contains('$') || Password.ToLower().Contains('^')
-                   || Password.ToLower().Contains('&') || Password.ToLower().Contains('*') || Password.ToLower().Contains('(') 
-                   || Password.ToLower().Contains(')') || Password.ToLower().Contains('_') || Password.ToLower().Contains('-') 
-                   || Password.ToLower().Contains('=') || Password.ToLower().Contains('+') || Password.ToLower().Contains('{') 
+                   || Password.ToLower().Contains('&') || Password.ToLower().Contains('*') || Password.ToLower().Contains('(')
+                   || Password.ToLower().Contains(')') || Password.ToLower().Contains('_') || Password.ToLower().Contains('-')
+                   || Password.ToLower().Contains('=') || Password.ToLower().Contains('+') || Password.ToLower().Contains('{')
                    || Password.ToLower().Contains('[') || Password.ToLower().Contains(']') || Password.ToLower().Contains('}')
-                   || Password.ToLower().Contains(';') || Password.ToLower().Contains(';') || Password.ToLower().Contains('\"') 
-                   || Password.ToLower().Contains('\'')|| Password.ToLower().Contains('>') || Password.ToLower().Contains(',') 
-                   || Password.ToLower().Contains('.') || Password.ToLower().Contains('<') || Password.ToLower().Contains('/') 
+                   || Password.ToLower().Contains(';') || Password.ToLower().Contains(';') || Password.ToLower().Contains('\"')
+                   || Password.ToLower().Contains('\'') || Password.ToLower().Contains('>') || Password.ToLower().Contains(',')
+                   || Password.ToLower().Contains('.') || Password.ToLower().Contains('<') || Password.ToLower().Contains('/')
                    || Password.ToLower().Contains('?') || Password.ToLower().Contains('\\') || Password.ToLower().Contains('|')))
                 {
                     condition = false;
@@ -564,20 +564,20 @@ namespace Online_Shoping_Site
                 if (Password.ToLower().Contains(" "))
                 { condition = false; }
 
-                for (int i = 0; i < Password.Length; i++) 
+                for (int i = 0; i < Password.Length; i++)
                 {
-                    if (Char.IsUpper(Password[i])) 
+                    if (Char.IsUpper(Password[i]))
                     { break; }
 
-                    else if (i == Password.Length - 1) 
+                    else if (i == Password.Length - 1)
                     { condition = false; }
                 }
 
                 for (int i = 0; i < Password.Length; i++)
                 {
-                    if (Char.IsLower(Password[i])) 
+                    if (Char.IsLower(Password[i]))
                     { break; }
-                    else if (i == Password.Length - 1) 
+                    else if (i == Password.Length - 1)
                     { condition = false; }
                 }
 
@@ -595,7 +595,7 @@ namespace Online_Shoping_Site
                     while (confirm == false)
                     {
                         confirm = true;
-                        if (Password != ConfirmSPassword) 
+                        if (Password != ConfirmSPassword)
                         { confirm = false; }
 
                         if (condition == false)
@@ -612,7 +612,7 @@ namespace Online_Shoping_Site
                                 Password = Console.ReadLine();
                             }
 
-                            else 
+                            else
                             {
                                 Console.WriteLine("(Any Data You Enterd Will Be Lost)");
                                 Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
@@ -634,29 +634,29 @@ namespace Online_Shoping_Site
             this.Password = Password;
         }
 
-//Fun7 (Set seller ID):
-        public void SetSellerID() 
+        //Fun7 (Set seller ID):
+        public void SetSellerID()
         {
             counter++;
             this.SellerID = Convert.ToString(counter);
         }
 
 
-//Get Functions:
-//Fun8:
-        public string GetName() 
+        //Get Functions:
+        //Fun8:
+        public string GetName()
         { return Name; }
 
-//Fun9:
-        public string GetEmailAddress() 
+        //Fun9:
+        public string GetEmailAddress()
         { return EmailAddress; }
 
-//Fun10:
-        public string GetPhoneNumber() 
+        //Fun10:
+        public string GetPhoneNumber()
         { return PhoneNumber; }
 
-//Fun11 (Check Seller: Exist or not, empty or not, save object, equality):
-        public void CheckSeller() 
+        //Fun11 (Check Seller: Exist or not, empty or not, save object, equality):
+        public void CheckSeller()
         {
             //Exist or not:
             FileStream FS;
@@ -664,7 +664,7 @@ namespace Online_Shoping_Site
             { FS = new FileStream("SellerData.txt", FileMode.Open, FileAccess.Read); }
 
             else
-            { FS = new FileStream("SellerData.txt", FileMode.Create, FileAccess.ReadWrite); } 
+            { FS = new FileStream("SellerData.txt", FileMode.Create, FileAccess.ReadWrite); }
 
             BinaryFormatter BF = new BinaryFormatter();
             Seller[] arr = new Seller[1000000];
@@ -672,62 +672,62 @@ namespace Online_Shoping_Site
 
             //if the file is empty write without checking
             if (FS.Length != 0)
-                {
+            {
                 //read objects & save to array
-                while (FS.Position < FS.Length) 
-                    {
-                        arr[i] = (Seller)BF.Deserialize(FS);
-                        i++;
-                    }
+                while (FS.Position < FS.Length)
+                {
+                    arr[i] = (Seller)BF.Deserialize(FS);
+                    i++;
+                }
 
                 //check if any of the objects in the array eqauls the new object
                 for (int j = 0; j < i; j++)
                 {
-                    if (   arr[j].GetName()         == this.GetName() 
-                        && arr[j].GetPhoneNumber()  == this.GetPhoneNumber()
+                    if (arr[j].GetName() == this.GetName()
+                        && arr[j].GetPhoneNumber() == this.GetPhoneNumber()
                         && arr[j].GetEmailAddress() == this.GetEmailAddress())
                     {
                         Console.WriteLine("The User Already Exist, Please Try to Log In Instead of Sign Up");
                         FS.Close();
                         GlobalFun.Welcoming();
-                    } 
+                    }
                 }
-                        
+
                 //if its new user save it to file
-                            FS.Close();
-                            this.SetSellerID();
-                            this.SaveToFile();
-                            Console.WriteLine("User Account Created Successfully As A Seller");
-                            Console.WriteLine("Do You Want To Log In? Answer by(Y:N):");
-                            string Answer = Console.ReadLine();
+                FS.Close();
+                this.SetSellerID();
+                this.SaveToFile();
+                Console.WriteLine("User Account Created Successfully As A Seller");
+                Console.WriteLine("Do You Want To Log In? Answer by(Y:N):");
+                string Answer = Console.ReadLine();
 
-                            if (Answer == "Y"|| Answer == "y") 
-                            { this.LogInSeller(); }
-
-                            else 
-                            { GlobalFun.Welcoming(); }
-                }
+                if (Answer == "Y" || Answer == "y")
+                { this.LogInSeller(); }
 
                 else
-                { 
-                    //if the file is empty then user is new (save it)
-                    FS.Close();
-                    this.SetSellerID();
-                    this.SaveToFile();
-                    Console.WriteLine("User Account Created Successfully As A Seller");
-                    Console.WriteLine("Do You Want To Log In? Answer by(Y:N):");
-                    string Answer = Console.ReadLine();
+                { GlobalFun.Welcoming(); }
+            }
 
-                    if (Answer == "Y" || Answer == "y") 
-                    { this.LogInSeller(); }
+            else
+            {
+                //if the file is empty then user is new (save it)
+                FS.Close();
+                this.SetSellerID();
+                this.SaveToFile();
+                Console.WriteLine("User Account Created Successfully As A Seller");
+                Console.WriteLine("Do You Want To Log In? Answer by(Y:N):");
+                string Answer = Console.ReadLine();
 
-                    else 
-                    { GlobalFun.Welcoming(); }
-                }
+                if (Answer == "Y" || Answer == "y")
+                { this.LogInSeller(); }
+
+                else
+                { GlobalFun.Welcoming(); }
+            }
         }
 
-//Fun12 (Seve To File):
-        public void SaveToFile() 
+        //Fun12 (Seve To File):
+        public void SaveToFile()
         {
             FileStream FS = new FileStream("SellerData.txt", FileMode.Append, FileAccess.Write);
             BinaryFormatter BF = new BinaryFormatter();
@@ -735,7 +735,7 @@ namespace Online_Shoping_Site
             FS.Close();
         }
 
-//Fun13 (Sign Up Seller):
+        //Fun13 (Sign Up Seller):
         public void SignUpSeller()
         {
             Console.WriteLine("Fill The Following To Create Your New Account As A Seller.");
@@ -793,7 +793,11 @@ namespace Online_Shoping_Site
             this.CheckSeller();
         }
 
-//Fun14:
+        public void AddingNewListing() 
+        {
+
+        }
+        //Fun14:
         public void LogInSeller()
         {
 
@@ -812,7 +816,7 @@ namespace Online_Shoping_Site
                 switch (choice)
                 {
                     case 1:
-                        //AddingNewListing();
+                        AddingNewListing();
                         break;
                     case 2:
                         //DeleteExistingListing();
