@@ -918,13 +918,66 @@ namespace Online_Shoping_Site
             //Check if the seller already exist & if the user is new Give uniqe ID then save to file:
             this.CheckSeller();
         }
+        public string GetPassword() { return this.Password; }
 
-   
+        public void FindAccount(string email,string Password, ref Seller S) {
+            //Exist or not:
+            FileStream FS;
+            
+            if (!(File.Exists("SellerData.txt")))
+            { Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
+              GlobalFun.Welcoming();
+
+            }
+            FS = new FileStream("SellerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
+            Seller[] arr = new Seller[1000000];
+            int i = 0;
+
+            
+            if (FS.Length != 0)
+            {
+                //read objects & save to array
+                while (FS.Position < FS.Length)
+                {
+                    arr[i] = (Seller)BF.Deserialize(FS);
+                    i++;
+                }
+
+                //check if any of the objects in the array eqauls the object
+                for (int j = 0; j < i; j++)
+                {
+                    if (arr[j].GetPassword() == Password
+                        && arr[j].GetEmailAddress() == email)
+                    {
+                        Console.WriteLine("Logged In Successfuly");
+                        
+                        S = arr[i];
+                        FS.Close();
+                    }
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
+                GlobalFun.Welcoming();
+            }
+
+        }
         //Fun14:
         public void LogInSeller()
         {
-
+            string email;
+            string Password;
+            Console.WriteLine("Enter Your Email:");
+            email = Console.ReadLine();
+            Console.WriteLine("Enter Your Password:");
+            Password = Console.ReadLine();
+            Seller S = new Seller();
+            this.FindAccount(email, Password,ref S);
             int choice = 0;
+           
             do
             {
                 Console.WriteLine("1. Adding new listing.");
@@ -952,13 +1005,13 @@ namespace Online_Shoping_Site
                         Console.WriteLine("Enter Listing Number Of Items In Listing:");
                         int NumOfItmes = Convert.ToInt32(Console.ReadLine());
                         L.SetNumberOfItems(NumOfItmes);
-                        this.AddListings(L);
+                        S.AddListings(L);
 
                         break;
                     case 2:
                         Console.WriteLine("Enter Listing Name:");
                         string Name2 = Console.ReadLine();
-                        this.DeleteListings(Name2);
+                        S.DeleteListings(Name2);
                         
                         break;
                     case 3:
@@ -974,7 +1027,7 @@ namespace Online_Shoping_Site
                             string Name3 = Console.ReadLine();
                             Console.WriteLine("Enter Listing New Name:");
                             string Name4 = Console.ReadLine();
-                            this.Change_Name_For_Existing_Listing(Name3,Name4);
+                            S.Change_Name_For_Existing_Listing(Name3,Name4);
                         }
                         if (choice2 == "2")
                         {
@@ -982,7 +1035,7 @@ namespace Online_Shoping_Site
                             string Name3 = Console.ReadLine();
                             Console.WriteLine("Enter Listing New Descreption:");
                             string Descreption = Console.ReadLine();
-                            this.Change_Description_For_Existing_Listing(Name3, Descreption);
+                            S.Change_Description_For_Existing_Listing(Name3, Descreption);
                         }
                         if (choice2 == "3")
                         {
@@ -990,7 +1043,7 @@ namespace Online_Shoping_Site
                             string Name3 = Console.ReadLine();
                             Console.WriteLine("Enter Listing New Price:");
                             double Price2 =Convert.ToDouble(Console.ReadLine());
-                            this.Change_Price_For_Existing_Listing(Name3, Price2);
+                            S.Change_Price_For_Existing_Listing(Name3, Price2);
                         }
                         if (choice2 == "4")
                         {
@@ -998,15 +1051,15 @@ namespace Online_Shoping_Site
                             string Name3 = Console.ReadLine();
                             Console.WriteLine("Enter Listing New Number Of Items:");
                             int Number = Convert.ToInt32(Console.ReadLine());
-                            this.Change_NumOfItems_For_Existing_Listing(Name3, Number);
+                            S.Change_NumOfItems_For_Existing_Listing(Name3, Number);
                         }
                         else {
                             Console.WriteLine("Choice Not Valid");
-                            this.LogInSeller();
+                            S.LogInSeller();
                         }
                         break;
                     case 4:
-                        this.ViewAllListings();
+                        S.ViewAllListings();
                         break;
                     case 5:
                         //ViewSoldListingsInformation();                   
