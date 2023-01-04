@@ -38,5 +38,9 @@ namespace Online_Shoping_Site
         public int GetNumberOfItems()
         { return this.NumberOfItems; }
 
+        public void Print() {
+            Console.WriteLine("Listings Name:", this.NameOfListing,"\t", "Listings Description:", this.Description, "\t","Number Of Items:",this.NumberOfItems, "\t", "Price", Price);
+        }
+
     }
 }

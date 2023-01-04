@@ -21,10 +21,136 @@ namespace Online_Shoping_Site
         string StoreNumber;
         string Password;
         string SellerID;
+        List<Listings> listings;
 
         public static int counter = 0;
 
-        //Listings listings;
+        public void ViewAllListings() {
+            if (this.listings != null)
+            {
+                for (int i = 0; i < this.listings.Count; i++)
+                {
+                    this.listings[i].Print();
+                    Console.WriteLine("\n");
+                }
+            }
+            else { Console.WriteLine("The Listings Is Empty"); }
+
+        }
+        public void AddListings(Listings L)
+        {
+
+
+            bool x = false;
+            for (int i = 0; i < this.listings.Count; i++)
+            {
+                if (this.listings[i] == L)
+                {
+                    x = true;
+                    string a;
+                    Console.WriteLine("Listing Alredy Exist\nWould You Like to Edit Number Of Items In It?(Y:N)");
+                    a = Console.ReadLine();
+                    if (a == "Y" || a == "y")
+                    {
+                        Console.WriteLine("Please Enter The New Value Of Items");
+                        int value = Convert.ToInt32(Console.ReadLine());
+                        this.Change_NumOfItems_For_Existing_Listing(this.listings[i].GetNameOfListing(), value);
+                    }
+                }
+            }
+            if (x == false)
+            {
+                this.listings.Add(L);
+                Console.WriteLine("Added Successefully"); 
+            }
+        }
+        public void DeleteListings(string name) {
+            if (this.listings != null)
+            { bool x=false;
+                for (int i = 0; i < this.listings.Count; i++)
+                {
+                    if (this.listings[i].GetNameOfListing() == name) {
+                        x = true;
+                        this.listings.RemoveAt(i);
+                        Console.WriteLine("Listing Deleted Successfully");
+                    }
+                }
+                if(x== false) { Console.WriteLine("Cant Delete"); Console.WriteLine("The Listing Is not In The Seller Data Listings To Delete"); }
+            }
+            else { Console.WriteLine("Cant Delete"); Console.WriteLine("The Listing Does Not Exist"); }
+        }
+        public void Change_Price_For_Existing_Listing(string name, double Price) {
+            if (this.listings != null)
+            {
+                bool x = false;
+                for (int i = 0; i < this.listings.Count; i++)
+                {
+                    if (this.listings[i].GetNameOfListing() == name)
+                    {
+                        x = true;
+                        this.listings[i].SetPrice(Price);
+                        Console.WriteLine("Listing Price Changed Successfully");
+                    }
+                }
+                if (x == false) { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+            }
+            else { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+        }
+        public void Change_Name_For_Existing_Listing(string oldname, string newname)
+        {
+            if (this.listings != null)
+            {
+                bool x = false;
+                for (int i = 0; i < this.listings.Count; i++)
+                {
+                    if (this.listings[i].GetNameOfListing() == oldname)
+                    {
+                        x = true;
+                        this.listings[i].SetNameOfListing(newname);
+                        Console.WriteLine("Listing Name Changed Successfully");
+                    }
+                }
+                if (x == false) { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+            }
+            else { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+        }
+        public void Change_Description_For_Existing_Listing(string name, string Description)
+        {
+            if (this.listings != null)
+            {
+                bool x = false;
+                for (int i = 0; i < this.listings.Count; i++)
+                {
+                    if (this.listings[i].GetNameOfListing() == name)
+                    {
+                        x = true;
+                        this.listings[i].SetDescription(Description);
+                        Console.WriteLine("Listing Description Changed Successfully");
+                    }
+                }
+                if (x == false) { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+            }
+            else { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+        }
+        public void Change_NumOfItems_For_Existing_Listing(string name, int NumOfItems)
+        {
+            if (this.listings != null)
+            {
+                bool x = false;
+                for (int i = 0; i < this.listings.Count; i++)
+                {
+                    if (this.listings[i].GetNameOfListing() == name)
+                    {
+                        x = true;
+                        this.listings[i].SetNumberOfItems(NumOfItems);
+                        Console.WriteLine("Listing Number Of Items Changed Successfully");
+                    }
+                }
+                if (x == false) { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+            }
+            else { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+        }
+
         //Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
         public void SetName(string Name)
         {
@@ -793,10 +919,7 @@ namespace Online_Shoping_Site
             this.CheckSeller();
         }
 
-        public void AddingNewListing() 
-        {
-
-        }
+   
         //Fun14:
         public void LogInSeller()
         {
@@ -816,16 +939,74 @@ namespace Online_Shoping_Site
                 switch (choice)
                 {
                     case 1:
-                        AddingNewListing();
+                        Listings L = new Listings();
+                        Console.WriteLine("Enter Listing Name:");
+                        string Name = Console.ReadLine();
+                        L.SetNameOfListing(Name);
+                        Console.WriteLine("Enter Listing Description:");
+                        string Description = Console.ReadLine();
+                        L.SetDescription(Description);
+                        Console.WriteLine("Enter Listing Price:");
+                        double Price = Convert.ToDouble(Console.ReadLine());
+                        L.SetPrice(Price);
+                        Console.WriteLine("Enter Listing Number Of Items In Listing:");
+                        int NumOfItmes = Convert.ToInt32(Console.ReadLine());
+                        L.SetNumberOfItems(NumOfItmes);
+                        this.AddListings(L);
+
                         break;
                     case 2:
-                        //DeleteExistingListing();
+                        Console.WriteLine("Enter Listing Name:");
+                        string Name2 = Console.ReadLine();
+                        this.DeleteListings(Name2);
+                        
                         break;
                     case 3:
-                        //ChangeInfoAndPriceForExistingListing();
+                        Console.WriteLine("What Would You Like To Change?");
+                        Console.WriteLine("1-Name");
+                        Console.WriteLine("2-Descreption");
+                        Console.WriteLine("3-Price");
+                        Console.WriteLine("4-Number Of Items");
+                        string choice2 = Console.ReadLine();
+                        if (choice2 == "1")
+                        {
+                            Console.WriteLine("Enter Listing Old Name:");
+                            string Name3 = Console.ReadLine();
+                            Console.WriteLine("Enter Listing New Name:");
+                            string Name4 = Console.ReadLine();
+                            this.Change_Name_For_Existing_Listing(Name3,Name4);
+                        }
+                        if (choice2 == "2")
+                        {
+                            Console.WriteLine("Enter Listing Name:");
+                            string Name3 = Console.ReadLine();
+                            Console.WriteLine("Enter Listing New Descreption:");
+                            string Descreption = Console.ReadLine();
+                            this.Change_Description_For_Existing_Listing(Name3, Descreption);
+                        }
+                        if (choice2 == "3")
+                        {
+                            Console.WriteLine("Enter Listing Name:");
+                            string Name3 = Console.ReadLine();
+                            Console.WriteLine("Enter Listing New Price:");
+                            double Price2 =Convert.ToDouble(Console.ReadLine());
+                            this.Change_Price_For_Existing_Listing(Name3, Price2);
+                        }
+                        if (choice2 == "4")
+                        {
+                            Console.WriteLine("Enter Listing Name:");
+                            string Name3 = Console.ReadLine();
+                            Console.WriteLine("Enter Listing New Number Of Items:");
+                            int Number = Convert.ToInt32(Console.ReadLine());
+                            this.Change_NumOfItems_For_Existing_Listing(Name3, Number);
+                        }
+                        else {
+                            Console.WriteLine("Choice Not Valid");
+                            this.LogInSeller();
+                        }
                         break;
                     case 4:
-                        //ViewAllListings();
+                        this.ViewAllListings();
                         break;
                     case 5:
                         //ViewSoldListingsInformation();                   
@@ -834,10 +1015,7 @@ namespace Online_Shoping_Site
                         //ChangeAccountInformation();                   
                         break;
                     case 7:
-                        //ViewSoldListingsInformation();                   
-                        break;
-                    case 8:
-                        //RETURN TO THE LOGIN SCREEN TO ENABLE YOU TO LOG IN WITH DIFFERENT USER TYPE.
+                        GlobalFun.Welcoming();             
                         break;
                     default:
                         Console.WriteLine("Invalid Choice, please try agian...");

@@ -38,7 +38,8 @@ namespace Online_Shoping_Site
                         }
                         else if (Action == 2)
                         {
-                        //LogInSeller();
+                            Seller NewAccount = new Seller();
+                            NewAccount.LogInSeller();
                         }
                         else
                         {
