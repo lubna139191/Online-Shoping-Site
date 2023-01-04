@@ -25,7 +25,8 @@ namespace Online_Shoping_Site
 
         public static int counter = 0;
 
-        public void ViewAllListings() {
+        public void ViewAllListings() 
+        {
             if (this.listings != null)
             {
                 for (int i = 0; i < this.listings.Count; i++)
@@ -34,13 +35,11 @@ namespace Online_Shoping_Site
                     Console.WriteLine("\n");
                 }
             }
-            else { Console.WriteLine("The Listings Is Empty"); }
-
+            else 
+            { Console.WriteLine("The Listings Is Empty"); }
         }
         public void AddListings(Listings L)
         {
-
-
             bool x = false;
             for (int i = 0; i < this.listings.Count; i++)
             {
@@ -64,22 +63,27 @@ namespace Online_Shoping_Site
                 Console.WriteLine("Added Successefully"); 
             }
         }
-        public void DeleteListings(string name) {
+        public void DeleteListings(string name) 
+        {
             if (this.listings != null)
             { bool x=false;
                 for (int i = 0; i < this.listings.Count; i++)
                 {
-                    if (this.listings[i].GetNameOfListing() == name) {
+                    if (this.listings[i].GetNameOfListing() == name) 
+                    {
                         x = true;
                         this.listings.RemoveAt(i);
                         Console.WriteLine("Listing Deleted Successfully");
                     }
                 }
-                if(x== false) { Console.WriteLine("Cant Delete"); Console.WriteLine("The Listing Is not In The Seller Data Listings To Delete"); }
+                if(x== false) 
+                { Console.WriteLine("Cant Delete"); Console.WriteLine("The Listing Is not In The Seller Data Listings To Delete"); }
             }
-            else { Console.WriteLine("Cant Delete"); Console.WriteLine("The Listing Does Not Exist"); }
+            else 
+            { Console.WriteLine("Cant Delete"); Console.WriteLine("The Listing Does Not Exist"); }
         }
-        public void Change_Price_For_Existing_Listing(string name, double Price) {
+        public void Change_Price_For_Existing_Listing(string name, double Price) 
+        {
             if (this.listings != null)
             {
                 bool x = false;
@@ -110,9 +114,11 @@ namespace Online_Shoping_Site
                         Console.WriteLine("Listing Name Changed Successfully");
                     }
                 }
-                if (x == false) { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+                if (x == false) 
+                { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
             }
-            else { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+            else 
+            { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
         }
         public void Change_Description_For_Existing_Listing(string name, string Description)
         {
@@ -128,9 +134,11 @@ namespace Online_Shoping_Site
                         Console.WriteLine("Listing Description Changed Successfully");
                     }
                 }
-                if (x == false) { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+                if (x == false) 
+                { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
             }
-            else { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+            else 
+            { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
         }
         public void Change_NumOfItems_For_Existing_Listing(string name, int NumOfItems)
         {
@@ -781,6 +789,11 @@ namespace Online_Shoping_Site
         public string GetPhoneNumber()
         { return PhoneNumber; }
 
+        //Fun11:
+        public string GetPassword()
+        { return this.Password; }
+
+
         //Fun11 (Check Seller: Exist or not, empty or not, save object, equality):
         public void CheckSeller()
         {
@@ -918,9 +931,9 @@ namespace Online_Shoping_Site
             //Check if the seller already exist & if the user is new Give uniqe ID then save to file:
             this.CheckSeller();
         }
-        public string GetPassword() { return this.Password; }
-
-        public void FindAccount(string email,string Password, ref Seller S) {
+        
+        public void FindAccount(string email,string Password, ref Seller S) 
+        {
             //Exist or not:
             FileStream FS;
             
@@ -987,7 +1000,7 @@ namespace Online_Shoping_Site
                 Console.WriteLine("5. View sold listings information.");
                 Console.WriteLine("6. Change account information.");
                 Console.WriteLine("7. logout.");
-                Console.Write("\nEnter your choice: ");
+                Console.Write("\nEnter your choice:");
                 choice = Convert.ToInt16(Console.ReadLine());
                 switch (choice)
                 {

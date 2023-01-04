@@ -10,7 +10,7 @@ namespace Online_Shoping_Site
         string NameOfListing;
         string Description;
         double Price;
-        int NumberOfItems;
+        int    NumberOfItems;
 
         //Set:
         public void SetNameOfListing (string NameOfListing)

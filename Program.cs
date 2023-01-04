@@ -11,10 +11,8 @@ namespace Online_Shoping_Site
     {
         static void Main(string[] args)
         {
-            //test
             //Welcoming screen:
             GlobalFun.Welcoming();
-            //print 
         }
 
     }

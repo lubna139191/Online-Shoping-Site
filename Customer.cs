@@ -19,12 +19,15 @@ namespace Online_Shoping_Site
         string CustomerId;
         Address ShippingAddress;
         Payment PaymentInformation;
+        List<Listings> listings;
+
         public static int counter = 0;
         public static Dictionary<string, object> data = new Dictionary<string, object>();
         //  public static string FileName { get; private set; }
 
         public static string ProgramFilesFolder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
         //FileName=ProgramFilesFolder + "/Online Shoping Site";
+
 
         //Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
         public void SetName(string Name)
@@ -625,7 +628,11 @@ namespace Online_Shoping_Site
         public string GetPhoneNumber()
         { return PhoneNumber; }
 
-//Fun11 (Check Seller: Exist or not, empty or not, save object, equality):
+//Fun11:
+        public string GetPassword()
+        { return this.Password; }
+
+        //Fun11 (Check Seller: Exist or not, empty or not, save object, equality):
         public void CheckCustomer()
         {
             //Exist or not:
@@ -765,7 +772,52 @@ namespace Online_Shoping_Site
 
         }
 
-//Fun14 (Log In Customer): 
+//Fun Find Account: 
+        public void FindAccount(string email, string Password, ref Customer C)
+        {
+            //Exist or not:
+            FileStream FC;
+            if (!(File.Exists("CustomerData.txt")))
+            {
+                Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
+                GlobalFun.Welcoming();
+            }
+            FC = new FileStream("CustomerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
+            Customer[] arr = new Customer[1000000];
+            int i = 0;
+
+
+            if (FC.Length != 0)
+            {
+                //read objects & save to array
+                while (FC.Position < FC.Length)
+                {
+                    arr[i] = (Customer)BF.Deserialize(FC);
+                    i++;
+                }
+
+                //check if any of the objects in the array eqauls the object
+                for (int j = 0; j < i; j++)
+                {
+                    if (arr[j].GetPassword() == Password
+                        && arr[j].GetEmailAddress() == email)
+                    {
+                        Console.WriteLine("Logged In Successfuly");
+                        C = arr[i];
+                        FC.Close();
+                    }
+                }
+            }
+
+            else
+            {
+                Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
+                GlobalFun.Welcoming();
+            }
+        }
+
+        //Fun14 (Log In Customer): 
         public void LogInCustomer()
         {
             string email;
@@ -775,8 +827,9 @@ namespace Online_Shoping_Site
             Console.WriteLine("Enter Your Password:");
             Password = Console.ReadLine();
             Customer C = new Customer();
+            this.FindAccount(email, Password, ref C);
+            
             int choice = 0;
-
             do
             {
                 Console.WriteLine("1. View all available listings.");

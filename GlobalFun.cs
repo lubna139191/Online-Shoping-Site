@@ -22,7 +22,7 @@ namespace Online_Shoping_Site
                 switch (user)
                 {
                     case 1:
-                        //Seller
+                        //Seller:
                         Console.WriteLine("If this is your first visit to the site,");
                         Console.WriteLine("choose the first option (Sign Up),");
                         Console.WriteLine("If you have already registered, choose the second option (Log In).");
@@ -31,8 +31,7 @@ namespace Online_Shoping_Site
                         int Action = Convert.ToInt32(Console.ReadLine());
                         if (Action == 1)
                         {   
-                        //New Seller Account
-
+                        //New Seller Account:
                             Seller NewAccount= new Seller();
                             NewAccount.SignUpSeller();
                         }
@@ -49,7 +48,7 @@ namespace Online_Shoping_Site
                         break;
 
                     case 2:
-                        //Cusromer
+                        //Cusromer:
                         Console.WriteLine("If this is your first visit to the site,");
                         Console.WriteLine("choose the first option (Sign Up),");
                         Console.WriteLine("If you have already registered, choose the second option (Log In).");
@@ -58,14 +57,16 @@ namespace Online_Shoping_Site
                         int Choice = Convert.ToInt32(Console.ReadLine());
                         if (Choice == 1)
                         {
-                         //New Customer Account
+                         //New Customer Account:
                              Customer NewAccount = new Customer();
                              NewAccount.SignUpCustomer();
                         }
 
                         else if (Choice == 2)
                         {
-                            //LogInCustomer();
+                        //LogInCustomer():
+                            Seller NewAccount = new Seller();
+                            NewAccount.LogInSeller();
                         }
                         else
                         {
