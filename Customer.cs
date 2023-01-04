@@ -20,10 +20,13 @@ namespace Online_Shoping_Site
         Address ShippingAddress;
         Payment PaymentInformation;
         public static int counter = 0;
+        public static Dictionary<string, object> data = new Dictionary<string, object>();
+        //  public static string FileName { get; private set; }
 
+        public static string ProgramFilesFolder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+        //FileName=ProgramFilesFolder + "/Online Shoping Site";
 
-
-//Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
+        //Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
         public void SetName(string Name)
         {
             bool condition = false;
@@ -627,11 +630,13 @@ namespace Online_Shoping_Site
         {
             //Exist or not:
             FileStream FC;
-            if (File.Exists("CustomerData.txt"))
-            { FC = new FileStream("CustomerData.txt", FileMode.Open, FileAccess.Read); }
+            if (File.Exists(ProgramFilesFolder+"/CustomerData.txt"))
+            { FC = new FileStream(ProgramFilesFolder+"/CustomerData.txt", FileMode.Open, FileAccess.Read); }
 
             else
-            { FC = new FileStream("CustomerData.txt", FileMode.Create, FileAccess.ReadWrite); }
+            {
+                Directory.CreateDirectory(ProgramFilesFolder);
+                FC = new FileStream(ProgramFilesFolder+"/CustomerData.txt", FileMode.Create, FileAccess.ReadWrite); }
 
             BinaryFormatter BF = new BinaryFormatter();
             Customer[] arr = new Customer[1000000];
@@ -668,7 +673,7 @@ namespace Online_Shoping_Site
                 Console.WriteLine("Do You Want To Log In? Answer by(Y:N):");
                 string Answer = Console.ReadLine();
 
-                if (Answer == "Y")
+                if (Answer == "Y"|| Answer == "y")
                 { this.LogInCustomer(); }
 
                 else
@@ -685,7 +690,7 @@ namespace Online_Shoping_Site
                 Console.WriteLine("Do You Want To Log In? Answer by(Y:N):");
                 string Answer = Console.ReadLine();
 
-                if (Answer == "Y")
+                if (Answer == "Y" || Answer == "y")
                 { this.LogInCustomer(); }
 
                 else
@@ -696,7 +701,11 @@ namespace Online_Shoping_Site
 //Fun12 (Seve To File):
         public void SaveToFile()
         {
-            FileStream FC = new FileStream("CustomerData.txt", FileMode.Append, FileAccess.Write);
+           // ProgramFilesFolder = ;
+            //FileName = 
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)) )
+            { Directory.CreateDirectory(ProgramFilesFolder); }
+                FileStream FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Append, FileAccess.Write);
             BinaryFormatter BF = new BinaryFormatter();
             BF.Serialize(FC, this);
             FC.Close();

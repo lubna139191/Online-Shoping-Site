@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Online_Shoping_Site
 {
+    [Serializable]
     class Listings
     {
         string NameOfListing;
