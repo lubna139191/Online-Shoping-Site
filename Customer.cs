@@ -768,7 +768,15 @@ namespace Online_Shoping_Site
 //Fun14 (Log In Customer): 
         public void LogInCustomer()
         {
+            string email;
+            string Password;
+            Console.WriteLine("Enter Your Email:");
+            email = Console.ReadLine();
+            Console.WriteLine("Enter Your Password:");
+            Password = Console.ReadLine();
+            Customer C = new Customer();
             int choice = 0;
+
             do
             {
                 Console.WriteLine("1. View all available listings.");
