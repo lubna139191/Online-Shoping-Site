@@ -17,6 +17,7 @@ namespace Online_Shoping_Site
             Console.WriteLine("4. Clear Screen And Start Again.");
             Console.WriteLine("Enter your choice: ");
             int user = Convert.ToInt32(Console.ReadLine());
+
             if (user == 1 || user == 2 || user == 3 || user==4)
             {
                 switch (user)
@@ -35,11 +36,13 @@ namespace Online_Shoping_Site
                             Seller NewAccount= new Seller();
                             NewAccount.SignUpSeller();
                         }
+
                         else if (Action == 2)
                         {
                             Seller NewAccount = new Seller();
                             NewAccount.LogInSeller();
                         }
+
                         else
                         {
                             Console.WriteLine("Invalid Choice, please try agian.");
@@ -55,6 +58,7 @@ namespace Online_Shoping_Site
                         Console.WriteLine("1. SignUp.");
                         Console.WriteLine("2. Login.");
                         int Choice = Convert.ToInt32(Console.ReadLine());
+
                         if (Choice == 1)
                         {
                          //New Customer Account:
@@ -64,15 +68,16 @@ namespace Online_Shoping_Site
 
                         else if (Choice == 2)
                         {
-                        //LogInCustomer():
-                            Seller NewAccount = new Seller();
-                            NewAccount.LogInSeller();
+                            Customer NewAccount = new Customer();
+                            NewAccount.LogInCustomer();
                         }
+
                         else
                         {
                             Console.WriteLine("Invalid Choice, please try agian.");
                             GlobalFun.Welcoming();
                         }
+
                         break;
 
                     case 3:
@@ -85,6 +90,7 @@ namespace Online_Shoping_Site
                         break;
                 }
             }
+
             else
             {
                 Console.WriteLine("Invalid Choice, please try agian.");

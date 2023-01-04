@@ -25,6 +25,7 @@ namespace Online_Shoping_Site
 
         public static int counter = 0;
 
+//Fun View All Listings:
         public void ViewAllListings() 
         {
             if (this.listings != null)
@@ -38,6 +39,8 @@ namespace Online_Shoping_Site
             else 
             { Console.WriteLine("The Listings Is Empty"); }
         }
+
+//Fun Add Listings:
         public void AddListings(Listings L)
         {
             bool x = false;
@@ -63,6 +66,8 @@ namespace Online_Shoping_Site
                 Console.WriteLine("Added Successefully"); 
             }
         }
+
+//Fun Delete Listing:
         public void DeleteListings(string name) 
         {
             if (this.listings != null)
@@ -82,6 +87,8 @@ namespace Online_Shoping_Site
             else 
             { Console.WriteLine("Cant Delete"); Console.WriteLine("The Listing Does Not Exist"); }
         }
+
+//Fun Change Price For Existing Listing:
         public void Change_Price_For_Existing_Listing(string name, double Price) 
         {
             if (this.listings != null)
@@ -100,6 +107,8 @@ namespace Online_Shoping_Site
             }
             else { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
         }
+
+//Fun Change Name For Existing Listing:
         public void Change_Name_For_Existing_Listing(string oldname, string newname)
         {
             if (this.listings != null)
@@ -120,6 +129,8 @@ namespace Online_Shoping_Site
             else 
             { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
         }
+
+//Fun Change Description For Existing Listing:
         public void Change_Description_For_Existing_Listing(string name, string Description)
         {
             if (this.listings != null)
@@ -140,6 +151,8 @@ namespace Online_Shoping_Site
             else 
             { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
         }
+
+//Fun Change Number Of Item For Existing Listing:
         public void Change_NumOfItems_For_Existing_Listing(string name, int NumOfItems)
         {
             if (this.listings != null)
@@ -159,7 +172,7 @@ namespace Online_Shoping_Site
             else { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
         }
 
-        //Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
+//Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
         public void SetName(string Name)
         {
             bool condition = false;
@@ -227,11 +240,11 @@ namespace Online_Shoping_Site
             this.Name = Name;
         }
 
-        //Fun2 (set Shipping Address: Country, City, Street, Apartment):
-        //Country: No number, No space, No special charachters.
-        //City: No number, No space, No special charachters.
-        //Street: No number, No space, No special charachters.
-        //Apartment: No number, No space, No special charachters.
+//Fun2 (set Shipping Address: Country, City, Street, Apartment):
+//Country: No number, No space, No special charachters.
+//City: No number, No space, No special charachters.
+//Street: No number, No space, No special charachters.
+//Apartment: No number, No space, No special charachters.
         public void SetAddress(string Country, string City, String Street, String ApartmentN)
         {
             addrees = new Address();
@@ -520,7 +533,7 @@ namespace Online_Shoping_Site
             this.EmailAddress = EmailAddress;
         }
 
-        //Fun4 (Set Phone Number: 10 Numbers, start with 0, second number is 7, third number 7/8/9, the reset are numbers):
+//Fun4 (Set Phone Number: 10 Numbers, start with 0, second number is 7, third number 7/8/9, the reset are numbers):
         public void SetPhoneNumber(string PhoneNumber)
         {
             bool condition = false;
@@ -596,7 +609,7 @@ namespace Online_Shoping_Site
 
         }
 
-        //Fun5 (set Store number: Number, ):
+//Fun5 (set Store number: Number, ):
         public void SetStoreNumber(string StoreNumber)
         {
             bool condition = false;
@@ -647,7 +660,7 @@ namespace Online_Shoping_Site
             this.StoreNumber = StoreNumber;
         }
 
-        //Fun6 (Set Password: Password Confirm, 8 charchters, special charchter, capital & small letters): 
+//Fun6 (Set Password: Password Confirm, 8 charchters, special charchter, capital & small letters): 
         public void SetPassword(string Password, string ConfirmSPassword)
         {
             bool condition = false;
@@ -768,7 +781,7 @@ namespace Online_Shoping_Site
             this.Password = Password;
         }
 
-        //Fun7 (Set seller ID):
+//Fun7 (Set seller ID):
         public void SetSellerID()
         {
             counter++;
@@ -776,7 +789,7 @@ namespace Online_Shoping_Site
         }
 
 
-        //Get Functions:
+//Get Functions:
         //Fun8:
         public string GetName()
         { return Name; }
@@ -794,7 +807,7 @@ namespace Online_Shoping_Site
         { return this.Password; }
 
 
-        //Fun11 (Check Seller: Exist or not, empty or not, save object, equality):
+//Fun11 (Check Seller: Exist or not, empty or not, save object, equality):
         public void CheckSeller()
         {
             //Exist or not:
@@ -865,7 +878,7 @@ namespace Online_Shoping_Site
             }
         }
 
-        //Fun12 (Seve To File):
+//Fun12 (Seve To File):
         public void SaveToFile()
         {
             FileStream FS = new FileStream("SellerData.txt", FileMode.Append, FileAccess.Write);
@@ -874,7 +887,7 @@ namespace Online_Shoping_Site
             FS.Close();
         }
 
-        //Fun13 (Sign Up Seller):
+//Fun13 (Sign Up Seller):
         public void SignUpSeller()
         {
             Console.WriteLine("Fill The Following To Create Your New Account As A Seller.");
@@ -931,22 +944,24 @@ namespace Online_Shoping_Site
             //Check if the seller already exist & if the user is new Give uniqe ID then save to file:
             this.CheckSeller();
         }
-        
+
+//Fun FindAccount:        
         public void FindAccount(string email,string Password, ref Seller S) 
         {
             //Exist or not:
             FileStream FS;
             
             if (!(File.Exists("SellerData.txt")))
-            { Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
+            { 
+              Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
               GlobalFun.Welcoming();
-
             }
+
             FS = new FileStream("SellerData.txt", FileMode.Open, FileAccess.Read);
             BinaryFormatter BF = new BinaryFormatter();
+
             Seller[] arr = new Seller[1000000];
             int i = 0;
-
             
             if (FS.Length != 0)
             {
@@ -960,17 +975,16 @@ namespace Online_Shoping_Site
                 //check if any of the objects in the array eqauls the object
                 for (int j = 0; j < i; j++)
                 {
-                    if (arr[j].GetPassword() == Password
+                    if (   arr[j].GetPassword() == Password
                         && arr[j].GetEmailAddress() == email)
                     {
                         Console.WriteLine("Logged In Successfuly");
-                        
                         S = arr[i];
                         FS.Close();
                     }
                 }
-
             }
+
             else
             {
                 Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
@@ -978,7 +992,8 @@ namespace Online_Shoping_Site
             }
 
         }
-        //Fun14:
+
+//Fun14 Log In:
         public void LogInSeller()
         {
             string email;
@@ -989,8 +1004,8 @@ namespace Online_Shoping_Site
             Password = Console.ReadLine();
             Seller S = new Seller();
             this.FindAccount(email, Password,ref S);
+
             int choice = 0;
-           
             do
             {
                 Console.WriteLine("1. Adding new listing.");
@@ -1021,12 +1036,14 @@ namespace Online_Shoping_Site
                         S.AddListings(L);
 
                         break;
+
                     case 2:
                         Console.WriteLine("Enter Listing Name:");
                         string Name2 = Console.ReadLine();
                         S.DeleteListings(Name2);
                         
                         break;
+
                     case 3:
                         Console.WriteLine("What Would You Like To Change?");
                         Console.WriteLine("1-Name");
@@ -1071,18 +1088,23 @@ namespace Online_Shoping_Site
                             S.LogInSeller();
                         }
                         break;
+
                     case 4:
                         S.ViewAllListings();
                         break;
+
                     case 5:
                         //ViewSoldListingsInformation();                   
                         break;
+
                     case 6:
                         //ChangeAccountInformation();                   
                         break;
+
                     case 7:
                         GlobalFun.Welcoming();             
                         break;
+
                     default:
                         Console.WriteLine("Invalid Choice, please try agian...");
                         break;

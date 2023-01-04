@@ -782,11 +782,12 @@ namespace Online_Shoping_Site
                 Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
                 GlobalFun.Welcoming();
             }
+
             FC = new FileStream("CustomerData.txt", FileMode.Open, FileAccess.Read);
             BinaryFormatter BF = new BinaryFormatter();
+
             Customer[] arr = new Customer[1000000];
             int i = 0;
-
 
             if (FC.Length != 0)
             {
@@ -796,11 +797,10 @@ namespace Online_Shoping_Site
                     arr[i] = (Customer)BF.Deserialize(FC);
                     i++;
                 }
-
                 //check if any of the objects in the array eqauls the object
                 for (int j = 0; j < i; j++)
                 {
-                    if (arr[j].GetPassword() == Password
+                    if (   arr[j].GetPassword() == Password
                         && arr[j].GetEmailAddress() == email)
                     {
                         Console.WriteLine("Logged In Successfuly");
@@ -817,7 +817,59 @@ namespace Online_Shoping_Site
             }
         }
 
-        //Fun14 (Log In Customer): 
+//Fun View all available listings
+        public void ViewAllAvailableListings()
+        {
+            if (this.listings != null)
+            {
+                for (int i = 0; i < this.listings.Count; i++)
+                {
+                    this.listings[i].Print();
+                    Console.WriteLine("\n");
+                }
+            }
+
+            else
+            { Console.WriteLine("The Listings Is Empty");}
+        }
+
+//Fun: ViewChosenListingInformation();
+        public void ViewChosenListingInformation()
+        {
+
+        }
+
+//Fun: AddListingToCart();
+        public void AddListingToCart()
+        {
+
+        }
+
+//Fun: ViewEditAddedListingsToCart();
+        public void ViewEditAddedListingsToCart()
+        { 
+
+        }
+
+//Fun: CheckoutListings();
+        public void CheckoutListings()
+        {
+
+        }
+
+//Fun: ChangeAccountInformation();
+        public void ChangeAccountInformation()
+        {
+
+        }
+
+//Fun: SearchForListing();
+        public void SearchForListing()
+        {
+
+        }
+
+//Fun14 (Log In Customer): 
         public void LogInCustomer()
         {
             string email;
@@ -840,33 +892,41 @@ namespace Online_Shoping_Site
                 Console.WriteLine("6. Change account information.");
                 Console.WriteLine("7. search for a listing.");
                 Console.WriteLine("8. logout.");
-                Console.Write("\nEnter your choice: ");
+                Console.Write("\nEnter your choice:");
                 choice = Convert.ToInt16(Console.ReadLine());
                 switch (choice)
                 {
                     case 1:
-                        //ViewAllAvailableListings();
+                        C.ViewAllAvailableListings();
                         break;
+
                     case 2:
                         //ViewChosenListingInformation();
                         break;
+
                     case 3:
                         //AddListingToCart();
                         break;
+
                     case 4:
                         //ViewEditAddedListingsToCart();
                         break;
+
                     case 5:
                         //CheckoutListings();
                         break;
+
                     case 6:
                         //ChangeAccountInformation();
                         break;
+
                     case 7:
                         //SearchForListing();
                         break;
+
                     case 8:
                         break;
+
                     default:
                         Console.WriteLine("Invalid Choice, please try agian...");
                         break;
