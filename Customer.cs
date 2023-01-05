@@ -825,7 +825,7 @@ namespace Online_Shoping_Site
             {
                 for (int i = 0; i < this.listings.Count; i++)
                 {
-                    this.listings[i].Print();
+                    //this.listings[i].Print();
                     Console.WriteLine("\n");
                 }
             }
@@ -844,7 +844,7 @@ namespace Online_Shoping_Site
                 {
                     if (this.listings[i].GetNameOfListing() == Name)
                     {
-                        this.listings[i].Print();
+                       // this.listings[i].Print();
                     }
                 }
             }

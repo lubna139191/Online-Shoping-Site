@@ -14,7 +14,7 @@ namespace Online_Shoping_Site
 
         //Set:
         public void SetNameOfListing (string NameOfListing)
-        { this.NameOfListing = NameOfListing; }
+        { this.NameOfListing = NameOfListing;  }
 
         public void SetDescription (string Description)
         { this.Description = Description; }
@@ -29,7 +29,7 @@ namespace Online_Shoping_Site
         public string GetNameOfListing()
         { return this.NameOfListing; }
 
-        public string GetSetDescription()
+        public string GetDescription()
         { return this.Description; }
 
         public double GetPrice()
@@ -39,9 +39,13 @@ namespace Online_Shoping_Site
         { return this.NumberOfItems; }
 
         public void Print() 
-        {
-            Console.WriteLine("Listings Name:", this.NameOfListing,"\t", "Listings Description:",
-            this.Description, "\t","Number Of Items:",this.NumberOfItems, "\t", "Price", Price);
+        {  
+         
+            Console.WriteLine("Listings Name:" + " " + this.GetNameOfListing());
+            Console.WriteLine("Listings Description:" + " " + this.GetDescription());
+            Console.WriteLine("Number Of Items:" + " " + this.GetNumberOfItems());
+            Console.WriteLine("Price:" + " " + this.GetPrice());
+          
         }
 
     }
