@@ -22,23 +22,7 @@ namespace Online_Shoping_Site
         string Password;
         string SellerID;
         List<Listings> listings;
-
         public static int counter = 0;
-
-//Fun View All Listings:
-        public void ViewAllListings() 
-        {
-            if (this.listings != null)
-            {
-                for (int i = 0; i < this.listings.Count; i++)
-                {
-                    this.listings[i].Print();
-                    Console.WriteLine("\n");
-                }
-            }
-            else 
-            { Console.WriteLine("The Listings Is Empty"); }
-        }
 
 //Fun Add Listings:
         public void AddListings(Listings L)
@@ -172,7 +156,22 @@ namespace Online_Shoping_Site
             else { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
         }
 
-//Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
+//Fun View All Listings:
+        public void ViewAllListings()
+        {
+            if (this.listings != null)
+            {
+                for (int i = 0; i < this.listings.Count; i++)
+                {
+                    this.listings[i].Print();
+                    Console.WriteLine("\n");
+                }
+            }
+            else
+            { Console.WriteLine("The Listings Is Empty"); }
+        }
+
+        //Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
         public void SetName(string Name)
         {
             bool condition = false;

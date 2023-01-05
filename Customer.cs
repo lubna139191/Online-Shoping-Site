@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
+using System.Xml.Linq;
 
 namespace Online_Shoping_Site
 { 
@@ -708,11 +709,11 @@ namespace Online_Shoping_Site
 //Fun12 (Seve To File):
         public void SaveToFile()
         {
-           // ProgramFilesFolder = ;
-            //FileName = 
+            // ProgramFilesFolder = ;
+            // FileName = 
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)) )
             { Directory.CreateDirectory(ProgramFilesFolder); }
-                FileStream FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Append, FileAccess.Write);
+            FileStream FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Append, FileAccess.Write);
             BinaryFormatter BF = new BinaryFormatter();
             BF.Serialize(FC, this);
             FC.Close();
@@ -817,7 +818,7 @@ namespace Online_Shoping_Site
             }
         }
 
-//Fun View all available listings
+//Fun1: View all available listings:
         public void ViewAllAvailableListings()
         {
             if (this.listings != null)
@@ -830,16 +831,29 @@ namespace Online_Shoping_Site
             }
 
             else
-            { Console.WriteLine("The Listings Is Empty");}
+            { Console.WriteLine("The Listings Is Empty"); }
         }
 
-//Fun: ViewChosenListingInformation();
-        public void ViewChosenListingInformation()
+//Fun: ViewChosenListingInformation():
+        public void ViewChosenListingInformation(string Name)
         {
+            //Check emty or not:
+            if (this.listings != null)
+            {
+                for (int i = 0; i < this.listings.Count; i++)
+                {
+                    if (this.listings[i].GetNameOfListing() == Name)
+                    {
+                        this.listings[i].Print();
+                    }
+                }
+            }
 
+            else
+            { Console.WriteLine("The Listings Is Empty"); }
         }
 
-//Fun: AddListingToCart();
+//Fun: AddListingToCart():
         public void AddListingToCart()
         {
 
@@ -901,7 +915,9 @@ namespace Online_Shoping_Site
                         break;
 
                     case 2:
-                        //ViewChosenListingInformation();
+                        Console.WriteLine("Enter Name of listing whose contents you want to view:");
+                        string Name = Console.ReadLine();
+                        C.ViewChosenListingInformation(Name);
                         break;
 
                     case 3:
