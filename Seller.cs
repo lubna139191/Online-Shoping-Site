@@ -688,7 +688,7 @@ namespace Online_Shoping_Site
         ///////////////////////////////////////////////////Sign Up///////////////////////////////////////////////////////////////
         public void SignUpSeller()
         {
-            Console.WriteLine("Fill The Following To Create Your New Account As A Seller.\n");
+            Console.WriteLine("\nFill The Following To Create Your New Account As A Seller.\n");
 
             //Seller Name:
             string SName;
@@ -846,13 +846,12 @@ namespace Online_Shoping_Site
         {
             string email;
             string Password;
-            Console.WriteLine("Enter Your Email:");
+            Console.WriteLine("\nEnter Your Email:");
             email = Console.ReadLine();
-            Console.WriteLine("\n");
             Console.WriteLine("Enter Your Password:");
-            Password = Console.ReadLine();
-            Console.WriteLine("\n");
+            Password = Console.ReadLine();   
             Seller S = new Seller();
+            
             this.FindAccount(email, Password,ref S);
             
             int choice = 0;
@@ -892,7 +891,7 @@ namespace Online_Shoping_Site
                         int NumOfItmes = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("\n");
                         L.SetNumberOfItems(NumOfItmes);
-                        S.AddListings(ref L,ref S);
+                        S.AddListings(ref L, ref S);
 
                         break;
 
@@ -909,46 +908,51 @@ namespace Online_Shoping_Site
                         Console.WriteLine("2-Descreption");
                         Console.WriteLine("3-Price");
                         Console.WriteLine("4-Number Of Items");
-                        string choice2 = Console.ReadLine();
-                        if (choice2 == "1")
-                        {
-                            Console.WriteLine("Enter Listing Old Name:");
-                            string Name3 = Console.ReadLine();
-                            Console.WriteLine("Enter Listing New Name:");
-                            string Name4 = Console.ReadLine();
-                            this.Change_Name_For_Existing_Listing(Name3, Name4);
-                        }
-                        if (choice2 == "2")
-                        {
-                            Console.WriteLine("Enter Listing Name:");
-                            string Name3 = Console.ReadLine();
-                            Console.WriteLine("Enter Listing New Descreption:");
-                            string Descreption = Console.ReadLine();
-                            this.Change_Description_For_Existing_Listing(Name3, Descreption);
-                        }
-                        if (choice2 == "3")
-                        {
-                            Console.WriteLine("Enter Listing Name:");
-                            string Name3 = Console.ReadLine();
-                            Console.WriteLine("Enter Listing New Price:");
-                            double Price2 = Convert.ToDouble(Console.ReadLine());
-                            this.Change_Price_For_Existing_Listing(Name3, Price2);
-                        }
-                        if (choice2 == "4")
-                        {
-                            Console.WriteLine("Enter Listing Name:");
-                            string Name3 = Console.ReadLine();
-                            Console.WriteLine("Enter Listing New Number Of Items:");
-                            int Number = Convert.ToInt32(Console.ReadLine());
-                            this.Change_NumOfItems_For_Existing_Listing(Name3, Number);
-                        }
+                        string X = Console.ReadLine();
+                        Console.WriteLine("\n");
+                        int choice2;
+                        if (X == "1"|| X == "2"|| X == "3"|| X == "4") {  choice2 = Convert.ToInt32(X); }
                         else
                         {
                             Console.WriteLine("Choice Not Valid");
-                            this.LogInSeller();
+                            choice2 = 0;
+                            goto case 3;
                         }
-                        break;
+                        switch (choice2) {
+                            case 1:
+                        
+                            Console.WriteLine("Enter Listing Name You Want to Edit:");
+                            string Name3 = Console.ReadLine();
+                            Console.WriteLine("Enter Listing New Name:");
+                            string Name4 = Console.ReadLine();
+                            this.Change_Name_For_Existing_Listing(Name3, Name4); break;
 
+                            case 2:
+                            Console.WriteLine("Enter Listing Name You Want to Edit:");
+                            string Name5 = Console.ReadLine();
+                            Console.WriteLine("Enter Listing New Descreption:"); 
+                                string Descreption = Console.ReadLine();
+                            this.Change_Description_For_Existing_Listing(Name5, Descreption);
+                                break;
+                            case 3:
+                            Console.WriteLine("Enter Listing Name You Want to Edit:");
+                            string Name6 = Console.ReadLine();
+                            Console.WriteLine("Enter Listing New Price:");
+                            double Price2 = Convert.ToDouble(Console.ReadLine());
+                            this.Change_Price_For_Existing_Listing(Name6, Price2);
+                                break;
+                            case 4:
+                            Console.WriteLine("Enter Listing Name You Want to Edit:");
+                            string Name7 = Console.ReadLine();
+                            Console.WriteLine("Enter Listing New Number Of Items:");
+                            int Number = Convert.ToInt32(Console.ReadLine());
+                            this.Change_NumOfItems_For_Existing_Listing(Name7, Number);
+                                break;
+                            default:
+                                Console.WriteLine("Invalid Choice, please try agian...");
+                                break;
+                              }
+                        break;
                     case 4:
                         this.ViewAllListings(S);
                         break;
@@ -971,6 +975,7 @@ namespace Online_Shoping_Site
                 }
             }
             while (choice != 7);
+
         }
 
 
@@ -983,7 +988,7 @@ namespace Online_Shoping_Site
 
             if (!(File.Exists("SellerData.txt")))
             {
-                Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
+                Console.WriteLine("The Email Or Password is Wrong, Please Try Again\n");
                 GlobalFun.Welcoming();
             }
 
@@ -1009,7 +1014,7 @@ namespace Online_Shoping_Site
                         && arr[j].GetEmailAddress() == email)
                     {
                         found = true;
-                        Console.WriteLine("Logged In Successfuly");
+                        Console.WriteLine("Logged In Successfuly\n");
                         S.SetName(arr[j].GetName());
                         S.SetEmailAddress(arr[j].GetEmailAddress());
                         S.SetAddress(arr[j].GetAddress());
@@ -1022,14 +1027,14 @@ namespace Online_Shoping_Site
                 }
                 if (found == false)
                 {
-                    Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
+                    Console.WriteLine("The Email Or Password is Wrong, Please Try Again\n");
                     GlobalFun.Welcoming();
                 }
             }
 
             else
             {
-                Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
+                Console.WriteLine("The Email Or Password is Wrong, Please Try Again\n");
                 GlobalFun.Welcoming();
             }
 
@@ -1095,7 +1100,7 @@ namespace Online_Shoping_Site
                 
                 S.listings.Add(L);
                 S.EditFile(S);
-                Console.WriteLine("Added Successefully"); 
+                Console.WriteLine("Added Successefully\n"); 
             }
         }
 
@@ -1169,14 +1174,14 @@ namespace Online_Shoping_Site
                     S.listings.RemoveAt(j);
                     FS.Close();
                     S.EditFile(S);
-                    Console.WriteLine("Listing Deleted Successfully");
+                    Console.WriteLine("Listing Deleted Successfully\n");
                 }
-                else if (arr[j].listings == null) { Console.WriteLine("Cant Delete"); Console.WriteLine("The Listing Does Not Exist"); }
+                else if (arr[j].listings == null) { Console.WriteLine("Cant Delete"); Console.WriteLine("The Listing Does Not Exist\n"); }
             }
            
       
             if(x== false) 
-            { Console.WriteLine("Cant Delete"); Console.WriteLine("The Listing Is not In The Seller Data Listings To Delete"); }
+            { Console.WriteLine("Cant Delete"); Console.WriteLine("The Listing Is not In The Seller Data To Delete\n"); }
             
             
         }
@@ -1187,21 +1192,41 @@ namespace Online_Shoping_Site
        /////////////////////////////////////Fun Change Price For Existing Listing///////////////////////////////////////////////////
         public void Change_Price_For_Existing_Listing(string name, double Price) 
         {
-            if (this.listings != null)
+            bool x = false;
+            Seller S = new Seller();
+            FileStream FS;
+            FS = new FileStream("SellerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
+            Seller[] arr = new Seller[1000000];
+            int i = 0;
+
+
+            //read objects & save to array
+            while (FS.Position < FS.Length)
             {
-                bool x = false;
-                for (int i = 0; i < this.listings.Count; i++)
-                {
-                    if (this.listings[i].GetNameOfListing() == name)
+                arr[i] = (Seller)BF.Deserialize(FS);
+                i++;
+            }
+
+            //check if any of the objects in the array eqauls the Edited object then Replace it
+            for (int j = 0; j < i; j++)
+            {
+                for (int z = 0; z < arr[j].listings.Count; z++) {
+                    if (arr[j].listings[z].GetNameOfListing() == name && arr[j].listings != null)
                     {
                         x = true;
-                        this.listings[i].SetPrice(Price);
-                        Console.WriteLine("Listing Price Changed Successfully");
-                    }
-                }
-                if (x == false) { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+                        S = arr[j];
+                        S.listings[z].SetPrice(Price);
+                        FS.Close();
+                        S.EditFile(S);
+                        Console.WriteLine("Listing Edited Price Successfully\n");
+                    } }
+                 if (arr[j].listings == null) { Console.WriteLine("Cant Edit Price"); Console.WriteLine("The Listing Does Not Exist\n"); }
             }
-            else { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+
+
+            if (x == false)
+            { Console.WriteLine("Cant Edit Price"); Console.WriteLine("The Listing Is not In The Seller Data To Edit\n"); }
         }
 
 
@@ -1209,23 +1234,44 @@ namespace Online_Shoping_Site
         ////////////////////////////////////Fun Change Name For Existing Listing///////////////////////////////////////////////
         public void Change_Name_For_Existing_Listing(string oldname, string newname)
         {
-            if (this.listings != null)
+            bool x = false;
+            Seller S = new Seller();
+            FileStream FS;
+            FS = new FileStream("SellerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
+            Seller[] arr = new Seller[1000000];
+            int i = 0;
+
+
+            //read objects & save to array
+            while (FS.Position < FS.Length)
             {
-                bool x = false;
-                for (int i = 0; i < this.listings.Count; i++)
+                arr[i] = (Seller)BF.Deserialize(FS);
+                i++;
+            }
+
+            //check if any of the objects in the array eqauls the Edited object then Replace it
+            for (int j = 0; j < i; j++)
+            {   for (int z = 0; z < arr[j].listings.Count; z++)
                 {
-                    if (this.listings[i].GetNameOfListing() == oldname)
+                    if (arr[j].listings[z].GetNameOfListing() == oldname && arr[j].listings != null)
                     {
                         x = true;
-                        this.listings[i].SetNameOfListing(newname);
-                        Console.WriteLine("Listing Name Changed Successfully");
+                        S = arr[j];
+                        S.listings[z].SetNameOfListing(newname);
+                        FS.Close();
+                        S.EditFile(S);
+                        Console.WriteLine("Listing Name Edited Successfully\n");
+                        
                     }
+                   
                 }
-                if (x == false) 
-                { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+            if (arr[j].listings == null) { Console.WriteLine("Cant Edit Name"); Console.WriteLine("The Listing Does Not Exist\n"); }
             }
-            else 
-            { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+
+
+            if (x == false)
+            { Console.WriteLine("Cant Edit Name"); Console.WriteLine("The Listing Is not In The Seller Data To Edit\n"); }
         }
 
 
@@ -1233,45 +1279,84 @@ namespace Online_Shoping_Site
         //////////////////////////////////Fun Change Description For Existing Listing////////////////////////////////////////////////////
         public void Change_Description_For_Existing_Listing(string name, string Description)
         {
-            if (this.listings != null)
+            bool x = false;
+            Seller S = new Seller();
+            FileStream FS;
+            FS = new FileStream("SellerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
+            Seller[] arr = new Seller[1000000];
+            int i = 0;
+
+
+            //read objects & save to array
+            while (FS.Position < FS.Length)
             {
-                bool x = false;
-                for (int i = 0; i < this.listings.Count; i++)
-                {
-                    if (this.listings[i].GetNameOfListing() == name)
+                arr[i] = (Seller)BF.Deserialize(FS);
+                i++;
+            }
+
+            //check if any of the objects in the array eqauls the Edited object then Replace it
+            for (int j = 0; j < i; j++)
+            {
+                for (int z = 0; z < arr[j].listings.Count; z++) {
+                    if (arr[j].listings[z].GetNameOfListing() == name && arr[j].listings != null)
                     {
                         x = true;
-                        this.listings[i].SetDescription(Description);
-                        Console.WriteLine("Listing Description Changed Successfully");
-                    }
-                }
-                if (x == false) 
-                { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+                        S = arr[j];
+                        S.listings[z].SetDescription(Description);
+                        FS.Close();
+                        S.EditFile(S);
+                        Console.WriteLine("Listing Description Edited Successfully\n");
+                    } }
+               if (arr[j].listings == null) { Console.WriteLine("Cant Edit Description"); Console.WriteLine("The Listing Does Not Exist\n"); }
             }
-            else 
-            { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+
+
+            if (x == false)
+            { Console.WriteLine("Cant Edit Description"); Console.WriteLine("The Listing Is not In The Seller Data To Edit\n"); }
         }
+    
 
 
 
         //////////////////////////////////Fun Change Number Of Item For Existing Listing////////////////////////////////////////////////
         public void Change_NumOfItems_For_Existing_Listing(string name, int NumOfItems)
         {
-            if (this.listings != null)
+            bool x = false;
+            Seller S = new Seller();
+            FileStream FS;
+            FS = new FileStream("SellerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
+            Seller[] arr = new Seller[1000000];
+            int i = 0;
+
+
+            //read objects & save to array
+            while (FS.Position < FS.Length)
             {
-                bool x = false;
-                for (int i = 0; i < this.listings.Count; i++)
-                {
-                    if (this.listings[i].GetNameOfListing() == name)
+                arr[i] = (Seller)BF.Deserialize(FS);
+                i++;
+            }
+
+            //check if any of the objects in the array eqauls the Edited object then Replace it
+            for (int j = 0; j < i; j++)
+            {
+                for (int z = 0; z < arr[j].listings.Count; z++) {
+                    if (arr[j].listings[z].GetNameOfListing() == name && arr[j].listings != null)
                     {
                         x = true;
-                        this.listings[i].SetNumberOfItems(NumOfItems);
-                        Console.WriteLine("Listing Number Of Items Changed Successfully");
-                    }
-                }
-                if (x == false) { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+                        S = arr[j];
+                        S.listings[z].SetNumberOfItems(NumOfItems);
+                        FS.Close();
+                        S.EditFile(S);
+                        Console.WriteLine("Listing Number Of Item Edited Successfully\n");
+                    } }
+                if (arr[j].listings == null) { Console.WriteLine("Cant Edit Number Of Item"); Console.WriteLine("The Listing Does Not Exist\n"); }
             }
-            else { Console.WriteLine("Cant Change"); Console.WriteLine("The Listing Does Not Exist"); }
+
+
+            if (x == false)
+            { Console.WriteLine("Cant Edit Number Of Item"); Console.WriteLine("The Listing Is not In The Seller Data To Edit\n"); }
         }
 
 
@@ -1312,7 +1397,7 @@ namespace Online_Shoping_Site
                 }
             }
             else
-            { Console.WriteLine("The Listings Is Empty"); }
+            { Console.WriteLine("The Listings Is Empty\n"); }
         }
 
 

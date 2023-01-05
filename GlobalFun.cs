@@ -24,7 +24,7 @@ namespace Online_Shoping_Site
                 {
                     case 1:
                         //Seller:
-                        Console.WriteLine("If this is your first visit to the site,");
+                        Console.WriteLine("\nIf this is your first visit to the site,");
                         Console.WriteLine("choose the first option (Sign Up),");
                         Console.WriteLine("If you have already registered, choose the second option (Log In).");
                         Console.WriteLine("1. SignUp.");
@@ -52,7 +52,8 @@ namespace Online_Shoping_Site
 
                     case 2:
                         //Cusromer:
-                        Console.WriteLine("If this is your first visit to the site,");
+                        
+                        Console.WriteLine("\nIf this is your first visit to the site,");
                         Console.WriteLine("choose the first option (Sign Up),");
                         Console.WriteLine("If you have already registered, choose the second option (Log In).");
                         Console.WriteLine("1. SignUp.");
