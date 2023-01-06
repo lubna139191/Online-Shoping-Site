@@ -23,11 +23,10 @@ namespace Online_Shoping_Site
         List<Listings> listings;
 
         public static int counter = 0;
-        public static Dictionary<string, object> data = new Dictionary<string, object>();
-        //  public static string FileName { get; private set; }
 
-        public static string ProgramFilesFolder = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-        //FileName=ProgramFilesFolder + "/Online Shoping Site";
+        public static Dictionary<string, object> data = new Dictionary<string, object>();
+        public static string ProgramFilesFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"/Data";
+
 
 
         //Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
@@ -709,9 +708,8 @@ namespace Online_Shoping_Site
 //Fun12 (Seve To File):
         public void SaveToFile()
         {
-            // ProgramFilesFolder = ;
-            // FileName = 
-            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData)) )
+             
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Data"))
             { Directory.CreateDirectory(ProgramFilesFolder); }
             FileStream FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Append, FileAccess.Write);
             BinaryFormatter BF = new BinaryFormatter();
