@@ -9,10 +9,14 @@ using System.Runtime.Serialization;
 using System.Xml.Linq;
 
 namespace Online_Shoping_Site
-{ 
+{
     [Serializable]
     class Customer
     {
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////// Atributes /////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         string Name;
         string EmailAddress;
         string PhoneNumber;
@@ -21,16 +25,41 @@ namespace Online_Shoping_Site
         Address ShippingAddress;
         Payment PaymentInformation;
         List<Listings> listings;
-
         public static int counter = 0;
-
         public static Dictionary<string, object> data = new Dictionary<string, object>();
-        public static string ProgramFilesFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"/Data";
+        public static string ProgramFilesFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Data";
 
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////Set Functions//////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void SetName(string Name) { this.Name = Name; }
+        public void SetEmailAddress(string EmailAddress) { this.EmailAddress = EmailAddress; }
+        public void SetPhoneNumber(string PhoneNumber) { this.PhoneNumber = PhoneNumber; }
+        public void SetPassword(string Password) { this.Password = Password; }
+        public void SetCustomerID(string ID) { this.CustomerId = ID; }
+        public void SetShippingAddress(Address ShippingAddress) { this.ShippingAddress = ShippingAddress; }
 
-        //Fun1 (Set Name: Letters only, No Nubers, No Special Charachters): 
-        public void SetName(string Name)
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////Get Functions//////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public string GetName() { return this.Name; }
+        public string GetEmailAddress() { return this.EmailAddress; }
+        public string GetPhoneNumber() { return this.PhoneNumber; }
+        public string GetPassword() { return this.Password; }
+        public string GetCustomerId() { return this.CustomerId; }
+        public Address GetShippingAddress() { return this.ShippingAddress; }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////Check the Data Enterd By the User///////////////////////////////////////////////
+        ////////////////////////////When the User Sign Up For The First Time//////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////(Generate Name: Letters only, No Numbers, No Special Charachters)/////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void GenerateName(string Name)
         {
             bool condition = false;
             while (condition == false)
@@ -41,23 +70,23 @@ namespace Online_Shoping_Site
                 for (int i = 0; i < Name.Length; i++)
                 {
                     string x = Convert.ToString(Name[i]);
-                    if (   x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
-                       ||  x == Convert.ToString("3") || x == Convert.ToString("4") || x == Convert.ToString("5")
-                       ||  x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8") 
-                       ||  x == Convert.ToString("9"))
+                    if (x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
+                       || x == Convert.ToString("3") || x == Convert.ToString("4") || x == Convert.ToString("5")
+                       || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8")
+                       || x == Convert.ToString("9"))
                     {
                         condition = false;
                     }
                 }
 
                 //check if enterd name contains any special charachters
-                if  (  Name.ToLower().Contains('~') || Name.ToLower().Contains('!') || Name.ToLower().Contains('@') || Name.ToLower().Contains('#') 
-                    || Name.ToLower().Contains('$') || Name.ToLower().Contains('^') || Name.ToLower().Contains('&') || Name.ToLower().Contains('*') 
-                    || Name.ToLower().Contains('(') || Name.ToLower().Contains(')') || Name.ToLower().Contains('_') || Name.ToLower().Contains('-') 
-                    || Name.ToLower().Contains('=') || Name.ToLower().Contains('+') || Name.ToLower().Contains('{') || Name.ToLower().Contains('[') 
-                    || Name.ToLower().Contains(']') || Name.ToLower().Contains('}') || Name.ToLower().Contains(';') || Name.ToLower().Contains(';') 
-                    || Name.ToLower().Contains('\"')|| Name.ToLower().Contains('\'')|| Name.ToLower().Contains('<') || Name.ToLower().Contains(',') 
-                    || Name.ToLower().Contains('.') || Name.ToLower().Contains('<') || Name.ToLower().Contains('/') || Name.ToLower().Contains('?') 
+                if (Name.ToLower().Contains('~') || Name.ToLower().Contains('!') || Name.ToLower().Contains('@') || Name.ToLower().Contains('#')
+                    || Name.ToLower().Contains('$') || Name.ToLower().Contains('^') || Name.ToLower().Contains('&') || Name.ToLower().Contains('*')
+                    || Name.ToLower().Contains('(') || Name.ToLower().Contains(')') || Name.ToLower().Contains('_') || Name.ToLower().Contains('-')
+                    || Name.ToLower().Contains('=') || Name.ToLower().Contains('+') || Name.ToLower().Contains('{') || Name.ToLower().Contains('[')
+                    || Name.ToLower().Contains(']') || Name.ToLower().Contains('}') || Name.ToLower().Contains(';') || Name.ToLower().Contains(';')
+                    || Name.ToLower().Contains('\"') || Name.ToLower().Contains('\'') || Name.ToLower().Contains('<') || Name.ToLower().Contains(',')
+                    || Name.ToLower().Contains('.') || Name.ToLower().Contains('<') || Name.ToLower().Contains('/') || Name.ToLower().Contains('?')
                     || Name.ToLower().Contains('\\') || Name.ToLower().Contains('|'))
                 {
                     condition = false;
@@ -97,8 +126,10 @@ namespace Online_Shoping_Site
             this.Name = Name;
         }
 
-//Fun2 (Set Email Address: Email is valid):
-        public void SetEmailAddress(string EmailAddress)
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////(Generate Email Address)//////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void GenerateEmailAddress(string EmailAddress)
         {
             bool condition = false;
             while (condition == false)
@@ -141,8 +172,11 @@ namespace Online_Shoping_Site
             this.EmailAddress = EmailAddress;
         }
 
-//Fun3 (Set Phone Number: 10 Numbers, start with 0, second number is 7, third number 7/8/9, the reset are numbers):
-        public void SetPhoneNumber(string PhoneNumber)
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////(Generate Phone Number)////////////////////////////////////////////
+        //////(10 Numbers, start with 0, second number is 7, third number 7/8/9, the rest are numbers)///////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void GeneratePhoneNumber(string PhoneNumber)
         {
             bool condition = false;
             while (condition == false)
@@ -215,8 +249,11 @@ namespace Online_Shoping_Site
 
         }
 
-//Fun4 (Set Password: Password Confirm, 8 charchters, special charchter, capital & small letters): 
-        public void SetPassword(string Password, string ConfirmSPassword)
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////(Generate Password)/////////////////////////////////////////////
+        //////////////(Confirm Password, 8 charchters, special charchter, capital & small letters)///////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void GeneratePassword(string Password, string ConfirmSPassword)
         {
             bool condition = false;
 
@@ -335,20 +372,20 @@ namespace Online_Shoping_Site
             }
             this.Password = Password;
         }
-
-//Fun5 (Set Customer ID):
-        public void SetCustomerID()
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////(Generate Customer ID)////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void GenerateCustomerID()
         {
             counter++;
             this.CustomerId = Convert.ToString(counter);
         }
 
-//Fun6 (set Shipping Address: Country, City, Street, Apartment):
-//Country: No number, No space, No special charachters.
-//City: No number, No space, No special charachters.
-//Street: No number, No space, No special charachters.
-//Apartment: No number, No space, No special charachters.
-        public void SetShippingAddress(string Country, string City, String Street, String ApartmentN)
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////(Generate Shipping Address: Country, City, Street, Apartment)//////////////////
+        ////////////////////////////(No number, No space, No special charachters)/////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void GenerateShippingAddress(string Country, string City, String Street, String ApartmentN)
         {
             ShippingAddress = new Address();
 
@@ -362,9 +399,9 @@ namespace Online_Shoping_Site
                 for (int i = 0; i < Country.Length; i++)
                 {
                     string x = Convert.ToString(Country[i]);
-                    if (   x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
+                    if (x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
                         || x == Convert.ToString("3") || x == Convert.ToString("4") || x == Convert.ToString("5")
-                        || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8") 
+                        || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8")
                         || x == Convert.ToString("9"))
                     {
                         condition = false;
@@ -373,20 +410,20 @@ namespace Online_Shoping_Site
                 }
 
                 //check if enterd Country contains any Spaces: 
-                if (Country.ToLower().Contains(" ")) 
+                if (Country.ToLower().Contains(" "))
                 { condition = false; }
 
                 //check if enterd Country contains any special charachters:
-                if (   Country.ToLower().Contains('~') || Country.ToLower().Contains('!') || Country.ToLower().Contains('@') 
+                if (Country.ToLower().Contains('~') || Country.ToLower().Contains('!') || Country.ToLower().Contains('@')
                     || Country.ToLower().Contains('#') || Country.ToLower().Contains('$') || Country.ToLower().Contains('^')
-                    || Country.ToLower().Contains('&') || Country.ToLower().Contains('*') || Country.ToLower().Contains('(') 
-                    || Country.ToLower().Contains(')') || Country.ToLower().Contains('_') || Country.ToLower().Contains('-') 
-                    || Country.ToLower().Contains('=') || Country.ToLower().Contains('+') || Country.ToLower().Contains('{') 
+                    || Country.ToLower().Contains('&') || Country.ToLower().Contains('*') || Country.ToLower().Contains('(')
+                    || Country.ToLower().Contains(')') || Country.ToLower().Contains('_') || Country.ToLower().Contains('-')
+                    || Country.ToLower().Contains('=') || Country.ToLower().Contains('+') || Country.ToLower().Contains('{')
                     || Country.ToLower().Contains('[') || Country.ToLower().Contains(']') || Country.ToLower().Contains('}')
-                    || Country.ToLower().Contains(';') || Country.ToLower().Contains(';') || Country.ToLower().Contains('\"') 
-                    || Country.ToLower().Contains('\'')|| Country.ToLower().Contains('<') || Country.ToLower().Contains(',') 
-                    || Country.ToLower().Contains('.') || Country.ToLower().Contains('<') || Country.ToLower().Contains('/') 
-                    || Country.ToLower().Contains('?') || Country.ToLower().Contains('\\')|| Country.ToLower().Contains('|'))
+                    || Country.ToLower().Contains(';') || Country.ToLower().Contains(';') || Country.ToLower().Contains('\"')
+                    || Country.ToLower().Contains('\'') || Country.ToLower().Contains('<') || Country.ToLower().Contains(',')
+                    || Country.ToLower().Contains('.') || Country.ToLower().Contains('<') || Country.ToLower().Contains('/')
+                    || Country.ToLower().Contains('?') || Country.ToLower().Contains('\\') || Country.ToLower().Contains('|'))
                 {
                     condition = false;
                 }
@@ -434,9 +471,9 @@ namespace Online_Shoping_Site
                 for (int i = 0; i < City.Length; i++)
                 {
                     string x = Convert.ToString(City[i]);
-                    if (   x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
+                    if (x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
                         || x == Convert.ToString("3") || x == Convert.ToString("4") || x == Convert.ToString("5")
-                        || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8") 
+                        || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8")
                         || x == Convert.ToString("9"))
                     {
                         condition = false;
@@ -449,13 +486,13 @@ namespace Online_Shoping_Site
                 { condition = false; }
 
                 //check if enterd City contains any special charachters:
-                if (   City.ToLower().Contains('~') || City.ToLower().Contains('!')  || City.ToLower().Contains('@') || City.ToLower().Contains('#') 
-                    || City.ToLower().Contains('$') || City.ToLower().Contains('^')  || City.ToLower().Contains('&') || City.ToLower().Contains('*') 
-                    || City.ToLower().Contains('(') || City.ToLower().Contains(')')  || City.ToLower().Contains('_') || City.ToLower().Contains('-') 
-                    || City.ToLower().Contains('=') || City.ToLower().Contains('+')  || City.ToLower().Contains('{') || City.ToLower().Contains('[') 
-                    || City.ToLower().Contains(']') || City.ToLower().Contains('}')  || City.ToLower().Contains(';') || City.ToLower().Contains(';') 
-                    || City.ToLower().Contains('\"') || City.ToLower().Contains('\'')|| City.ToLower().Contains('<') || City.ToLower().Contains(',') 
-                    || City.ToLower().Contains('.') || City.ToLower().Contains('<')  || City.ToLower().Contains('/') || City.ToLower().Contains('?') 
+                if (City.ToLower().Contains('~') || City.ToLower().Contains('!') || City.ToLower().Contains('@') || City.ToLower().Contains('#')
+                    || City.ToLower().Contains('$') || City.ToLower().Contains('^') || City.ToLower().Contains('&') || City.ToLower().Contains('*')
+                    || City.ToLower().Contains('(') || City.ToLower().Contains(')') || City.ToLower().Contains('_') || City.ToLower().Contains('-')
+                    || City.ToLower().Contains('=') || City.ToLower().Contains('+') || City.ToLower().Contains('{') || City.ToLower().Contains('[')
+                    || City.ToLower().Contains(']') || City.ToLower().Contains('}') || City.ToLower().Contains(';') || City.ToLower().Contains(';')
+                    || City.ToLower().Contains('\"') || City.ToLower().Contains('\'') || City.ToLower().Contains('<') || City.ToLower().Contains(',')
+                    || City.ToLower().Contains('.') || City.ToLower().Contains('<') || City.ToLower().Contains('/') || City.ToLower().Contains('?')
                     || City.ToLower().Contains('\\') || City.ToLower().Contains('|'))
                 {
                     condition = false;
@@ -503,9 +540,9 @@ namespace Online_Shoping_Site
                 for (int i = 0; i < Street.Length; i++)
                 {
                     string x = Convert.ToString(Street[i]);
-                    if (  x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
+                    if (x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
                        || x == Convert.ToString("3") || x == Convert.ToString("4") || x == Convert.ToString("5")
-                       || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8") 
+                       || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8")
                        || x == Convert.ToString("9"))
                     {
                         condition = false;
@@ -514,17 +551,17 @@ namespace Online_Shoping_Site
                 }
 
                 //check if enterd Street contains any Spaces: 
-                if (Street.ToLower().Contains(" ")) 
+                if (Street.ToLower().Contains(" "))
                 { condition = false; }
 
                 //check if enterd City contains any special charachters:
-                if (   Street.ToLower().Contains('~') || Street.ToLower().Contains('!')  || Street.ToLower().Contains('@') || Street.ToLower().Contains('#') 
-                    || Street.ToLower().Contains('$') || Street.ToLower().Contains('^')  || Street.ToLower().Contains('&') || Street.ToLower().Contains('*') 
-                    || Street.ToLower().Contains('(') || Street.ToLower().Contains(')')  || Street.ToLower().Contains('_') || Street.ToLower().Contains('-') 
-                    || Street.ToLower().Contains('=') || Street.ToLower().Contains('+')  || Street.ToLower().Contains('{') || Street.ToLower().Contains('[') 
-                    || Street.ToLower().Contains(']') || Street.ToLower().Contains('}')  || Street.ToLower().Contains(';') || Street.ToLower().Contains(';') 
-                    || Street.ToLower().Contains('\"') || Street.ToLower().Contains('\'')|| Street.ToLower().Contains('<') || Street.ToLower().Contains(',') 
-                    || Street.ToLower().Contains('.') || Street.ToLower().Contains('<')  || Street.ToLower().Contains('/') || Street.ToLower().Contains('?') 
+                if (Street.ToLower().Contains('~') || Street.ToLower().Contains('!') || Street.ToLower().Contains('@') || Street.ToLower().Contains('#')
+                    || Street.ToLower().Contains('$') || Street.ToLower().Contains('^') || Street.ToLower().Contains('&') || Street.ToLower().Contains('*')
+                    || Street.ToLower().Contains('(') || Street.ToLower().Contains(')') || Street.ToLower().Contains('_') || Street.ToLower().Contains('-')
+                    || Street.ToLower().Contains('=') || Street.ToLower().Contains('+') || Street.ToLower().Contains('{') || Street.ToLower().Contains('[')
+                    || Street.ToLower().Contains(']') || Street.ToLower().Contains('}') || Street.ToLower().Contains(';') || Street.ToLower().Contains(';')
+                    || Street.ToLower().Contains('\"') || Street.ToLower().Contains('\'') || Street.ToLower().Contains('<') || Street.ToLower().Contains(',')
+                    || Street.ToLower().Contains('.') || Street.ToLower().Contains('<') || Street.ToLower().Contains('/') || Street.ToLower().Contains('?')
                     || Street.ToLower().Contains('\\') || Street.ToLower().Contains('|'))
                 {
                     condition = false;
@@ -562,7 +599,7 @@ namespace Online_Shoping_Site
                 }
             }
             this.ShippingAddress.SetStreet(Street);
-            
+
             ////Check Apatrment:
             condition = false;
             while (condition == false)
@@ -576,7 +613,7 @@ namespace Online_Shoping_Site
                     if (x != Convert.ToString("0") && x != Convert.ToString("1") && x != Convert.ToString("2")
                      && x != Convert.ToString("3") && x != Convert.ToString("4") && x != Convert.ToString("5")
                      && x != Convert.ToString("6") && x != Convert.ToString("7") && x != Convert.ToString("8")
-                     && x != Convert.ToString("9")) 
+                     && x != Convert.ToString("9"))
                     { condition = false; }
 
                 }
@@ -615,35 +652,94 @@ namespace Online_Shoping_Site
             this.ShippingAddress.SetApartment(ApartmentN);
         }
 
-//Get Functions:
-//Fun8:
-        public string GetName()
-        { return Name; }
 
-//Fun9:
-        public string GetEmailAddress()
-        { return EmailAddress; }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////Functions On Customer////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Fun10:
-        public string GetPhoneNumber()
-        { return PhoneNumber; }
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////(Sign Up  Function)///////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Fun11:
-        public string GetPassword()
-        { return this.Password; }
+        public void SignUpCustomer()
+        {
+            Console.WriteLine("Fill The Following To Create Your New Account As A Customer.");
 
-        //Fun11 (Check Seller: Exist or not, empty or not, save object, equality):
+            //Customer Name:
+            string CName;
+            Console.WriteLine("Full Name(Make Sure It Does Not Contains Any Numbers or Special Charachters):");
+            CName = Console.ReadLine();
+            this.GenerateName(CName);
+            Console.WriteLine("\n");
+
+            //Customer Email Address:
+            string CEmailAddress;
+            Console.WriteLine("Email Address(Make Sure Its A Vaild Email Ex:xxx@xxx.com):");
+            CEmailAddress = Console.ReadLine();
+            Console.WriteLine("\n");
+            this.GenerateEmailAddress(CEmailAddress);
+
+            //Customer Phone Number:
+            string CPhoneNumber;
+            Console.WriteLine("PhoneNumber(Make Sure It Does Not Contains Any Letters or Special Charachters & Valid Ex:07(7|8|9)*******):");
+            CPhoneNumber = Console.ReadLine();
+            Console.WriteLine("\n");
+            this.GeneratePhoneNumber(CPhoneNumber);
+
+            //Customer Password:
+            string CPassword;
+            Console.WriteLine("Password(Make Sure It is Not Less Than 8 Charachters\nAnd Contains One UpperCase & One LowerCase & one Special Charachters At Least):");
+            CPassword = Console.ReadLine();
+            string ConfirmCPassword;
+            Console.WriteLine("Confirm Password:");
+            ConfirmCPassword = Console.ReadLine();
+            Console.WriteLine("\n");
+            this.GeneratePassword(CPassword, ConfirmCPassword);
+
+            //Customer Address:
+            Console.WriteLine("Address\n");
+            //Country:
+            Console.WriteLine("Country (Make Sure It Does Not Contains Spaces or Any Numbers Or Special Charaters):");
+            string CCountry;
+            CCountry = Console.ReadLine();
+            Console.WriteLine("\n");
+            //City:
+            Console.WriteLine("City (Make Sure It Does Not Contains Spaces or Any Numbers Or Special Charaters):");
+            string CCity;
+            CCity = Console.ReadLine();
+            Console.WriteLine("\n");
+            //Street:
+            Console.WriteLine("Street (Make Sure It Does Not Contains Spaces or Any Numbers Or Special Charaters):");
+            string CStreet;
+            CStreet = Console.ReadLine();
+            Console.WriteLine("\n");
+            //Apartment Number:
+            Console.WriteLine("Apartment Number (Make Sure It Does Not Contains Spaces Any Letters Or Special Charaters Or Spaces):");
+            string CApartmentN;
+            CApartmentN = Console.ReadLine();
+            Console.WriteLine("\n");
+            this.GenerateShippingAddress(CCountry, CCity, CStreet, CApartmentN);
+
+            //Check if the customer already exist & if the user is new Give uniqe ID then save to file:
+            this.CheckCustomer();
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////Check If Seller Exist/////////////////////////////////////////////////////////
+        ////////////////////////////////////////When New Seller Sign Up/////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void CheckCustomer()
         {
             //Exist or not:
             FileStream FC;
-            if (File.Exists(ProgramFilesFolder+"/CustomerData.txt"))
-            { FC = new FileStream(ProgramFilesFolder+"/CustomerData.txt", FileMode.Open, FileAccess.Read); }
+            if (File.Exists(ProgramFilesFolder + "/CustomerData.txt"))
+            { FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read); }
 
             else
             {
                 Directory.CreateDirectory(ProgramFilesFolder);
-                FC = new FileStream(ProgramFilesFolder+"/CustomerData.txt", FileMode.Create, FileAccess.ReadWrite); }
+                FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Create, FileAccess.ReadWrite);
+            }
 
             BinaryFormatter BF = new BinaryFormatter();
             Customer[] arr = new Customer[1000000];
@@ -674,13 +770,13 @@ namespace Online_Shoping_Site
 
                 //if its new user save it to file
                 FC.Close();
-                this.SetCustomerID();
+                this.GenerateCustomerID();
                 this.SaveToFile();
                 Console.WriteLine("User Account Created Successfully As A Customer");
                 Console.WriteLine("Do You Want To Log In? Answer by(Y:N):");
                 string Answer = Console.ReadLine();
 
-                if (Answer == "Y"|| Answer == "y")
+                if (Answer == "Y" || Answer == "y")
                 { this.LogInCustomer(); }
 
                 else
@@ -691,7 +787,7 @@ namespace Online_Shoping_Site
             {
                 //if the file is empty then user is new (save it)
                 FC.Close();
-                this.SetCustomerID();
+                this.GenerateCustomerID();
                 this.SaveToFile();
                 Console.WriteLine("User Account Created Successfully As A Customer");
                 Console.WriteLine("Do You Want To Log In? Answer by(Y:N):");
@@ -705,10 +801,12 @@ namespace Online_Shoping_Site
             }
         }
 
-//Fun12 (Seve To File):
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////Save Customer Account To CustomerData File///////////////////////////////////////
+        //////////////////////////////////When New Customer Account Pass The Checkup Test////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void SaveToFile()
         {
-             
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Data"))
             { Directory.CreateDirectory(ProgramFilesFolder); }
             FileStream FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Append, FileAccess.Write);
@@ -717,171 +815,12 @@ namespace Online_Shoping_Site
             FC.Close();
         }
 
-//Fun13 (Sign Up Customer):
-        public void SignUpCustomer()
-        {
-            Console.WriteLine("Fill The Following To Create Your New Account As A Customer.");
 
-            //Customer Name:
-            string CName;
-            Console.WriteLine("Full Name(Make Sure It Does Not Contains Any Numbers or Special Charachters):");
-            CName = Console.ReadLine();
-            this.SetName(CName);
 
-            //Customer Email Address:
-            string CEmailAddress;
-            Console.WriteLine("Email Address(Make Sure Its A Vaild Email Ex:xxx@xxx.com):");
-            CEmailAddress = Console.ReadLine();
-            this.SetEmailAddress(CEmailAddress);
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////( Log In )////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            //Customer Phone Number:
-            string CPhoneNumber;
-            Console.WriteLine("PhoneNumber(Make Sure It Does Not Contains Any Letters or Special Charachters & Valid Ex:07(7|8|9)*******):");
-            CPhoneNumber = Console.ReadLine();
-            this.SetPhoneNumber(CPhoneNumber);
-
-         
-            //Customer Password:
-            string CPassword;
-            Console.WriteLine("Password(Make Sure It is Not Less Than 8 Charachters\nAnd Contains One UpperCase & One LowerCase & one Special Charachters At Least):");
-            CPassword = Console.ReadLine();
-            string ConfirmCPassword;
-            Console.WriteLine("Confirm Password:");
-            ConfirmCPassword = Console.ReadLine();
-            this.SetPassword(CPassword, ConfirmCPassword);
-
-            //Customer Address:
-            Console.WriteLine("Address");
-            Console.WriteLine("Country (Make Sure It Does Not Contains Spaces or Any Numbers Or Special Charaters):");
-            string CCountry;
-            CCountry = Console.ReadLine();
-            Console.WriteLine("City (Make Sure It Does Not Contains Spaces or Any Numbers Or Special Charaters):");
-            string CCity;
-            CCity = Console.ReadLine();
-            Console.WriteLine("Street (Make Sure It Does Not Contains Spaces or Any Numbers Or Special Charaters):");
-            string CStreet;
-            CStreet = Console.ReadLine();
-            Console.WriteLine("Apartment Number (Make Sure It Does Not Contains Spaces Any Letters Or Special Charaters Or Spaces):");
-            string CApartmentN;
-            CApartmentN = Console.ReadLine();
-            this.SetShippingAddress(CCountry, CCity, CStreet, CApartmentN);
-
-            //Check if the customer already exist & if the user is new Give uniqe ID then save to file:
-            this.CheckCustomer();
-
-        }
-
-//Fun Find Account: 
-        public void FindAccount(string email, string Password, ref Customer C)
-        {
-            //Exist or not:
-            FileStream FC;
-            if (!(File.Exists("CustomerData.txt")))
-            {
-                Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
-                GlobalFun.Welcoming();
-            }
-
-            FC = new FileStream("CustomerData.txt", FileMode.Open, FileAccess.Read);
-            BinaryFormatter BF = new BinaryFormatter();
-
-            Customer[] arr = new Customer[1000000];
-            int i = 0;
-
-            if (FC.Length != 0)
-            {
-                //read objects & save to array
-                while (FC.Position < FC.Length)
-                {
-                    arr[i] = (Customer)BF.Deserialize(FC);
-                    i++;
-                }
-                //check if any of the objects in the array eqauls the object
-                for (int j = 0; j < i; j++)
-                {
-                    if (   arr[j].GetPassword() == Password
-                        && arr[j].GetEmailAddress() == email)
-                    {
-                        Console.WriteLine("Logged In Successfuly");
-                        C = arr[i];
-                        FC.Close();
-                    }
-                }
-            }
-
-            else
-            {
-                Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
-                GlobalFun.Welcoming();
-            }
-        }
-
-//Fun1: View all available listings:
-        public void ViewAllAvailableListings()
-        {
-            if (this.listings != null)
-            {
-                for (int i = 0; i < this.listings.Count; i++)
-                {
-                    //this.listings[i].Print();
-                    Console.WriteLine("\n");
-                }
-            }
-
-            else
-            { Console.WriteLine("The Listings Is Empty"); }
-        }
-
-//Fun: ViewChosenListingInformation():
-        public void ViewChosenListingInformation(string Name)
-        {
-            //Check emty or not:
-            if (this.listings != null)
-            {
-                for (int i = 0; i < this.listings.Count; i++)
-                {
-                    if (this.listings[i].GetNameOfListing() == Name)
-                    {
-                       // this.listings[i].Print();
-                    }
-                }
-            }
-
-            else
-            { Console.WriteLine("The Listings Is Empty"); }
-        }
-
-//Fun: AddListingToCart():
-        public void AddListingToCart()
-        {
-
-        }
-
-//Fun: ViewEditAddedListingsToCart();
-        public void ViewEditAddedListingsToCart()
-        { 
-
-        }
-
-//Fun: CheckoutListings();
-        public void CheckoutListings()
-        {
-
-        }
-
-//Fun: ChangeAccountInformation();
-        public void ChangeAccountInformation()
-        {
-
-        }
-
-//Fun: SearchForListing();
-        public void SearchForListing()
-        {
-
-        }
-
-//Fun14 (Log In Customer): 
         public void LogInCustomer()
         {
             string email;
@@ -892,7 +831,7 @@ namespace Online_Shoping_Site
             Password = Console.ReadLine();
             Customer C = new Customer();
             this.FindAccount(email, Password, ref C);
-            
+
             int choice = 0;
             do
             {
@@ -948,5 +887,190 @@ namespace Online_Shoping_Site
             }
             while (choice != 8);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////( Serch If The Account Trying To Log In Exist )///////////////////////////////   
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void FindAccount(string email, string Password, ref Customer C)
+        {
+            //Exist or not:
+            FileStream FC;
+            if (!(File.Exists(ProgramFilesFolder + "/CustomerData.txt")))
+            {
+                Console.WriteLine("The Email Or Password is Wrong, Please Try Again");
+                GlobalFun.Welcoming();
+            }
+
+            FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
+
+            Customer[] arr = new Customer[1000000];
+            int i = 0;
+
+            if (FC.Length != 0)
+            {
+                //read objects & save to array
+                while (FC.Position < FC.Length)
+                {
+                    arr[i] = (Customer)BF.Deserialize(FC);
+                    i++;
+                }
+
+                bool found = false;
+                //check if any of the objects in the array eqauls the object
+                for (int j = 0; j < i; j++)
+                {
+                    if (arr[j].GetPassword() == Password
+                        && arr[j].GetEmailAddress() == email)
+                    {
+                        found = true;
+                        Console.WriteLine("Logged In Successfuly\n");
+                        C.SetName(arr[j].GetName());
+                        C.SetEmailAddress(arr[j].GetEmailAddress());
+                        C.SetShippingAddress(arr[j].GetShippingAddress());
+                        C.SetPassword(arr[j].GetPassword());
+                        C.SetPhoneNumber(arr[j].GetPhoneNumber());
+                        C.SetCustomerID(arr[j].GetCustomerId());
+                        FC.Close();
+                    }
+                }
+                if (found == false)
+                {
+                    Console.WriteLine("The Email Or Password is Wrong, Please Try Again\n");
+                    GlobalFun.Welcoming();
+                }
+            }
+
+            else
+            {
+                Console.WriteLine("The Email Or Password is Wrong, Please Try Again\n");
+                GlobalFun.Welcoming();
+            }
+
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////( Functions Seller Can Do When Log In Pass Successfully )////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////( Function To Edit Data File After Any Change )/////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void EditFile(Customer C)
+        {
+            FileStream FC;
+            FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
+            Customer[] arr = new Customer[1000000];
+            int i = 0;
+
+
+            //read objects & save to array
+            while (FC.Position < FC.Length)
+            {
+                arr[i] = (Customer)BF.Deserialize(FC);
+                i++;
+            }
+
+            //check if any of the objects in the array eqauls the Edited object then Replace it
+            for (int j = 0; j < i; j++)
+            {
+                if (arr[j].GetName() == C.GetName()
+                    && arr[j].GetPhoneNumber() == C.GetPhoneNumber()
+                    && arr[j].GetEmailAddress() == C.GetEmailAddress())
+                {
+                    arr[j] = new Customer();
+                    arr[j] = C;
+                }
+            }
+            FC.Close();
+
+            FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Create, FileAccess.ReadWrite);
+            for (int k = 0; k < i; k++) { BF.Serialize(FC, arr[k]); }
+
+
+            FC.Close();
+
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( View all available listings )///////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void ViewAllAvailableListings()
+        {
+            if (this.listings != null)
+            {
+                for (int i = 0; i < this.listings.Count; i++)
+                {
+                    //this.listings[i].Print();
+                    Console.WriteLine("\n");
+                }
+            }
+
+            else
+            { Console.WriteLine("The Listings Is Empty"); }
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( View Chosen Listing Information )///////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void ViewChosenListingInformation(string Name)
+        {
+            //Check emty or not:
+            if (this.listings != null)
+            {
+                for (int i = 0; i < this.listings.Count; i++)
+                {
+                    if (this.listings[i].GetNameOfListing() == Name)
+                    {
+                        // this.listings[i].Print();
+                    }
+                }
+            }
+
+            else
+            { Console.WriteLine("The Listings Is Empty"); }
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////( Add Listing To Cart )////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void AddListingToCart()
+        {
+
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( View/Edit Added Listings To Cart )//////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void ViewEditAddedListingsToCart()
+        {
+
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( Checkout Listings )/////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void CheckoutListings()
+        {
+
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( Change Account Information )////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void ChangeAccountInformation()
+        {
+
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( Search For Listing )////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void SearchForListing()
+        {
+
+        }
+
     }
 }
