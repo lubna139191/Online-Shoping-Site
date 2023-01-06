@@ -1061,7 +1061,49 @@ namespace Online_Shoping_Site
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void ChangeAccountInformation()
         {
+            Console.WriteLine("Do you want to change your Account Information? (Y) or (N)");
+            string s = Console.ReadLine();
+            bool condition = false;
+            while(condition==false)
+            {
+                condition = true;
+                if (s == "Y" || s == "y")
+                {
+                    Console.WriteLine("What Do you want to change? choose (ph) to change phone number," +
+                        "choose (p) to change password,choose (e) to change email address.");
+                    string b = Console.ReadLine();
+                    if (b=="ph")
+                    {
+                        Console.WriteLine("Enter the new phone number: ");
+                        string newnumber = Console.ReadLine();
+                        GeneratePhoneNumber(newnumber);
 
+                    }
+                    if (b == "p")
+                    {
+                        Console.WriteLine("Enter the new Password: ");
+                        string newpass = Console.ReadLine();
+                        Console.WriteLine("Confirm the new Password: ");
+                        string Confirmnewpass = Console.ReadLine();
+                        GeneratePassword(newpass, Confirmnewpass);
+                    }
+                    if (b == "e")
+                    {
+                        Console.WriteLine("Enter the new Email Address: ");
+                        string newEmailAddress = Console.ReadLine();
+                        GenerateEmailAddress(newEmailAddress);
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("Thank you");
+                    condition = false;
+                }
+                
+            }
+            condition = false;
+            //need to add the update to files
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
