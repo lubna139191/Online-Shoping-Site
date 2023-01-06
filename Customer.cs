@@ -1059,7 +1059,7 @@ namespace Online_Shoping_Site
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Account Information )////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void ChangeAccountInformation()
+        public void ChangeCustomerAccountInformationc()
         {
             Console.WriteLine("Do you want to change your Account Information? (Y) or (N)");
             string s = Console.ReadLine();
@@ -1069,12 +1069,12 @@ namespace Online_Shoping_Site
                 condition = true;
                 if (s == "Y" || s == "y")
                 {
-                    Console.WriteLine("What Do you want to change? choose (ph) to change phone number," +
-                        "choose (p) to change password,choose (e) to change email address.");
+                    Console.WriteLine("What Do you want to change? Enter (ph) to change phone number," +
+                        "Enter (p) to change password, Enter (e) to change email address.");
                     string b = Console.ReadLine();
                     if (b=="ph")
                     {
-                        Console.WriteLine("Enter the new phone number: ");
+                        Console.WriteLine("Enter the new Phone Number: ");
                         string newnumber = Console.ReadLine();
                         GeneratePhoneNumber(newnumber);
 

@@ -128,8 +128,6 @@ namespace Online_Shoping_Site
             this.Name = Name;
         }
 
-
-
         ///////////////////////////////////////////////Seller Email Address///////////////////////////////////////////////
         public void GenerateEmailAddress(string EmailAddress)
         {
@@ -988,7 +986,7 @@ namespace Online_Shoping_Site
 
 
 
-        //////////////////////////////////////////////////Serch If The Account Trying To Log In Exist////////////////////////////////////////   
+        //////////////////////////////////////////////////Search If The Account Trying To Log In Exist////////////////////////////////////////   
         public void FindAccount(string email, string Password, ref Seller S)
         {
             //Exist or not:
@@ -1453,11 +1451,63 @@ namespace Online_Shoping_Site
             }
 
         }
+        ///////////////////////////////////////////////Change account information////////////////////////////////////////////////////
+
+
+        public void ChangeSellerAccountInformation()
+        {
+            Console.WriteLine("Do you want to change your Account Information? (Y) or (N)");
+            string s = Console.ReadLine();
+            bool condition = false;
+            while (condition == false)
+            {
+                condition = true;
+                if (s == "Y" || s == "y")
+                {
+                    Console.WriteLine("What Do you want to change? Enter (ph) to change phone number," +
+                        "Enter (p) to change password,Enter (e) to change email address, Enter (sn) to change the store name.");
+                    string b = Console.ReadLine();
+                    if (b == "ph")
+                    {
+                        Console.WriteLine("Enter the new Phone Number: ");
+                        string newnumber = Console.ReadLine();
+                        GeneratePhoneNumber(newnumber);
+
+                    }
+                    if (b == "p")
+                    {
+                        Console.WriteLine("Enter the new Password: ");
+                        string newpass = Console.ReadLine();
+                        Console.WriteLine("Confirm the new Password: ");
+                        string Confirmnewpass = Console.ReadLine();
+                        GeneratePassword(newpass, Confirmnewpass);
+                    }
+                    if (b == "e")
+                    {
+                        Console.WriteLine("Enter the new Email Address: ");
+                        string newEmailAddress = Console.ReadLine();
+                        GenerateEmailAddress(newEmailAddress);
+                    }
+                    if (b == "sn")
+                    {
+                        Console.WriteLine("Enter the new Store Name: ");
+                        string newStoreName = Console.ReadLine();
+                        GenerateName(newStoreName);
+                    }
+
+                }
+                else
+                {
+                    Console.WriteLine("Thank you");
+                    condition = false;
+                }
+
+            }
+            condition = false;
+            //need to add the update to files
 
 
 
-
-
-
+        }
     }
 }
