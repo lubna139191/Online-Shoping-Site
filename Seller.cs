@@ -1167,16 +1167,17 @@ namespace Online_Shoping_Site
             //check if any of the objects in the array eqauls the Edited object then Replace it
             for (int j = 0; j < i; j++)
             {
-                if (arr[j].listings[j].GetNameOfListing() == name && arr[j].listings != null)
-                {
-                    x = true;
-                    S = arr[j];
-                    S.listings.RemoveAt(j);
-                    FS.Close();
-                    S.EditFile(S);
-                    Console.WriteLine("Listing Deleted Successfully\n");
-                }
-                else if (arr[j].listings == null) { Console.WriteLine("Cant Delete"); Console.WriteLine("The Listing Does Not Exist\n"); }
+                for (int z = 0; z < arr[j].listings.Count; z++) {
+                    if (arr[j].listings[z].GetNameOfListing() == name && arr[j].listings != null)
+                    {
+                        x = true;
+                        S = arr[j];
+                        S.listings.RemoveAt(z);
+                        FS.Close();
+                        S.EditFile(S);
+                        Console.WriteLine("Listing Deleted Successfully\n");
+                    } }
+               if (arr[j].listings == null) { Console.WriteLine("Cant Delete"); Console.WriteLine("The Listing Does Not Exist\n"); }
             }
            
       
