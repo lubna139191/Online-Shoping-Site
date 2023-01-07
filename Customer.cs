@@ -943,8 +943,8 @@ namespace Online_Shoping_Site
                 Console.WriteLine("6. Change account information.");
                 Console.WriteLine("7. search for a listing.");
                 Console.WriteLine("8. logout.");
-                Console.Write("\nEnter your choice:");
-                choice = Convert.ToInt16(Console.ReadLine());
+                Console.Write("\nEnter your choice: ");
+              
                 string x = Console.ReadLine();
 
                 //To Avoid Exception Of Converting Non Convertable Type To Int
@@ -1011,7 +1011,7 @@ namespace Online_Shoping_Site
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////( Functions Seller Can Do When Log In Pass Successfully )////////////////////
+        ////////////////////////////////////( Functions Customer Can Do When Log In Pass Successfully )////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
