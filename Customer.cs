@@ -1208,7 +1208,29 @@ namespace Online_Shoping_Site
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void SearchForListing()
         {
-
+            /*FileStream FC;
+            FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
+            Console.WriteLine("Enter the word you want to search about: ");
+            string word = Console.ReadLine();
+            this.ViewAllAvailableListings();
+            Customer[] arr = new Customer[1000000];
+            int i = 0;
+            while (FC.Position < FC.Length)
+            {
+                arr[i] = (Customer)BF.Deserialize(FC);
+                i++;
+            }
+            for (int j = 0; j < i; j++)
+            {
+                if (arr[j].GetName() == C.GetName() && arr[j].GetPhoneNumber() == C.GetPhoneNumber() && arr[j].GetPassword() == C.GetPassword()
+            && arr[j].GetEmailAddress() == C.GetEmailAddress())
+                {
+                    C = arr[j];
+                }
+            }
+            FC.Close();
+            */
         }
 
     }
