@@ -968,7 +968,7 @@ namespace Online_Shoping_Site
                         break;
 
                     case 6:
-                        this.ChangeSellerAccountInformation(ref s);                   
+                        S.ChangeSellerAccountInformation(ref S);                   
                         break;
 
                     case 7:

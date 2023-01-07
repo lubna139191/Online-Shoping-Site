@@ -980,7 +980,7 @@ namespace Online_Shoping_Site
                         break;
 
                     case 6:
-                        //ChangeAccountInformation();
+                        this.ChangeCustomerAccountInformation(C);
                         break;
 
                     case 7:
@@ -1117,7 +1117,7 @@ namespace Online_Shoping_Site
           //FC.close();
         }
 
-        public void ChangeCustomerAccountInformation(ref Customer c)
+        public void ChangeCustomerAccountInformation(ref Customer C)
         {
             bool condition = false;
             while (condition == false)
