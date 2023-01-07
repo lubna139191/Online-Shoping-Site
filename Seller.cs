@@ -1457,29 +1457,45 @@ namespace Online_Shoping_Site
 
         public void ChangeSellerPhoneNumber()
         {
+          /*FileStream FS;
+            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();*/
             Console.WriteLine("Enter the new Phone Number: ");
             string newnumber = Console.ReadLine();
             this.GeneratePhoneNumber(newnumber);
+          //FS.close()
         }
         public void ChangeSellerPassword()
         {
+          /*FileStream FS;
+            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();*/
             Console.WriteLine("Enter the new Password: ");
             string newpass = Console.ReadLine();
             Console.WriteLine("Confirm the new Password: ");
             string Confirmnewpass = Console.ReadLine();
             this.GeneratePassword(newpass, Confirmnewpass);
+          //FS.close()
         }
         public void ChangeSellerEmailAddress()
         {
+          /*FileStream FS;
+            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();*/
             Console.WriteLine("Enter the new Email Address: ");
             string newEmailAddress = Console.ReadLine();
             this.GenerateEmailAddress(newEmailAddress);
+          //FS.close()
         }
         public void ChangeSellerStoreName()
         {
+          /*FileStream FS;
+            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();*/
             Console.WriteLine("Enter the new Store Name: ");
             string newStoreName = Console.ReadLine();
             this.GenerateName(newStoreName);
+          //FS.close()
         }
 
         public void ChangeSellerAccountInformation(ref Seller s)
