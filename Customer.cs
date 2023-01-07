@@ -1084,57 +1084,59 @@ namespace Online_Shoping_Site
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Account Information )////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /*public void ChangeSellerPhoneNumber()
+        public void ChangeCustomerPhoneNumber()
         {
+          /*FileStream FC;
+            FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();*/
             Console.WriteLine("Enter the new Phone Number: ");
             string newnumber = Console.ReadLine();
             this.GeneratePhoneNumber(newnumber);
+          //FC.close();
         }
-        public void ChangeSellerPassword()
+        public void ChangeCustomerPassword()
         {
+          /*FileStream FC;
+            FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();*/
             Console.WriteLine("Enter the new Password: ");
             string newpass = Console.ReadLine();
             Console.WriteLine("Confirm the new Password: ");
             string Confirmnewpass = Console.ReadLine();
             this.GeneratePassword(newpass, Confirmnewpass);
+          //FC.close();
         }
-        public void ChangeSellerEmailAddress()
+        public void ChangeCustomerEmailAddress()
         {
+          /*FileStream FC;
+            FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();*/
             Console.WriteLine("Enter the new Email Address: ");
             string newEmailAddress = Console.ReadLine();
             this.GenerateEmailAddress(newEmailAddress);
-        }
-        public void ChangeSellerStoreName()
-        {
-            Console.WriteLine("Enter the new Store Name: ");
-            string newStoreName = Console.ReadLine();
-            this.GenerateName(newStoreName);
+          //FC.close();
         }
 
-        public void ChangeSellerAccountInformation(ref Seller s)
+        public void ChangeCustomerAccountInformation(ref Customer c)
         {
             bool condition = false;
             while (condition == false)
             {
                 condition = true;
                 Console.WriteLine("What Do you want to change? Enter (1) to change phone number," +
-                "Enter (2) to change password,Enter (3) to change email address, Enter (4) to change the store name.");
+                "Enter (2) to change password,Enter (3) to change email address");
                 string b = Console.ReadLine();
                 if (b == "1")
                 {
-                    ChangeSellerPhoneNumber();
+                    ChangeCustomerPhoneNumber();
                 }
                 if (b == "2")
                 {
-                    ChangeSellerPassword();
+                    ChangeCustomerPassword();
                 }
                 if (b == "3")
                 {
-                    ChangeSellerEmailAddress();
-                }
-                if (b == "4")
-                {
-                    ChangeSellerStoreName();
+                    ChangeCustomerEmailAddress();
                 }
                 else
                 {
@@ -1146,7 +1148,7 @@ namespace Online_Shoping_Site
             //need to add the update to files
 
         }
-        */
+        
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Search For Listing )////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
