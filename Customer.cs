@@ -1084,11 +1084,69 @@ namespace Online_Shoping_Site
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Account Information )////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void ChangeAccountInformation()
+        /*public void ChangeSellerPhoneNumber()
         {
-
+            Console.WriteLine("Enter the new Phone Number: ");
+            string newnumber = Console.ReadLine();
+            this.GeneratePhoneNumber(newnumber);
+        }
+        public void ChangeSellerPassword()
+        {
+            Console.WriteLine("Enter the new Password: ");
+            string newpass = Console.ReadLine();
+            Console.WriteLine("Confirm the new Password: ");
+            string Confirmnewpass = Console.ReadLine();
+            this.GeneratePassword(newpass, Confirmnewpass);
+        }
+        public void ChangeSellerEmailAddress()
+        {
+            Console.WriteLine("Enter the new Email Address: ");
+            string newEmailAddress = Console.ReadLine();
+            this.GenerateEmailAddress(newEmailAddress);
+        }
+        public void ChangeSellerStoreName()
+        {
+            Console.WriteLine("Enter the new Store Name: ");
+            string newStoreName = Console.ReadLine();
+            this.GenerateName(newStoreName);
         }
 
+        public void ChangeSellerAccountInformation(ref Seller s)
+        {
+            bool condition = false;
+            while (condition == false)
+            {
+                condition = true;
+                Console.WriteLine("What Do you want to change? Enter (1) to change phone number," +
+                "Enter (2) to change password,Enter (3) to change email address, Enter (4) to change the store name.");
+                string b = Console.ReadLine();
+                if (b == "1")
+                {
+                    ChangeSellerPhoneNumber();
+                }
+                if (b == "2")
+                {
+                    ChangeSellerPassword();
+                }
+                if (b == "3")
+                {
+                    ChangeSellerEmailAddress();
+                }
+                if (b == "4")
+                {
+                    ChangeSellerStoreName();
+                }
+                else
+                {
+                    condition = false;
+                }
+
+            }
+            condition = false;
+            //need to add the update to files
+
+        }
+        */
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Search For Listing )////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
