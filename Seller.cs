@@ -1473,9 +1473,10 @@ namespace Online_Shoping_Site
             }
             for (int j = 0; j < i; j++)
             {
-                if (arr[j].GetPhoneNumber() == S.GetPhoneNumber())
+                if (arr[j].GetName() == S.GetName() && arr[j].GetEmailAddress() == S.GetEmailAddress() && arr[j].GetPhoneNumber() == S.GetPhoneNumber())
                 {
-                    S = arr[j];
+                    S.SetPhoneNumber(newnumber);
+                    arr[j].SetPhoneNumber(newnumber);
                 }
             }
             FS.Close();
@@ -1503,9 +1504,10 @@ namespace Online_Shoping_Site
             }
             for (int j = 0; j < i; j++)
             {
-                if (arr[j].GetPassword() == S.GetPassword())
+                if (arr[j].GetName() == S.GetName() && arr[j].GetEmailAddress() == S.GetEmailAddress() && arr[j].GetPhoneNumber() == S.GetPhoneNumber())
                 {
-                    S = arr[j];
+                    S.SetPassword(newpass);
+                    arr[j].SetPassword(newpass);
                 }
             }
             FS.Close();
@@ -1532,9 +1534,10 @@ namespace Online_Shoping_Site
             }
             for (int j = 0; j < i; j++)
             {
-                if (arr[j].GetEmailAddress() == S.GetEmailAddress())
+                if (arr[j].GetName() == S.GetName() && arr[j].GetEmailAddress() == S.GetEmailAddress() && arr[j].GetPhoneNumber() == S.GetPhoneNumber())
                 {
-                    S = arr[j];
+                    S.SetEmailAddress(newEmailAddress);
+                    arr[j].SetEmailAddress(newEmailAddress);
                 }
             }
             FS.Close();
@@ -1561,9 +1564,10 @@ namespace Online_Shoping_Site
             }
             for (int j = 0; j < i; j++)
             {
-                if (arr[j].GetName() == S.GetName())
+                if (arr[j].GetName() == S.GetName()&& arr[j].GetEmailAddress() == S.GetEmailAddress()&& arr[j].GetPhoneNumber() == S.GetPhoneNumber())
                 {
-                    S = arr[j];
+                    S.SetStoreNumber(newStoreName);
+                    arr[j].SetStoreNumber(newStoreName);
                 }
             }
             FS.Close();
@@ -1579,8 +1583,7 @@ namespace Online_Shoping_Site
             while (condition == false)
             {
                 condition = true;
-                Console.WriteLine("What Do you want to change? Enter (1) to change phone number," +
-                "Enter (2) to change password,Enter (3) to change email address, Enter (4) to change the store name.");
+                Console.WriteLine("What Do you want to change?\nEnter (1) to change phone number.\nEnter (2) to change password.\nEnter (3)to change email address.\nEnter (4) to change the store name.");
                 string b = Console.ReadLine();
                 if (b == "1")
                 {
@@ -1604,7 +1607,7 @@ namespace Online_Shoping_Site
                 }
 
             }
-            condition = false;
+        
 
         }
 

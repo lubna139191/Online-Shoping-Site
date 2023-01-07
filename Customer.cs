@@ -25,7 +25,7 @@ namespace Online_Shoping_Site
         string CustomerId;
         Address ShippingAddress;
         Payment PaymentInformation;
-        List<Listings> listings;
+        List<Listings> cart;
         public static int counter = 0;
         public static Dictionary<string, object> data = new Dictionary<string, object>();
         public static string ProgramFilesFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Data";
@@ -964,16 +964,25 @@ namespace Online_Shoping_Site
                         this.ViewAllAvailableListings();
                         Console.WriteLine("Enter Name of listing whose contents you want to view:");
                         string Name = Console.ReadLine();
-                        C.ViewChosenListingInformation(Name);
+                        this.ViewChosenListingInformation(Name);
                         break;
 
                     case 3:
-                        //AddListingToCart();
+                        this.ViewAllAvailableListings();
+                        Console.WriteLine("Enter Name of listing you want to add:");
+                        string Name2 = Console.ReadLine();
+                        this.AddListingToCart(Name2);
                         break;
 
                     case 4:
-                        //ViewEditAddedListingsToCart();
-                        Console.WriteLine("View Added listings to cart: ");
+                        Console.WriteLine("1-View");
+                        Console.WriteLine("2-Edit");
+                        Console.WriteLine("Enter Youre Choice:");
+                        string s = Console.ReadLine();
+                        if (s == "1") { this.ViewAddedListingsToCart(C); }
+                       else if (s == "2") { this.EditAddedListingsToCart(); }
+                        else { Console.WriteLine("Invalid Choice..."); }
+                       
 
                         break;
 
@@ -986,7 +995,7 @@ namespace Online_Shoping_Site
                         break;
 
                     case 7:
-                        //SearchForListing();
+                        this.SearchForListing();
                         break;
 
                     case 8:
@@ -1024,17 +1033,19 @@ namespace Online_Shoping_Site
             }
 
             FS.Close();
-
-            if (this.listings.Count != 0)
+            bool condition = false;
+            for (int j = 0; j < i; j++)
             {
-                for (int J = 0; J < this.listings.Count; J++)
+                for (int k = 0; k < arr[j].listings.Count; k++)
                 {
-                    this.listings[J].Print();
+                    condition = true;
+                    Console.WriteLine(arr[j].listings[k].GetNameOfListing());
                     Console.WriteLine("\n");
                 }
+               
             }
-            else
-            { Console.WriteLine("The Listings Is Empty\n"); }
+            if(condition == false)
+            { Console.WriteLine("No Listings To Show\n"); }
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1056,64 +1067,110 @@ namespace Online_Shoping_Site
             }
 
             FS.Close();
-
-            //Check emty or not:
-            if (this.listings != null)
-            {
-                for (int x = 0; x < this.listings.Count; i++)
+            bool found = false;
+            for (int j = 0; j < i; j++) {
+                for (int x = 0; x < arr[j].listings.Count; x++)
                 {
-                    if (this.listings[i].GetNameOfListing() == Name)
+                    if (arr[j].listings[x].GetNameOfListing() == Name)
                     {
-                        this.listings[i].Print();
-                        Seller S = new Seller();
-                        Console.WriteLine(S.GetName());
-                        Console.WriteLine(S.GetPhoneNumber());
-                        Console.WriteLine(S.GetStoreNumber());
+                        arr[j].listings[i].Print();
+                        found = true;
                     }
                 }
-            }
 
-            else
+            }
+            if(found==false)
             {
-                Console.WriteLine("The Listings Is Empty");
-                this.ViewChosenListingInformation(Name);
+                Console.WriteLine("The Listings Not Found");
             }
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////( Add Listing To Cart )////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void AddListingToCart()
+        public void AddListingToCart(string name)
         {
+            FileStream FC;
+            FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
 
+            //read objects & save to array
+            Customer[] arr = new Customer[1000000];
+            int i = 0;
+            while (FC.Position < FC.Length)
+            {
+                arr[i] = (Customer)BF.Deserialize(FC);
+                i++;
+            }
+
+            FC.Close();
+            FileStream FS;
+            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter bf = new BinaryFormatter();
+
+            //read objects & save to array
+            Seller[] arr2 = new Seller[1000000];
+            int x = 0;
+            while (FC.Position < FC.Length)
+            {
+                arr2[x] = (Seller)bf.Deserialize(FS);
+                x++;
+            }
+
+            FS.Close();
+            bool condition = false;
+            //check if item is avaliable
+            for (int z = 0; z < x; z++) { for(int r = 0; r < arr2[z].listings.Count; r++) {
+                    if (arr2[z].listings[r].GetNameOfListing() == name && arr2[z].listings[r].GetNumberOfItems() > 0) {
+                        Listings L = new Listings();
+                        L.SetNameOfListing(name);
+                        L.SetPrice(arr2[z].listings[r].GetPrice());
+                        L.SetDescription(arr2[z].listings[r].GetDescription());
+                        L.SetNumberOfItems(1);
+                        condition = true; } } }
+            for(int y = 0; y < i; y++) { for (int r = 0; r < arr[y].cart.Count; r++) { if(arr[y].cart[y].GetNameOfListing()==name) {
+                        Console.WriteLine("The Listing Already In Cart");
+                        Console.WriteLine("Try To Edit The Number Of Items");
+                        //this.LogInCustomer();
+                    } } }
+            if(condition == false) { Console.WriteLine("The Listing Is Not Available"); }
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( View Added Listings To Cart )//////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void ViewAddedListingsToCart()
+        public void ViewAddedListingsToCart(Customer C)
         {
-            FileStream FS;
-            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+            FileStream FC;
+            FC= new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
             BinaryFormatter BF = new BinaryFormatter();
+
             //read objects & save to array
-            Seller[] arr = new Seller[1000000];
+            Customer[] arr = new Customer[1000000];
             int i = 0;
-            while (FS.Position < FS.Length)
+            while (FC.Position < FC.Length)
             {
-                arr[i] = (Seller)BF.Deserialize(FS);
+                arr[i] = (Customer)BF.Deserialize(FC);
                 i++;
             }
+
+            FC.Close();
+            bool found = false;
             for (int j = 0; j < i; j++)
             {
-                if (arr[i].listing[j] == S.Getname())
-                {
-                    C = arr[j];
-                    Console.WriteLine()
+                if (arr[j].GetName()==C.GetName()&& arr[j].GetPhoneNumber()==C.GetPhoneNumber() && arr[j].GetEmailAddress()==C.GetEmailAddress()) {
+                    for (int k = 0; k < arr[j].cart.Count; k++)
+                    {
+                        arr[j].cart[k].Print();
+                        found = true;
+                    }
                 }
+                
             }
-            FS.Close();
-            S.EditFile(S);
+            if (found == false) { 
+            Console.WriteLine("Empty Cart");
+            }
+        }
 
 
 
@@ -1164,11 +1221,12 @@ namespace Online_Shoping_Site
             {
                 if (arr[j].GetPhoneNumber() == C.GetPhoneNumber())
                 {
-                    C = arr[j];
+                   arr[j].SetPhoneNumber(newnumber);
+                    C.SetPhoneNumber(newnumber);
                 }
             }
             FC.Close();
-            C.EditFile(C);
+            this.EditFile(C);
            
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1195,7 +1253,8 @@ namespace Online_Shoping_Site
             {
                 if (arr[j].GetPassword() == C.GetPassword())
                 {
-                    C = arr[j];
+                    arr[j].SetPassword(newpass);
+                    C.SetPassword(newpass);
                 }
             }
             FC.Close();
@@ -1223,7 +1282,8 @@ namespace Online_Shoping_Site
             {
                 if (arr[j].GetEmailAddress() == C.GetEmailAddress())
                 {
-                    C = arr[j];
+                    arr[j].SetEmailAddress(newEmailAddress);
+                    C.SetEmailAddress(newEmailAddress);
                 }
             }
             FC.Close();
@@ -1238,8 +1298,7 @@ namespace Online_Shoping_Site
             while (condition == false)
             {
                 condition = true;
-                Console.WriteLine("What Do you want to change? Enter (1) to change phone number," +
-                "Enter (2) to change password,Enter (3) to change email address");
+                Console.WriteLine("What Do you want to change?\nEnter (1) to change phone number.\nEnter (2) to change password.\nEnter (3) to change email address.");
                 string b = Console.ReadLine();
                 if (b == "1")
                 {
@@ -1259,7 +1318,7 @@ namespace Online_Shoping_Site
                 }
 
             }
-            condition = false;
+         
            
 
         }
@@ -1269,29 +1328,34 @@ namespace Online_Shoping_Site
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void SearchForListing()
         {
-            /*FileStream FC;
-            FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
+            
+            FileStream FS;
+            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
             BinaryFormatter BF = new BinaryFormatter();
             Console.WriteLine("Enter the word you want to search about: ");
             string word = Console.ReadLine();
-            this.ViewAllAvailableListings();
-            Customer[] arr = new Customer[1000000];
+            
+            Seller[] arr = new Seller[1000000];
             int i = 0;
-            while (FC.Position < FC.Length)
+            while (FS.Position < FS.Length)
             {
-                arr[i] = (Customer)BF.Deserialize(FC);
+                arr[i] = (Seller)BF.Deserialize(FS);
                 i++;
             }
+            bool found = false;
             for (int j = 0; j < i; j++)
             {
-                if (arr[j].GetName() == C.GetName() && arr[j].GetPhoneNumber() == C.GetPhoneNumber() && arr[j].GetPassword() == C.GetPassword()
-            && arr[j].GetEmailAddress() == C.GetEmailAddress())
+                for(int z=0;z<arr[j].listings.Count;z++)
                 {
-                    C = arr[j];
+                    if (arr[j].listings[z].GetNameOfListing().Contains(word)|| arr[j].listings[z].GetDescription().Contains(word))
+                    {
+                        found = true;
+                        arr[j].listings[z].Print(); }
                 }
             }
-            FC.Close();
-            */
+            if (found==false) { Console.WriteLine("Not Found"); }
+            FS.Close();
+            
         }
 
     }
