@@ -40,7 +40,7 @@ namespace Online_Shoping_Site
         public void SetPassword(string Password) { this.Password = Password; }
         public void SetCustomerID(string ID) { this.CustomerId = ID; }
         public void SetShippingAddress(Address ShippingAddress) { this.ShippingAddress = ShippingAddress; }
-
+        public void SetCart(List<Listings> cart) { this.cart = cart; }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////Get Functions//////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -987,7 +987,7 @@ namespace Online_Shoping_Site
                         break;
 
                     case 5:
-                        //CheckoutListings();
+                        this.CheckoutListings(ref C);
                         break;
 
                     case 6:
@@ -1398,9 +1398,96 @@ namespace Online_Shoping_Site
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////( Checkout Listings )/////////////////////////////////////////////
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            public void CheckoutListings()
+            public void CheckoutListings(ref Customer C)
         {
+            FileStream FC;
+            FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
+            Customer[] Customerarr = new Customer[1000000];
+            int i = 0;
+            while (FC.Position < FC.Length)
+            {
+                Customerarr[i] = (Customer)BF.Deserialize(FC);
+                i++;
+            }
+            FC.Close();
 
+            FileStream FS;
+            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+            Seller[] Sellerarr = new Seller[1000000];
+            int j = 0;
+            while (FS.Position < FS.Length)
+            {
+                Sellerarr[j] = (Seller)BF.Deserialize(FS);
+                j++;
+            }
+            FS.Close();
+            FileStream FX;
+            
+            FX= new FileStream(ProgramFilesFolder + "/SoldListings.txt", FileMode.Append, FileAccess.ReadWrite);
+            Listings[] Sold = new Listings[1000000];
+            int k = 0;
+            while (FX.Position < FX.Length)
+            {
+                Sold[k] = (Listings)BF.Deserialize(FX);
+                k++;
+            }
+            bool condition = false;
+            bool condition2 = false;
+            
+            Seller S=new Seller();
+            for (int f=0;f<j;f++) { 
+            for(int r = 0; r < Sellerarr[f].listings.Count; r++)
+                {
+                    for(int u = 0; u < C.cart.Count; u++)
+                    {
+                        if (C.cart[u].GetNameOfListing() == Sellerarr[f].listings[r].GetNameOfListing())
+                        {
+                            S.SetName(Sellerarr[f].GetName());
+                            S.SetPassword(Sellerarr[f].GetPassword());
+                            S.SetPhoneNumber(Sellerarr[f].GetPhoneNumber());
+                            S.SetEmailAddress(Sellerarr[f].GetEmailAddress());
+                            S.SetStoreNumber(Sellerarr[f].GetStoreNumber());
+                            S.SetSellerID(Sellerarr[f].GetSellerId());
+                            S.SetAddress(Sellerarr[f].GetAddress());
+                            S.Setlisting(Sellerarr[f].Getlisting());
+                            S.listings[r].SetNumberOfItems(Sellerarr[f].listings[r].GetNumberOfItems() - C.cart[u].GetNumberOfItems());
+                            
+                        }
+                    }
+                }
+            }
+
+
+
+
+            if (C.cart != null)
+            {
+                for (int b = 0; b < C.cart.Count; b++)
+                {
+                    if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Data"))
+                    { Directory.CreateDirectory(ProgramFilesFolder); }
+                    BF.Serialize(FX, C.cart[b]);
+                    condition2 = true;
+                }
+            }
+            FX.Close();
+
+
+            for (int a = 0; a < i; a++)
+            {
+                if (C.GetName() == Customerarr[a].GetName()) {
+                    List<Listings> cart2 = new List<Listings> { };
+                    C.SetCart(cart2);
+                    this.EditFile(C);
+                    condition = true;
+                }
+                if (condition==true) { break; }
+            }
+
+
+            if (condition == true && condition2 == true) { Console.WriteLine("Checkout Succssefully.."); }
+            else { Console.WriteLine("Checkout Faild.."); }
 
 
 
