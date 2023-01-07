@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Xml.Linq;
+using System.ComponentModel;
 
 namespace Online_Shoping_Site
 {
@@ -980,7 +981,7 @@ namespace Online_Shoping_Site
                         break;
 
                     case 6:
-                        this.ChangeCustomerAccountInformation(C);
+                        this.ChangeCustomerAccountInformation(ref C);
                         break;
 
                     case 7:
@@ -1080,43 +1081,50 @@ namespace Online_Shoping_Site
         {
 
         }
-
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////( Change Account Information )////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void ChangeCustomerPhoneNumber()
+        ///////////////////////////////////////////( Change Phone Number)////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void ChangeCustomerPhoneNumber(ref Customer C)
         {
-          /*FileStream FC;
+            FileStream FC;
             FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
-            BinaryFormatter BF = new BinaryFormatter();*/
+            BinaryFormatter BF = new BinaryFormatter();
             Console.WriteLine("Enter the new Phone Number: ");
             string newnumber = Console.ReadLine();
             this.GeneratePhoneNumber(newnumber);
-          //FC.close();
+            FC.Close();
         }
-        public void ChangeCustomerPassword()
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( Change Password)////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void ChangeCustomerPassword(ref Customer C)
         {
-          /*FileStream FC;
+            FileStream FC;
             FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
-            BinaryFormatter BF = new BinaryFormatter();*/
+            BinaryFormatter BF = new BinaryFormatter();
             Console.WriteLine("Enter the new Password: ");
             string newpass = Console.ReadLine();
             Console.WriteLine("Confirm the new Password: ");
             string Confirmnewpass = Console.ReadLine();
             this.GeneratePassword(newpass, Confirmnewpass);
-          //FC.close();
+            FC.Close();
         }
-        public void ChangeCustomerEmailAddress()
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( Change Email Address)////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void ChangeCustomerEmailAddress(ref Customer C)
         {
-          /*FileStream FC;
+            FileStream FC;
             FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
-            BinaryFormatter BF = new BinaryFormatter();*/
+            BinaryFormatter BF = new BinaryFormatter();
             Console.WriteLine("Enter the new Email Address: ");
             string newEmailAddress = Console.ReadLine();
             this.GenerateEmailAddress(newEmailAddress);
-          //FC.close();
+            FC.Close();
         }
-
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( Change Customer Account Information)////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void ChangeCustomerAccountInformation(ref Customer C)
         {
             bool condition = false;
@@ -1128,15 +1136,15 @@ namespace Online_Shoping_Site
                 string b = Console.ReadLine();
                 if (b == "1")
                 {
-                    ChangeCustomerPhoneNumber();
+                    this.ChangeCustomerPhoneNumber(ref C);
                 }
                 if (b == "2")
                 {
-                    ChangeCustomerPassword();
+                    this.ChangeCustomerPassword(ref C);
                 }
                 if (b == "3")
                 {
-                    ChangeCustomerEmailAddress();
+                    this.ChangeCustomerEmailAddress(ref C);
                 }
                 else
                 {
@@ -1145,7 +1153,7 @@ namespace Online_Shoping_Site
 
             }
             condition = false;
-            //need to add the update to files
+           
 
         }
         

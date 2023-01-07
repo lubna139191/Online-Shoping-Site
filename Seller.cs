@@ -968,7 +968,7 @@ namespace Online_Shoping_Site
                         break;
 
                     case 6:
-                        S.ChangeSellerAccountInformation(ref S);                   
+                        this.ChangeSellerAccountInformation(ref S);                   
                         break;
 
                     case 7:
@@ -1452,53 +1452,66 @@ namespace Online_Shoping_Site
             }
 
         }
-        ///////////////////////////////////////////////Change account information////////////////////////////////////////////////////
-
-
-        public void ChangeSellerPhoneNumber()
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( Change Phone Number)///////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void ChangeSellerPhoneNumber(ref Seller S)
         {
-          /*FileStream FS;
+            FileStream FS;
             FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
-            BinaryFormatter BF = new BinaryFormatter();*/
+            BinaryFormatter BF = new BinaryFormatter();
             Console.WriteLine("Enter the new Phone Number: ");
             string newnumber = Console.ReadLine();
             this.GeneratePhoneNumber(newnumber);
-          //FS.close()
+            FS.Close();
         }
-        public void ChangeSellerPassword()
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( Change Passowrd)///////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void ChangeSellerPassword(ref Seller S)
         {
-          /*FileStream FS;
+            FileStream FS;
             FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
-            BinaryFormatter BF = new BinaryFormatter();*/
+            BinaryFormatter BF = new BinaryFormatter();
             Console.WriteLine("Enter the new Password: ");
             string newpass = Console.ReadLine();
             Console.WriteLine("Confirm the new Password: ");
             string Confirmnewpass = Console.ReadLine();
             this.GeneratePassword(newpass, Confirmnewpass);
-          //FS.close()
+            FS.Close();
         }
-        public void ChangeSellerEmailAddress()
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( Change Email Address)///////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public void ChangeSellerEmailAddress(ref Seller S)
         {
-          /*FileStream FS;
+            FileStream FS;
             FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
-            BinaryFormatter BF = new BinaryFormatter();*/
+            BinaryFormatter BF = new BinaryFormatter();
             Console.WriteLine("Enter the new Email Address: ");
             string newEmailAddress = Console.ReadLine();
             this.GenerateEmailAddress(newEmailAddress);
-          //FS.close()
+            FS.Close();
         }
-        public void ChangeSellerStoreName()
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( Change Store Name)///////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public void ChangeSellerStoreName(ref Seller S)
         {
-          /*FileStream FS;
+            FileStream FS;
             FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
-            BinaryFormatter BF = new BinaryFormatter();*/
+            BinaryFormatter BF = new BinaryFormatter();
             Console.WriteLine("Enter the new Store Name: ");
             string newStoreName = Console.ReadLine();
             this.GenerateName(newStoreName);
-          //FS.close()
+            FS.Close();
         }
-
-        public void ChangeSellerAccountInformation(ref Seller s)
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( Change Seller Account Information)////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void ChangeSellerAccountInformation(ref Seller S)
         {
             bool condition = false;
             while (condition == false)
@@ -1509,19 +1522,19 @@ namespace Online_Shoping_Site
                 string b = Console.ReadLine();
                 if (b == "1")
                 {
-                    ChangeSellerPhoneNumber();
+                    this.ChangeSellerPhoneNumber(ref S);
                 }
                 if (b == "2")
                 {
-                    ChangeSellerPassword();
+                    this.ChangeSellerPassword(ref S);
                 }
                 if (b == "3")
                 {
-                    ChangeSellerEmailAddress();
+                    this.ChangeSellerEmailAddress(ref S);
                 }
                 if (b == "4")
                 {
-                    ChangeSellerStoreName();
+                    this.ChangeSellerStoreName(ref S);
                 }
                 else
                 {
@@ -1530,7 +1543,6 @@ namespace Online_Shoping_Site
 
             }
             condition = false;
-            //need to add the update to files
 
         }
 
