@@ -1206,8 +1206,52 @@ namespace Online_Shoping_Site
 
             public void EditAddedListingsToCart()
             {
-                
-           
+            public void EditAddedListingsToCart(int ActionId)
+            {
+                //1-> delete
+                //2->edit
+                //3->add
+                {
+                    FileStream FS;
+                    FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+                    BinaryFormatter BF = new BinaryFormatter();
+                    //read objects & save to array
+                    Seller[] arr = new Seller[1000000];
+                    int i = 0;
+                    while (FS.Position < FS.Length)
+                    {
+                        arr[i] = (Seller)BF.Deserialize(FS);
+                        i++;
+                    }
+                    for (int j = 0; j < i; j++)
+                    {
+                        if (arr[i].listing[j] == S.Getname())
+                        {
+                            if (ActionId == 1)
+                            {
+                                arr[j] = 0;
+
+                            }
+                            else if (ActionId == 2)
+                            {
+                                arr[j] = 0;//instide of 0 put the new value
+
+                            }
+                            else if (ActionId == 3)
+                            {
+                                var newArrayLength = arr.Length + 1;
+                                var newarray = new Seller[newArrayLength];
+                                //move the old array to the new array 
+                            }
+                        }
+                    }
+                    FS.Close();
+                    S.EditFile(S);
+
+
+                }
+
+
 
 
 
@@ -1221,6 +1265,11 @@ namespace Online_Shoping_Site
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             public void CheckoutListings()
         {
+
+
+
+
+
 
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
