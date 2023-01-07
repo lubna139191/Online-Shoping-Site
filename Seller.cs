@@ -1463,6 +1463,13 @@ namespace Online_Shoping_Site
             Console.WriteLine("Enter the new Phone Number: ");
             string newnumber = Console.ReadLine();
             this.GeneratePhoneNumber(newnumber);
+            Seller[] arr = new Seller[1000000];
+            int i = 0;
+            while (FS.Position < FS.Length)
+            {
+                arr[i] = (Seller)BF.Deserialize(FS);
+                i++;
+            }
             FS.Close();
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
