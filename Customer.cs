@@ -972,6 +972,8 @@ namespace Online_Shoping_Site
 
                     case 4:
                         //ViewEditAddedListingsToCart();
+                        Console.WriteLine("View Added listings to cart: ");
+
                         break;
 
                     case 5:
