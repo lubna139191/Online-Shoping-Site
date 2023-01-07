@@ -21,6 +21,7 @@ namespace Online_Shoping_Site
         string StoreNumber;
         string Password;
         string SellerID;
+        List<Listings> listing;
         public List<Listings> listings = new List<Listings> { };
         public static int counter = 0;
         public static Dictionary<string, object> data = new Dictionary<string, object>();
@@ -37,7 +38,7 @@ namespace Online_Shoping_Site
         public void SetStoreNumber(string StoreNumber) { this.StoreNumber = StoreNumber; }
         public void SetPassword(string Password) { this.Password = Password; }
         public void SetSellerID(string ID) { this.SellerID = ID; }
-
+        public void Setlisting(List<Listings> listing) { this.listing = listing; }
 
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +52,7 @@ namespace Online_Shoping_Site
         public string GetPassword() { return this.Password; }
         public string GetSellerId() { return this.SellerID; }
 
-
+        public List<Listings> Getlisting() { return this.listing; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////Check the Data Enterd By the User///////////////////////////////////////////////
