@@ -1092,7 +1092,23 @@ namespace Online_Shoping_Site
             Console.WriteLine("Enter the new Phone Number: ");
             string newnumber = Console.ReadLine();
             this.GeneratePhoneNumber(newnumber);
+            Customer[] arr = new Customer[1000000];
+            int i = 0;
+            while (FC.Position < FC.Length)
+            {
+                arr[i] = (Customer)BF.Deserialize(FC);
+                i++;
+            }
+            for (int j = 0; j < i; j++)
+            {
+                if (arr[j].GetPhoneNumber() == C.GetPhoneNumber())
+                {
+                    C = arr[j];
+                }
+            }
             FC.Close();
+            C.EditFile(C);
+           
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Password)////////////////////////////////////
@@ -1107,7 +1123,22 @@ namespace Online_Shoping_Site
             Console.WriteLine("Confirm the new Password: ");
             string Confirmnewpass = Console.ReadLine();
             this.GeneratePassword(newpass, Confirmnewpass);
+            Customer[] arr = new Customer[1000000];
+            int i = 0;
+            while (FC.Position < FC.Length)
+            {
+                arr[i] = (Customer)BF.Deserialize(FC);
+                i++;
+            }
+            for (int j = 0; j < i; j++)
+            {
+                if (arr[j].GetPassword() == C.GetPassword())
+                {
+                    C = arr[j];
+                }
+            }
             FC.Close();
+            C.EditFile(C);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Email Address)////////////////////////////////////
@@ -1120,7 +1151,22 @@ namespace Online_Shoping_Site
             Console.WriteLine("Enter the new Email Address: ");
             string newEmailAddress = Console.ReadLine();
             this.GenerateEmailAddress(newEmailAddress);
+            Customer[] arr = new Customer[1000000];
+            int i = 0;
+            while (FC.Position < FC.Length)
+            {
+                arr[i] = (Customer)BF.Deserialize(FC);
+                i++;
+            }
+            for (int j = 0; j < i; j++)
+            {
+                if (arr[j].GetEmailAddress() == C.GetEmailAddress())
+                {
+                    C = arr[j];
+                }
+            }
             FC.Close();
+            C.EditFile(C);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Customer Account Information)////////////////////////////////////

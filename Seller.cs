@@ -1470,7 +1470,15 @@ namespace Online_Shoping_Site
                 arr[i] = (Seller)BF.Deserialize(FS);
                 i++;
             }
+            for (int j = 0; j < i; j++)
+            {
+                if (arr[j].GetPhoneNumber() == S.GetPhoneNumber())
+                {
+                    S = arr[j];
+                }
+            }
             FS.Close();
+            S.EditFile(S);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Passowrd)///////////////////////////////////////////////
@@ -1485,7 +1493,22 @@ namespace Online_Shoping_Site
             Console.WriteLine("Confirm the new Password: ");
             string Confirmnewpass = Console.ReadLine();
             this.GeneratePassword(newpass, Confirmnewpass);
+            Seller[] arr = new Seller[1000000];
+            int i = 0;
+            while (FS.Position < FS.Length)
+            {
+                arr[i] = (Seller)BF.Deserialize(FS);
+                i++;
+            }
+            for (int j = 0; j < i; j++)
+            {
+                if (arr[j].GetPassword() == S.GetPassword())
+                {
+                    S = arr[j];
+                }
+            }
             FS.Close();
+            S.EditFile(S);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Email Address)///////////////////////////////////////////////
@@ -1499,7 +1522,22 @@ namespace Online_Shoping_Site
             Console.WriteLine("Enter the new Email Address: ");
             string newEmailAddress = Console.ReadLine();
             this.GenerateEmailAddress(newEmailAddress);
+            Seller[] arr = new Seller[1000000];
+            int i = 0;
+            while (FS.Position < FS.Length)
+            {
+                arr[i] = (Seller)BF.Deserialize(FS);
+                i++;
+            }
+            for (int j = 0; j < i; j++)
+            {
+                if (arr[j].GetEmailAddress() == S.GetEmailAddress())
+                {
+                    S = arr[j];
+                }
+            }
             FS.Close();
+            S.EditFile(S);
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Store Name)///////////////////////////////////////////////
@@ -1513,7 +1551,23 @@ namespace Online_Shoping_Site
             Console.WriteLine("Enter the new Store Name: ");
             string newStoreName = Console.ReadLine();
             this.GenerateName(newStoreName);
+            Seller[] arr = new Seller[1000000];
+            int i = 0;
+            while (FS.Position < FS.Length)
+            {
+                arr[i] = (Seller)BF.Deserialize(FS);
+                i++;
+            }
+            for (int j = 0; j < i; j++)
+            {
+                if (arr[j].GetName() == S.GetName())
+                {
+                    S = arr[j];
+                }
+            }
             FS.Close();
+            S.EditFile(S);
+            
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Seller Account Information)////////////////////////////////////
