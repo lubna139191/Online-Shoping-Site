@@ -1480,7 +1480,7 @@ namespace Online_Shoping_Site
                 }
             }
             FS.Close();
-            S.EditFile(S);
+            S.EditFile(S); Console.WriteLine("Changed Successfuly.\n");
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Passowrd)///////////////////////////////////////////////
@@ -1511,7 +1511,7 @@ namespace Online_Shoping_Site
                 }
             }
             FS.Close();
-            S.EditFile(S);
+            S.EditFile(S); Console.WriteLine("Changed Successfuly.\n");
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Email Address)///////////////////////////////////////////////
@@ -1541,7 +1541,7 @@ namespace Online_Shoping_Site
                 }
             }
             FS.Close();
-            S.EditFile(S);
+            S.EditFile(S); Console.WriteLine("Changed Successfuly.\n");
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Store Name)///////////////////////////////////////////////
@@ -1572,7 +1572,7 @@ namespace Online_Shoping_Site
             }
             FS.Close();
             S.EditFile(S);
-            
+            Console.WriteLine("Changed Successfuly.\n");
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Seller Account Information)////////////////////////////////////
@@ -1582,24 +1582,33 @@ namespace Online_Shoping_Site
             bool condition = false;
             while (condition == false)
             {
-                condition = true;
-                Console.WriteLine("What Do you want to change?\nEnter (1) to change phone number.\nEnter (2) to change password.\nEnter (3)to change email address.\nEnter (4) to change the store name.");
+                
+                Console.WriteLine("What Do you want to change?\nEnter (1) to change phone number.\nEnter (2) to change password.\nEnter (3)to change email address.\nEnter (4) to change the store name.\nEnter (5) to Go Back.");
                 string b = Console.ReadLine();
-                if (b == "1")
+              if (b == "1")
                 {
+                    condition = true;
                     this.ChangeSellerPhoneNumber(ref S);
                 }
-                if (b == "2")
+                else if (b == "2")
                 {
+                    condition = true;
                     this.ChangeSellerPassword(ref S);
                 }
-                if (b == "3")
+                else if (b == "3")
                 {
+                    condition = true;
                     this.ChangeSellerEmailAddress(ref S);
                 }
-                if (b == "4")
+                else if(b == "4")
                 {
+                    condition = true;
                     this.ChangeSellerStoreName(ref S);
+                }
+                else if (b == "5")
+                {
+                    condition = true;
+
                 }
                 else
                 {
