@@ -961,6 +961,7 @@ namespace Online_Shoping_Site
                         break;
 
                     case 2:
+                        this.ViewAllAvailableListings();
                         Console.WriteLine("Enter Name of listing whose contents you want to view:");
                         string Name = Console.ReadLine();
                         C.ViewChosenListingInformation(Name);
@@ -1024,12 +1025,11 @@ namespace Online_Shoping_Site
 
             FS.Close();
 
-            Seller S = new Seller();
-            if (S.listings.Count != 0)
+            if (this.listings.Count != 0)
             {
-                for (int J = 0; J < S.listings.Count; J++)
+                for (int J = 0; J < this.listings.Count; J++)
                 {
-                    S.listings[J].Print();
+                    this.listings[J].Print();
                     Console.WriteLine("\n");
                 }
             }
@@ -1042,20 +1042,42 @@ namespace Online_Shoping_Site
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void ViewChosenListingInformation(string Name)
         {
+            FileStream FS;
+            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
+
+            //read objects & save to array
+            Seller[] arr = new Seller[1000000];
+            int i = 0;
+            while (FS.Position < FS.Length)
+            {
+                arr[i] = (Seller)BF.Deserialize(FS);
+                i++;
+            }
+
+            FS.Close();
+
             //Check emty or not:
             if (this.listings != null)
             {
-                for (int i = 0; i < this.listings.Count; i++)
+                for (int x = 0; x < this.listings.Count; i++)
                 {
                     if (this.listings[i].GetNameOfListing() == Name)
                     {
-                        // this.listings[i].Print();
+                        this.listings[i].Print();
+                        Seller S = new Seller();
+                        Console.WriteLine(S.GetName());
+                        Console.WriteLine(S.GetPhoneNumber());
+                        Console.WriteLine(S.GetStoreNumber());
                     }
                 }
             }
 
             else
-            { Console.WriteLine("The Listings Is Empty"); }
+            {
+                Console.WriteLine("The Listings Is Empty");
+                this.ViewChosenListingInformation(Name);
+            }
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
