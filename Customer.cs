@@ -929,7 +929,6 @@ namespace Online_Shoping_Site
             Console.WriteLine("Enter Your Password:");
             Password = Console.ReadLine();
             Customer C = new Customer();
-            Seller S = new Seller();
             this.FindAccount(email, Password, ref C);
 
             int choice = 0;
@@ -957,7 +956,7 @@ namespace Online_Shoping_Site
                 switch (choice)
                 {
                     case 1:
-                        this.ViewAllAvailableListings(S);
+                        this.ViewAllAvailableListings();
                         break;
 
                     case 2:
@@ -1003,12 +1002,12 @@ namespace Online_Shoping_Site
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////( Functions Seller Can Do When Log In Pass Successfully )////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( View all available listings )///////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void ViewAllAvailableListings(Seller S)
-          {
+        public void ViewAllAvailableListings()
+        {
             FileStream FS;
             FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
             BinaryFormatter BF = new BinaryFormatter();
@@ -1022,23 +1021,14 @@ namespace Online_Shoping_Site
                 i++;
             }
 
-            //check if any of the objects in the array eqauls the Edited object then Replace it
-            for (int j = 0; j < i; j++)
-            {
-                if (   arr[j].GetName()         == S.GetName()
-                    && arr[j].GetPhoneNumber()  == S.GetPhoneNumber()
-                    && arr[j].GetEmailAddress() == S.GetEmailAddress())
-                {
-                    S = arr[j];
-                }
-            }
             FS.Close();
 
+            Seller S = new Seller();
             if (S.listings.Count != 0)
             {
                 for (int J = 0; J < S.listings.Count; J++)
                 {
-                    S.listings[J].PrintListingName();
+                    S.listings[J].Print();
                     Console.WriteLine("\n");
                 }
             }
