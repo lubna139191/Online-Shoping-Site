@@ -40,12 +40,15 @@ namespace Online_Shoping_Site
 
         public void Print() 
         {  
-         
             Console.WriteLine("Listings Name:" + " " + this.GetNameOfListing());
             Console.WriteLine("Listings Description:" + " " + this.GetDescription());
             Console.WriteLine("Number Of Items:" + " " + this.GetNumberOfItems());
             Console.WriteLine("Price:" + " " + this.GetPrice());
-          
+        }
+
+        public void PrintListingName()
+        {
+            Console.WriteLine("Listings Name:" + " " + this.GetNameOfListing());
         }
 
     }

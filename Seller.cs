@@ -21,7 +21,7 @@ namespace Online_Shoping_Site
         string StoreNumber;
         string Password;
         string SellerID;
-        List<Listings> listings = new List<Listings> { };
+        public List<Listings> listings = new List<Listings> { };
         public static int counter = 0;
         public static Dictionary<string, object> data = new Dictionary<string, object>();
         public static string ProgramFilesFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"/Data";
@@ -1409,7 +1409,8 @@ namespace Online_Shoping_Site
 
 
         ///////////////////////////////////////////////View Sold Listings////////////////////////////////////////////////////
-        public void ViewSoldListings(Seller S) {
+        public void ViewSoldListings(Seller S) 
+        {
             FileStream FS;
             bool found = false;
             if (File.Exists(ProgramFilesFolder + "/SoldListings.txt"))

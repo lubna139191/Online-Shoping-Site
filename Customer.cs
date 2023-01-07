@@ -382,7 +382,7 @@ namespace Online_Shoping_Site
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////(Generate Shipping Address: Country, City, Street, Apartment)//////////////////
+        ////////////////////////(Generate Shipping Address: Country, City, Street, Apartment)//////////////////
         ////////////////////////////(No number, No space, No special charachters)/////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         public void GenerateShippingAddress(string Country, string City, String Street, String ApartmentN)
@@ -815,79 +815,6 @@ namespace Online_Shoping_Site
             FC.Close();
         }
 
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////( Log In )////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        public void LogInCustomer()
-        {
-            string email;
-            string Password;
-            Console.WriteLine("Enter Your Email:");
-            email = Console.ReadLine();
-            Console.WriteLine("Enter Your Password:");
-            Password = Console.ReadLine();
-            Customer C = new Customer();
-            this.FindAccount(email, Password, ref C);
-
-            int choice = 0;
-            do
-            {
-                Console.WriteLine("1. View all available listings.");
-                Console.WriteLine("2. View a chosen listing information.");
-                Console.WriteLine("3. Add a listing to their cart.");
-                Console.WriteLine("4. View/Edit added listings to their cart.");
-                Console.WriteLine("5. Checkout listings.");
-                Console.WriteLine("6. Change account information.");
-                Console.WriteLine("7. search for a listing.");
-                Console.WriteLine("8. logout.");
-                Console.Write("\nEnter your choice:");
-                choice = Convert.ToInt16(Console.ReadLine());
-                switch (choice)
-                {
-                    case 1:
-                        C.ViewAllAvailableListings();
-                        break;
-
-                    case 2:
-                        Console.WriteLine("Enter Name of listing whose contents you want to view:");
-                        string Name = Console.ReadLine();
-                        C.ViewChosenListingInformation(Name);
-                        break;
-
-                    case 3:
-                        //AddListingToCart();
-                        break;
-
-                    case 4:
-                        //ViewEditAddedListingsToCart();
-                        break;
-
-                    case 5:
-                        //CheckoutListings();
-                        break;
-
-                    case 6:
-                        //ChangeAccountInformation();
-                        break;
-
-                    case 7:
-                        //SearchForListing();
-                        break;
-
-                    case 8:
-                        break;
-
-                    default:
-                        Console.WriteLine("Invalid Choice, please try agian...");
-                        break;
-                }
-            }
-            while (choice != 8);
-        }
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////( Serch If The Account Trying To Log In Exist )///////////////////////////////   
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -949,10 +876,6 @@ namespace Online_Shoping_Site
 
         }
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////( Functions Seller Can Do When Log In Pass Successfully )////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////( Function To Edit Data File After Any Change )/////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -993,22 +916,132 @@ namespace Online_Shoping_Site
 
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////( Log In )////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public void LogInCustomer()
+        {
+            string email;
+            string Password;
+            Console.WriteLine("Enter Your Email:");
+            email = Console.ReadLine();
+            Console.WriteLine("Enter Your Password:");
+            Password = Console.ReadLine();
+            Customer C = new Customer();
+            Seller S = new Seller();
+            this.FindAccount(email, Password, ref C);
+
+            int choice = 0;
+            do
+            {
+                Console.WriteLine("1. View all available listings.");
+                Console.WriteLine("2. View a chosen listing information.");
+                Console.WriteLine("3. Add a listing to their cart.");
+                Console.WriteLine("4. View/Edit added listings to their cart.");
+                Console.WriteLine("5. Checkout listings.");
+                Console.WriteLine("6. Change account information.");
+                Console.WriteLine("7. search for a listing.");
+                Console.WriteLine("8. logout.");
+                Console.Write("\nEnter your choice:");
+                choice = Convert.ToInt16(Console.ReadLine());
+                string x = Console.ReadLine();
+
+                //To Avoid Exception Of Converting Non Convertable Type To Int
+                if (x == "1" || x == "2" || x == "3" || x == "4" || x == "5" || x == "6" || x == "7")
+                { choice = Convert.ToInt16(x); }
+                else 
+                { choice = 8; }
+
+                Console.WriteLine("\n");
+                switch (choice)
+                {
+                    case 1:
+                        this.ViewAllAvailableListings(S);
+                        break;
+
+                    case 2:
+                        Console.WriteLine("Enter Name of listing whose contents you want to view:");
+                        string Name = Console.ReadLine();
+                        C.ViewChosenListingInformation(Name);
+                        break;
+
+                    case 3:
+                        //AddListingToCart();
+                        break;
+
+                    case 4:
+                        //ViewEditAddedListingsToCart();
+                        break;
+
+                    case 5:
+                        //CheckoutListings();
+                        break;
+
+                    case 6:
+                        //ChangeAccountInformation();
+                        break;
+
+                    case 7:
+                        //SearchForListing();
+                        break;
+
+                    case 8:
+                        GlobalFun.Welcoming();
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid Choice, please try agian...");
+                        break;
+                }
+            }
+            while (choice != 8);
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////( Functions Seller Can Do When Log In Pass Successfully )////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( View all available listings )///////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void ViewAllAvailableListings()
-        {
-            if (this.listings != null)
+        public void ViewAllAvailableListings(Seller S)
+          {
+            FileStream FS;
+            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
+
+            //read objects & save to array
+            Seller[] arr = new Seller[1000000];
+            int i = 0;
+            while (FS.Position < FS.Length)
             {
-                for (int i = 0; i < this.listings.Count; i++)
+                arr[i] = (Seller)BF.Deserialize(FS);
+                i++;
+            }
+
+            //check if any of the objects in the array eqauls the Edited object then Replace it
+            for (int j = 0; j < i; j++)
+            {
+                if (   arr[j].GetName()         == S.GetName()
+                    && arr[j].GetPhoneNumber()  == S.GetPhoneNumber()
+                    && arr[j].GetEmailAddress() == S.GetEmailAddress())
                 {
-                    //this.listings[i].Print();
+                    S = arr[j];
+                }
+            }
+            FS.Close();
+
+            if (S.listings.Count != 0)
+            {
+                for (int J = 0; J < S.listings.Count; J++)
+                {
+                    S.listings[J].PrintListingName();
                     Console.WriteLine("\n");
                 }
             }
-
             else
-            { Console.WriteLine("The Listings Is Empty"); }
+            { Console.WriteLine("The Listings Is Empty\n"); }
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1059,51 +1092,9 @@ namespace Online_Shoping_Site
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////( Change Account Information )////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void ChangeCustomerAccountInformationc()
+        public void ChangeAccountInformation()
         {
-            Console.WriteLine("Do you want to change your Account Information? (Y) or (N)");
-            string s = Console.ReadLine();
-            bool condition = false;
-            while(condition==false)
-            {
-                condition = true;
-                if (s == "Y" || s == "y")
-                {
-                    Console.WriteLine("What Do you want to change? Enter (ph) to change phone number," +
-                        "Enter (p) to change password, Enter (e) to change email address.");
-                    string b = Console.ReadLine();
-                    if (b=="ph")
-                    {
-                        Console.WriteLine("Enter the new Phone Number: ");
-                        string newnumber = Console.ReadLine();
-                        GeneratePhoneNumber(newnumber);
 
-                    }
-                    if (b == "p")
-                    {
-                        Console.WriteLine("Enter the new Password: ");
-                        string newpass = Console.ReadLine();
-                        Console.WriteLine("Confirm the new Password: ");
-                        string Confirmnewpass = Console.ReadLine();
-                        GeneratePassword(newpass, Confirmnewpass);
-                    }
-                    if (b == "e")
-                    {
-                        Console.WriteLine("Enter the new Email Address: ");
-                        string newEmailAddress = Console.ReadLine();
-                        GenerateEmailAddress(newEmailAddress);
-                    }
-
-                }
-                else
-                {
-                    Console.WriteLine("Thank you");
-                    condition = false;
-                }
-                
-            }
-            condition = false;
-            //need to add the update to files
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
