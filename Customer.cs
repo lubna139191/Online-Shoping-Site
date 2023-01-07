@@ -980,7 +980,7 @@ namespace Online_Shoping_Site
                         Console.WriteLine("Enter Youre Choice:");
                         string s = Console.ReadLine();
                         if (s == "1") { this.ViewAddedListingsToCart(C); }
-                       else if (s == "2") { this.EditAddedListingsToCart(); }
+                       else if (s == "2") { this.EditAddedListingsToCart(ref C); }
                         else { Console.WriteLine("Invalid Choice..."); }
                        
 
@@ -1152,8 +1152,9 @@ namespace Online_Shoping_Site
                         L.SetNumberOfItems(1);
                         C.cart.Add(L);
                         condition = true;
-                        Console.WriteLine("\nAdded Succssefuly\n");
                         this.EditFile(C);
+                        Console.WriteLine("\nAdded Succssefuly\n");
+                        
 
                     } } }
           
@@ -1204,58 +1205,192 @@ namespace Online_Shoping_Site
             ///////////////////////////////////////////( Edit Added Listings To Cart)/////////////////////////////////////////////
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            public void EditAddedListingsToCart()
-            {
-            public void EditAddedListingsToCart(int ActionId)
-            {
-                //1-> delete
-                //2->edit
-                //3->add
+         
+            public void EditAddedListingsToCart(ref Customer C)
+        {
+            Console.WriteLine("Your Cart:");
+            C.ViewAddedListingsToCart(C);
+
+            Console.WriteLine("Enter The Name Of Listing You Want To Edit,");
+            string name = Console.ReadLine();
+            Console.WriteLine("1-Delete Listing From Cart.");
+            Console.WriteLine("2-Increase Listing Number Of Items In Cart.");
+            Console.WriteLine("3-Dcrease Listing Number Of Items In Cart.");
+            Console.WriteLine("4-Go Back.");
+            string choice = Console.ReadLine();
+            bool condition = false;
+            while (condition == false) {
+
+                if (choice == "1")
                 {
-                    FileStream FS;
-                    FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+                    FileStream FC;
+                    FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
                     BinaryFormatter BF = new BinaryFormatter();
                     //read objects & save to array
-                    Seller[] arr = new Seller[1000000];
+                    Customer[] customerarr = new Customer[1000000];
                     int i = 0;
-                    while (FS.Position < FS.Length)
+                    while (FC.Position < FC.Length)
                     {
-                        arr[i] = (Seller)BF.Deserialize(FS);
+                        customerarr[i] = (Customer)BF.Deserialize(FC);
                         i++;
                     }
+                    FC.Close();     
+                    bool condition2 = false;
+            
+                 
+
                     for (int j = 0; j < i; j++)
                     {
-                        if (arr[i].listing[j] == S.Getname())
+                        if (customerarr[j].cart != null)
                         {
-                            if (ActionId == 1)
+                            for (int k = 0; k < customerarr[j].cart.Count; k++)
                             {
-                                arr[j] = 0;
+                                if (customerarr[j].cart[k].GetNameOfListing() == name)
+                                {
 
-                            }
-                            else if (ActionId == 2)
-                            {
-                                arr[j] = 0;//instide of 0 put the new value
-
-                            }
-                            else if (ActionId == 3)
-                            {
-                                var newArrayLength = arr.Length + 1;
-                                var newarray = new Seller[newArrayLength];
-                                //move the old array to the new array 
+                                    customerarr[j].cart.RemoveAt(k);
+                                    C = customerarr[j];
+                                    C.EditFile(C);
+                                    condition2 = true;
+                                    Console.WriteLine("\nEdited Successfully..\n");
+                                }
+                                if (condition2 == true) { break; }
                             }
                         }
                     }
-                    FS.Close();
-                    S.EditFile(S);
 
 
+                    if (condition2 == false) { Console.WriteLine("\nCant Delete..\n"); }
+                    condition = true;
                 }
+                else if (choice == "2")
+                {
+                    FileStream FC;
+                    FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
+                    BinaryFormatter BF = new BinaryFormatter();
+                    //read objects & save to array
+                    Customer[] customerarr = new Customer[1000000];
+                    int i = 0;
+                    while (FC.Position < FC.Length)
+                    {
+                        customerarr[i] = (Customer)BF.Deserialize(FC);
+                        i++;
+                    }
+                    FC.Close();
+
+                    FileStream FS;
+                    FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    //read objects & save to array
+                    Seller[] sellerarr = new Seller[1000000];
+                    int x = 0;
+                    while (FS.Position < FS.Length)
+                    {
+                        sellerarr[x] = (Seller)bf.Deserialize(FS);
+                        x++;
+                    }
+                    FS.Close();
+
+                    bool found = false;
+                    bool condition2 = false;
+                    int NumOfItemForSeller=0;
+                    for (int y = 0; y < x; y++)
+                    {
+                        for (int a = 0; a < sellerarr[y].listings.Count; a++)
+                        {
+                            if (sellerarr[y].listings[a].GetNumberOfItems()>0 && sellerarr[y].listings[a].GetNameOfListing()==name) { found = true; NumOfItemForSeller = sellerarr[y].listings[a].GetNumberOfItems(); }
+                        }
+                    }
+
+                    for (int j = 0; j < i; j++)
+                    {
+                        if (customerarr[j].cart != null)
+                        {
+                            for (int k = 0; k < customerarr[j].cart.Count; k++)
+                            {
+                                if (customerarr[j].cart[k].GetNameOfListing() == name && found == true && customerarr[j].cart[k].GetNumberOfItems() + 1 <= NumOfItemForSeller)
+                                {
+
+                                    customerarr[j].cart[k].SetNumberOfItems(customerarr[j].cart[k].GetNumberOfItems() + 1);
+                                    C = customerarr[j];
+                                    C.EditFile(C);
+                                    condition2 = true;
+                                    Console.WriteLine("\nEdited Successfully..\n");
+                                }
+                                if (condition2 == true) { break; }
+                            }
+                        }
+                    }
 
 
+                    if (condition2 == false) { Console.WriteLine("\nCant Edit..\n"); }
+
+                    condition = true; }
+                else if (choice == "3") {
+                    FileStream FC;
+                    FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
+                    BinaryFormatter BF = new BinaryFormatter();
+                    //read objects & save to array
+                    Customer[] customerarr = new Customer[1000000];
+                    int i = 0;
+                    while (FC.Position < FC.Length)
+                    {
+                        customerarr[i] = (Customer)BF.Deserialize(FC);
+                        i++;
+                    }
+                    FC.Close();
+
+                    FileStream FS;
+                    FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+                    BinaryFormatter bf = new BinaryFormatter();
+                    //read objects & save to array
+                    Seller[] sellerarr = new Seller[1000000];
+                    int x = 0;
+                    while (FS.Position < FS.Length)
+                    {
+                        sellerarr[x] = (Seller)bf.Deserialize(FS);
+                        x++;
+                    }
+                    FS.Close();
+
+                    bool found = false;
+                    bool condition2 = false;
+                    int NumOfItemForSeller = 0;
+                    for (int y = 0; y < x; y++)
+                    {
+                        for (int a = 0; a < sellerarr[y].listings.Count; a++)
+                        {
+                            if (sellerarr[y].listings[a].GetNumberOfItems() > 0 && sellerarr[y].listings[a].GetNameOfListing() == name) { found = true; NumOfItemForSeller = sellerarr[y].listings[a].GetNumberOfItems(); }
+                        }
+                    }
+
+                    for (int j = 0; j < i; j++)
+                    {
+                        if (customerarr[j].cart != null)
+                        {
+                            for (int k = 0; k < customerarr[j].cart.Count; k++)
+                            {
+                                if (customerarr[j].cart[k].GetNameOfListing() == name && found == true && customerarr[j].cart[k].GetNumberOfItems() - 1 > 0)
+                                {
+
+                                    customerarr[j].cart[k].SetNumberOfItems(customerarr[j].cart[k].GetNumberOfItems() - 1);
+                                    C = customerarr[j];
+                                    C.EditFile(C);
+                                    condition2 = true;
+                                    Console.WriteLine("\nEdited Successfully..\n");
+                                }
+                                if (condition2 == true) { break; }
+                            }
+                        }
+                    }
 
 
-
+                    if (condition2 == false) { Console.WriteLine("\nCant Edit..\n"); }
+                    condition = true; }
+                else if (choice == "4") { condition = true; }
+                else { Console.WriteLine("Choice Invalid"); }
             }
+     }
 
 
             /// 
