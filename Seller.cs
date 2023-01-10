@@ -13,24 +13,27 @@ namespace Online_Shoping_Site
     [Serializable]
     class Seller
     {
-        ////////////////////////////////////////Attributes///////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////( Atributes )///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         string Name;
-        Address addrees;
         string EmailAddress;
         string PhoneNumber;
         string StoreNumber;
         string Password;
         string SellerID;
+        Address addrees;
+        public static int counter = 0;
         List<Listings> listing;
         public List<Listings> listings = new List<Listings> { };
-        public static int counter = 0;
         public static Dictionary<string, object> data = new Dictionary<string, object>();
         public static string ProgramFilesFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"/Data";
-
-        
+    
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////Set Functions//////////////////////////////////////////////////////////
+        ////////////////////////////////////////( Set Functions )//////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         public void SetName(string Name) { this.Name = Name; }
         public void SetEmailAddress(string EmailAddress) { this.EmailAddress = EmailAddress; }
         public void SetAddress(Address addrees) { this.addrees = addrees; }
@@ -40,10 +43,10 @@ namespace Online_Shoping_Site
         public void SetSellerID(string ID) { this.SellerID = ID; }
         public void Setlisting(List<Listings> listing) { this.listing = listing; }
 
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////Get Functions//////////////////////////////////////////////////////////
+        ////////////////////////////////////////( Get Functions )//////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         public string GetName() { return this.Name; }
         public string GetEmailAddress() { return this.EmailAddress; }
         public Address GetAddress() { return this.addrees; }
@@ -51,29 +54,28 @@ namespace Online_Shoping_Site
         public string GetStoreNumber() { return this.StoreNumber; }
         public string GetPassword() { return this.Password; }
         public string GetSellerId() { return this.SellerID; }
-
         public List<Listings> Getlisting() { return this.listing; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////Check the Data Enterd By the User///////////////////////////////////////////////
-        ////////////////////////////When the User Sign Up For The First Time//////////////////////////////////////////
+        ///////////////////////////////( Check the Data Enterd By the User )///////////////////////////////////////////
+        ////////////////////////////( When the User Sign Up For The First Time )//////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////( Generate Seller Name: Letters only, No Numbers, No Special Charachters )///////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-        ///////////////////////////////////////Seller Name////////////////////////////////////////////////////////
         public void GenerateName(string Name)
         {
             bool condition = false;
             while (condition == false)
             {
                 condition = true;
-
-                //check if enterd name contains any nmubers
-                for (int i = 0; i < Name.Length; i++)
+                //check if enterd name contains any nmubers:
+                for (int i=0; i<Name.Length; i++)
                 {
                     string x = Convert.ToString(Name[i]);
-                    if (x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
+                    if (  x == Convert.ToString("0") || x == Convert.ToString("1") || x == Convert.ToString("2")
                        || x == Convert.ToString("3") || x == Convert.ToString("4") || x == Convert.ToString("5")
                        || x == Convert.ToString("6") || x == Convert.ToString("7") || x == Convert.ToString("8")
                        || x == Convert.ToString("9"))
@@ -83,18 +85,19 @@ namespace Online_Shoping_Site
                 }
 
                 //check if enterd name contains any special charachters
-                if (Name.ToLower().Contains('~') || Name.ToLower().Contains('!') || Name.ToLower().Contains('@') || Name.ToLower().Contains('#')
+                if (   Name.ToLower().Contains('~') || Name.ToLower().Contains('!') || Name.ToLower().Contains('@') || Name.ToLower().Contains('#')
                     || Name.ToLower().Contains('$') || Name.ToLower().Contains('^') || Name.ToLower().Contains('&') || Name.ToLower().Contains('*')
                     || Name.ToLower().Contains('(') || Name.ToLower().Contains(')') || Name.ToLower().Contains('_') || Name.ToLower().Contains('-')
                     || Name.ToLower().Contains('=') || Name.ToLower().Contains('+') || Name.ToLower().Contains('{') || Name.ToLower().Contains('[')
                     || Name.ToLower().Contains(']') || Name.ToLower().Contains('}') || Name.ToLower().Contains(';') || Name.ToLower().Contains(';')
-                    || Name.ToLower().Contains('\"') || Name.ToLower().Contains('\'') || Name.ToLower().Contains('<') || Name.ToLower().Contains(',')
+                    || Name.ToLower().Contains('\"')|| Name.ToLower().Contains('\'')|| Name.ToLower().Contains('<') || Name.ToLower().Contains(',')
                     || Name.ToLower().Contains('.') || Name.ToLower().Contains('<') || Name.ToLower().Contains('/') || Name.ToLower().Contains('?')
-                    || Name.ToLower().Contains('\\') || Name.ToLower().Contains('|'))
+                    || Name.ToLower().Contains('\\')|| Name.ToLower().Contains('|'))
                 {
                     condition = false;
                 }
 
+                //Check Condition:
                 if (condition == false)
                 {
                     Console.WriteLine("The Name You Enterd Does Not Meet The Requirements");
@@ -102,6 +105,7 @@ namespace Online_Shoping_Site
                     Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
                     string x = Console.ReadLine();
 
+                    //Try Again or exit:
                     if (x == "1")
                     {
                         int choice = Convert.ToInt32(x);
@@ -129,14 +133,94 @@ namespace Online_Shoping_Site
             this.Name = Name;
         }
 
-        ///////////////////////////////////////////////Seller Email Address///////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////( Generate Seller Phone Number )///////////////////////////////////////
+        //////( 10 Numbers, start with 0, second number is 7, third number 7/8/9, the rest are numbers )/////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void GeneratePhoneNumber(string PhoneNumber)
+        {
+            bool condition = false;
+            while (condition == false)
+            {
+                condition = true;
+
+                //check if the phone number length is 10 Numbers:
+                if (PhoneNumber.Length != 10)
+                { condition = false; }
+
+                //check if the phone number start with 0:
+                if (PhoneNumber.Length == 10)
+                {
+                    if (Convert.ToString(PhoneNumber[0]) != Convert.ToString("0"))
+                    { condition = false; }
+
+                    //check if the second phone number is 7:
+                    if (Convert.ToString(PhoneNumber[1]) != Convert.ToString("7"))
+                    { condition = false; }
+
+                    //check if the third phone number is 7 or 8 or 9:
+                    if (Convert.ToString(PhoneNumber[2]) != Convert.ToString("7")
+                     && Convert.ToString(PhoneNumber[2]) != Convert.ToString("8")
+                     && Convert.ToString(PhoneNumber[2]) != Convert.ToString("9"))
+                    { condition = false; }
+
+                    //check if the rest of the phone number are numbers:
+                    for (int i = 3; i < PhoneNumber.Length; i++)
+                    {
+                        string x = Convert.ToString(PhoneNumber[i]);
+                        if (x != Convert.ToString("0") && x != Convert.ToString("1") && x != Convert.ToString("2")
+                        && x != Convert.ToString("3") && x != Convert.ToString("4") && x != Convert.ToString("5")
+                        && x != Convert.ToString("6") && x != Convert.ToString("7") && x != Convert.ToString("8")
+                        && x != Convert.ToString("9"))
+                        { condition = false; }
+                    }
+                }
+
+                if (condition == false)
+                {
+                    Console.WriteLine("The Phone Number You Enterd Is Not valid");
+                    Console.WriteLine("To Enter Anthor Phone Number Enter (1)");
+                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                    string x = Console.ReadLine();
+
+                    if (x == "1")
+                    {
+                        int choice = Convert.ToInt32(x);
+                        Console.WriteLine("Enter Phone Number:");
+                        PhoneNumber = Console.ReadLine();
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                        Console.WriteLine("Are You Sure You Want To Exit? Answer By(Y:N)");
+                        string Answer = Console.ReadLine();
+
+                        if (Answer == "Y" || Answer == "y")
+                        { GlobalFun.Welcoming(); }
+
+                        else
+                        {
+                            Console.WriteLine("Enter Phone Number:");
+                            PhoneNumber = Console.ReadLine();
+                        }
+                    }
+                }
+            }
+            this.PhoneNumber = PhoneNumber;
+        }
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////( Generate Seller Email Address )////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void GenerateEmailAddress(string EmailAddress)
         {
             bool condition = false;
             while (condition == false)
             {
                 condition = true;
-                //check if the email is valid
+
+                //Check if the email is valid:
                 string regex = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$";
                 condition = Regex.IsMatch(EmailAddress, regex, RegexOptions.IgnoreCase);
                 if (condition == false)
@@ -173,8 +257,134 @@ namespace Online_Shoping_Site
             this.EmailAddress = EmailAddress;
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////( Generate Seller Password )///////////////////////////////////////
+        //////////////(Confirm Password, 8 charchters, special charchter, capital & small letters)///////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void GeneratePassword(string Password, string ConfirmSPassword)
+        {
+            bool condition = false;
 
-        ////////////////////////////////////////////////Seller Address/////////////////////////////////////////////////////////////
+            //Confirm password:
+            while (condition == false)
+            {
+                condition = true;
+                if (Password != ConfirmSPassword)
+                { condition = false; }
+
+                if (condition == false)
+                {
+                    Console.WriteLine("Password Does not Match, ReEnter Password Please:");
+                    Console.WriteLine("Password:");
+                    Password = Console.ReadLine();
+                    Console.WriteLine("Confirm Password:");
+                    ConfirmSPassword = Console.ReadLine();
+                }
+            }
+            condition = false;
+
+            while (condition == false)
+            {
+                condition = true;
+
+                //Check if password 8 charchters:
+                if (Password.Length < 8)
+                { condition = false; }
+
+                //Check if password contains one special charachter at least:
+                if (!(Password.ToLower().Contains('~') || Password.ToLower().Contains('!') || Password.ToLower().Contains('@')
+                   || Password.ToLower().Contains('#') || Password.ToLower().Contains('$') || Password.ToLower().Contains('^')
+                   || Password.ToLower().Contains('&') || Password.ToLower().Contains('*') || Password.ToLower().Contains('(')
+                   || Password.ToLower().Contains(')') || Password.ToLower().Contains('_') || Password.ToLower().Contains('-')
+                   || Password.ToLower().Contains('=') || Password.ToLower().Contains('+') || Password.ToLower().Contains('{')
+                   || Password.ToLower().Contains('[') || Password.ToLower().Contains(']') || Password.ToLower().Contains('}')
+                   || Password.ToLower().Contains(';') || Password.ToLower().Contains(';') || Password.ToLower().Contains('\"')
+                   || Password.ToLower().Contains('\'') || Password.ToLower().Contains('>') || Password.ToLower().Contains(',')
+                   || Password.ToLower().Contains('.') || Password.ToLower().Contains('<') || Password.ToLower().Contains('/')
+                   || Password.ToLower().Contains('?') || Password.ToLower().Contains('\\') || Password.ToLower().Contains('|')))
+                {
+                    condition = false;
+                }
+
+                //Check if password contains one capital Letter at least & one small Letter at least:
+                if (Password.ToLower().Contains(" "))
+                { condition = false; }
+
+                for (int i = 0; i < Password.Length; i++)
+                {
+                    if (Char.IsUpper(Password[i]))
+                    { break; }
+
+                    else if (i == Password.Length - 1)
+                    { condition = false; }
+                }
+
+                for (int i = 0; i < Password.Length; i++)
+                {
+                    if (Char.IsLower(Password[i]))
+                    { break; }
+
+                    else if (i == Password.Length - 1)
+                    { condition = false; }
+                }
+
+                if (condition == false)
+                {
+                    Console.WriteLine("Please ReEnter Your Password & Make Sure Its Not Less Than 8 Characters");
+                    Console.WriteLine("And Contains One Special Chrachter & one UpperCase & One LowerCase At Least");
+                    Console.WriteLine("Password:");
+                    Password = Console.ReadLine();
+                    Console.WriteLine("Confirm Password:");
+                    ConfirmSPassword = Console.ReadLine();
+                    bool confirm = false;
+
+                    //Confirm password:
+                    while (confirm == false)
+                    {
+                        confirm = true;
+                        if (Password != ConfirmSPassword)
+                        { confirm = false; }
+
+                        if (condition == false)
+                        {
+                            Console.WriteLine("The Password You Enterd Does Not Meet The Requirements");
+                            Console.WriteLine("To Enter Anthor Password Enter (1)");
+                            Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                            string x = Console.ReadLine();
+
+                            if (x == "1")
+                            {
+                                int choice = Convert.ToInt32(x);
+                                Console.WriteLine("Enter Password:");
+                                Password = Console.ReadLine();
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                                Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
+                                string Answer = Console.ReadLine();
+
+                                if (Answer == "Y" || Answer == "y")
+                                { GlobalFun.Welcoming(); }
+
+                                else
+                                {
+                                    Console.WriteLine("Enter Password:");
+                                    Password = Console.ReadLine();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            this.Password = Password;
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////( Generate Address: Country, City, Street, Apartment )/////////////////////////
+        ////////////////////////////( No number, No space, No special charachters )///////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////       
         public void GenerateAddress(string Country, string City, String Street, String ApartmentN)
         {
             addrees = new Address();
@@ -419,85 +629,9 @@ namespace Online_Shoping_Site
             this.addrees.SetApartment(ApartmentN);
         }
 
-
-        ///////////////////////////////////////////////////////Seller PhoneNumber////////////////////////////////////////////////////
-        public void GeneratePhoneNumber(string PhoneNumber)
-        {
-            bool condition = false;
-            while (condition == false)
-            {
-                condition = true;
-
-                //check if the phone number is 10 Numbers:
-                if (PhoneNumber.Length != 10)
-                { condition = false; }
-
-                //check if the phone number start with 0:
-                if (PhoneNumber.Length == 10)
-                {
-                    if (Convert.ToString(PhoneNumber[0]) != Convert.ToString("0"))
-                    { condition = false; }
-
-                    //check if the second phone number is 7:
-                    if (Convert.ToString(PhoneNumber[1]) != Convert.ToString("7"))
-                    { condition = false; }
-
-                    //check if the third phone number is 7 or 8 or 9:
-                    if (Convert.ToString(PhoneNumber[2]) != Convert.ToString("7")
-                     && Convert.ToString(PhoneNumber[2]) != Convert.ToString("8")
-                     && Convert.ToString(PhoneNumber[2]) != Convert.ToString("9"))
-                    { condition = false; }
-
-
-
-                    //check if the rest of the phone number are numbers:
-                    for (int i = 3; i < PhoneNumber.Length; i++)
-                    {
-                        string x = Convert.ToString(PhoneNumber[i]);
-                        if (x != Convert.ToString("0") && x != Convert.ToString("1") && x != Convert.ToString("2")
-                        && x != Convert.ToString("3") && x != Convert.ToString("4") && x != Convert.ToString("5")
-                        && x != Convert.ToString("6") && x != Convert.ToString("7") && x != Convert.ToString("8")
-                        && x != Convert.ToString("9"))
-                        { condition = false; }
-
-                    }
-                }
-
-                if (condition == false)
-                {
-                    Console.WriteLine("The Phone Number You Enterd Is Not valid");
-                    Console.WriteLine("To Enter Anthor Phone Number Enter (1)");
-                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
-                    string x = Console.ReadLine();
-                    if (x == "1")
-                    {
-                        int choice = Convert.ToInt32(x);
-                        Console.WriteLine("Enter Phone Number:");
-                        PhoneNumber = Console.ReadLine();
-                    }
-
-                    else
-                    {
-                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
-                        Console.WriteLine("Are You Sure You Want To Exit? Answer By(Y:N)");
-                        string Answer = Console.ReadLine();
-                        if (Answer == "Y" || Answer == "y")
-                        { GlobalFun.Welcoming(); }
-
-                        else
-                        {
-                            Console.WriteLine("Enter Phone Number:");
-                            PhoneNumber = Console.ReadLine();
-                        }
-                    }
-                }
-            }
-            this.PhoneNumber = PhoneNumber;
-
-        }
-
-
-        ////////////////////////////////////////////////Seller Store Number//////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////( Generate Seller Store Number )/////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////        
         public void GenerateStoreNumber(string StoreNumber)
         {
             bool condition = false;
@@ -513,7 +647,6 @@ namespace Online_Shoping_Site
                     && x != Convert.ToString("6") && x != Convert.ToString("7") && x != Convert.ToString("8")
                     && x != Convert.ToString("9"))
                     { condition = false; }
-
                 }
 
                 if (condition == false)
@@ -522,6 +655,7 @@ namespace Online_Shoping_Site
                     Console.WriteLine("To Enter Anthor Store Number Enter (1)");
                     Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
                     string x = Console.ReadLine();
+
                     if (x == "1")
                     {
                         int choice = Convert.ToInt32(x);
@@ -534,6 +668,7 @@ namespace Online_Shoping_Site
                         Console.WriteLine("(Any Data You Enterd Will Be Lost)");
                         Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
                         string Answer = Console.ReadLine();
+
                         if (Answer == "Y" || Answer == "y")
                         { GlobalFun.Welcoming(); }
 
@@ -548,144 +683,22 @@ namespace Online_Shoping_Site
             this.StoreNumber = StoreNumber;
         }
 
-
-        /////////////////////////////////////////////////////Seller Password/////////////////////////////////////////////////////////////
-        public void GeneratePassword(string Password, string ConfirmSPassword)
-        {
-            bool condition = false;
-
-            //confirm password:
-            while (condition == false)
-            {
-                condition = true;
-                if (Password != ConfirmSPassword)
-                { condition = false; }
-
-                if (condition == false)
-                {
-                    Console.WriteLine("Password Does not Match, ReEnter Password Please:");
-                    Console.WriteLine("Password:");
-                    Password = Console.ReadLine();
-                    Console.WriteLine("Confirm Password:");
-                    ConfirmSPassword = Console.ReadLine();
-                }
-            }
-            condition = false;
-
-            while (condition == false)
-            {
-                condition = true;
-
-                //Check if password 8 charchters:
-                if (Password.Length < 8)
-                { condition = false; }
-
-                //Check if password contains one special charachter at least
-                if (!(Password.ToLower().Contains('~') || Password.ToLower().Contains('!') || Password.ToLower().Contains('@')
-                   || Password.ToLower().Contains('#') || Password.ToLower().Contains('$') || Password.ToLower().Contains('^')
-                   || Password.ToLower().Contains('&') || Password.ToLower().Contains('*') || Password.ToLower().Contains('(')
-                   || Password.ToLower().Contains(')') || Password.ToLower().Contains('_') || Password.ToLower().Contains('-')
-                   || Password.ToLower().Contains('=') || Password.ToLower().Contains('+') || Password.ToLower().Contains('{')
-                   || Password.ToLower().Contains('[') || Password.ToLower().Contains(']') || Password.ToLower().Contains('}')
-                   || Password.ToLower().Contains(';') || Password.ToLower().Contains(';') || Password.ToLower().Contains('\"')
-                   || Password.ToLower().Contains('\'') || Password.ToLower().Contains('>') || Password.ToLower().Contains(',')
-                   || Password.ToLower().Contains('.') || Password.ToLower().Contains('<') || Password.ToLower().Contains('/')
-                   || Password.ToLower().Contains('?') || Password.ToLower().Contains('\\') || Password.ToLower().Contains('|')))
-                {
-                    condition = false;
-                }
-
-
-                //Check if password contains one capital Letter at least & one small Letter at least
-                if (Password.ToLower().Contains(" "))
-                { condition = false; }
-
-                for (int i = 0; i < Password.Length; i++)
-                {
-                    if (Char.IsUpper(Password[i]))
-                    { break; }
-
-                    else if (i == Password.Length - 1)
-                    { condition = false; }
-                }
-
-                for (int i = 0; i < Password.Length; i++)
-                {
-                    if (Char.IsLower(Password[i]))
-                    { break; }
-                    else if (i == Password.Length - 1)
-                    { condition = false; }
-                }
-
-                if (condition == false)
-                {
-                    Console.WriteLine("Please ReEnter Your Password & Make Sure Its Not Less Than 8 Characters");
-                    Console.WriteLine("And Contains One Special Chrachter & one UpperCase & One LowerCase At Least");
-                    Console.WriteLine("Password:");
-                    Password = Console.ReadLine();
-                    Console.WriteLine("Confirm Password:");
-                    ConfirmSPassword = Console.ReadLine();
-                    bool confirm = false;
-
-                    //confirm password:
-                    while (confirm == false)
-                    {
-                        confirm = true;
-                        if (Password != ConfirmSPassword)
-                        { confirm = false; }
-
-                        if (condition == false)
-                        {
-                            Console.WriteLine("The Password You Enterd Does Not Meet The Requirements");
-                            Console.WriteLine("To Enter Anthor Password Enter (1)");
-                            Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
-                            string x = Console.ReadLine();
-
-                            if (x == "1")
-                            {
-                                int choice = Convert.ToInt32(x);
-                                Console.WriteLine("Enter Password:");
-                                Password = Console.ReadLine();
-                            }
-
-                            else
-                            {
-                                Console.WriteLine("(Any Data You Enterd Will Be Lost)");
-                                Console.WriteLine("Are You Sure You Want To Exit?Answer By(Y:N)");
-                                string Answer = Console.ReadLine();
-
-                                if (Answer == "Y" || Answer == "y")
-                                { GlobalFun.Welcoming(); }
-
-                                else
-                                {
-                                    Console.WriteLine("Enter Password:");
-                                    Password = Console.ReadLine();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            this.Password = Password;
-        }
-
-
-        /////////////////////////////////////////////////////////////Seller ID/////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////( Generate Seller ID )////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////             
         public void GenerateSellerID()
         {
             counter++;
             this.SellerID = Convert.ToString(counter);
         }
 
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////( Functions On Seller )//////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////Functions On Seller/////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-        ///////////////////////////////////////////////////Sign Up///////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////( Sign Up  Function )///////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
         public void SignUpSeller()
         {
             Console.WriteLine("\nFill The Following To Create Your New Account As A Seller.\n");
@@ -735,7 +748,7 @@ namespace Online_Shoping_Site
             Console.WriteLine("\n");
             this.GeneratePhoneNumber(SPhoneNumber);
 
-            //Seller StoreNumber: 
+            //Seller Store Number: 
             string SStoreNumber;
             Console.WriteLine("StoreNumber(Make Sure It Does Not Contains Any Letters or Special Charachters):");
             SStoreNumber = Console.ReadLine();
@@ -756,10 +769,10 @@ namespace Online_Shoping_Site
             this.CheckSeller();
         }
 
-
-
-        ///////////////////////////////////////////Check If Seller Exist/////////////////////////////////////////////////////////
-        ////////////////////////////////////////When New Seller Sign Up/////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////( Check If Seller Exist )////////////////////////////////////////
+        ////////////////////////////////////////( When New Seller Sign Up )//////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void CheckSeller()
         {
             //Exist or not:
@@ -832,162 +845,24 @@ namespace Online_Shoping_Site
                 { GlobalFun.Welcoming(); }
             }
         }
-        /////////////////////////////////////////Save Seller Account To SellerData File//////////////////////////////////////////////////
-        //////////////////////////////////When New Seller Account Pass The Checkup Test/////////////////////////////////////////////////
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////( Save Seller Account To Seller Data File )////////////////////////////////
+        ////////////////////////////////( When New Seller Account Pass The Checkup Test )////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void SaveToFile()
         {
-
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Data"))
             { Directory.CreateDirectory(ProgramFilesFolder); }
             FileStream FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Append, FileAccess.Write);
             BinaryFormatter BF = new BinaryFormatter();
             BF.Serialize(FS, this);
             FS.Close();
-
         }
 
-
-
-        //////////////////////////////////////////////////Log In //////////////////////////////////////////////////////////////////
-        public void LogInSeller()
-        {
-            string email;
-            string Password;
-            Console.WriteLine("\nEnter Your Email:");
-            email = Console.ReadLine();
-            Console.WriteLine("Enter Your Password:");
-            Password = Console.ReadLine();
-            Seller S = new Seller();
-
-            this.FindAccount(email, Password, ref S);
-
-            int choice = 0;
-            do
-            {
-                Console.WriteLine("1. Adding new listing.");
-                Console.WriteLine("2. Delete existing listing");
-                Console.WriteLine("3. Change info and price for existing listing.");
-                Console.WriteLine("4. View all listings.");
-                Console.WriteLine("5. View sold listings information.");
-                Console.WriteLine("6. Change account information.");
-                Console.WriteLine("7. logout.");
-                Console.WriteLine("\nEnter your choice:");
-                string x = Console.ReadLine();
-                if (x == "1" || x == "2" || x == "3" || x == "4" || x == "5" || x == "6" || x == "7")
-                { choice = Convert.ToInt16(x); }//To Avoid Exception Of Converting Non Convertable Type To Int
-                else { choice = 8; }
-                Console.WriteLine("\n");
-                switch (choice)
-                {
-                    case 1:
-                        //Add New Listing
-                        Listings L = new Listings();
-                        Console.WriteLine("Enter Listing Name:");
-                        string Name = Console.ReadLine();
-                        Console.WriteLine("\n");
-                        L.SetNameOfListing(Name);
-                        Console.WriteLine("Enter Listing Description:");
-                        string Description = Console.ReadLine();
-                        Console.WriteLine("\n");
-                        L.SetDescription(Description);
-                        Console.WriteLine("Enter Listing Price:");
-                        double Price = Convert.ToDouble(Console.ReadLine());
-                        Console.WriteLine("\n");
-                        L.SetPrice(Price);
-                        Console.WriteLine("Enter Listing Number Of Items In Listing:");
-                        int NumOfItmes = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine("\n");
-                        L.SetNumberOfItems(NumOfItmes);
-                        S.AddListings(ref L, ref S);
-
-                        break;
-
-                    case 2:
-                        Console.WriteLine("Enter Listing Name:");
-                        string Name2 = Console.ReadLine();
-                        this.DeleteListings(Name2);
-
-                        break;
-
-                    case 3:
-                        Console.WriteLine("What Would You Like To Change?");
-                        Console.WriteLine("1-Name");
-                        Console.WriteLine("2-Descreption");
-                        Console.WriteLine("3-Price");
-                        Console.WriteLine("4-Number Of Items");
-                        string X = Console.ReadLine();
-                        Console.WriteLine("\n");
-                        int choice2;
-                        if (X == "1" || X == "2" || X == "3" || X == "4") { choice2 = Convert.ToInt32(X); }
-                        else
-                        {
-                            Console.WriteLine("Choice Not Valid");
-                            choice2 = 0;
-                            goto case 3;
-                        }
-                        switch (choice2) {
-                            case 1:
-
-                                Console.WriteLine("Enter Listing Name You Want to Edit:");
-                                string Name3 = Console.ReadLine();
-                                Console.WriteLine("Enter Listing New Name:");
-                                string Name4 = Console.ReadLine();
-                                this.Change_Name_For_Existing_Listing(Name3, Name4); break;
-
-                            case 2:
-                                Console.WriteLine("Enter Listing Name You Want to Edit:");
-                                string Name5 = Console.ReadLine();
-                                Console.WriteLine("Enter Listing New Descreption:");
-                                string Descreption = Console.ReadLine();
-                                this.Change_Description_For_Existing_Listing(Name5, Descreption);
-                                break;
-                            case 3:
-                                Console.WriteLine("Enter Listing Name You Want to Edit:");
-                                string Name6 = Console.ReadLine();
-                                Console.WriteLine("Enter Listing New Price:");
-                                double Price2 = Convert.ToDouble(Console.ReadLine());
-                                this.Change_Price_For_Existing_Listing(Name6, Price2);
-                                break;
-                            case 4:
-                                Console.WriteLine("Enter Listing Name You Want to Edit:");
-                                string Name7 = Console.ReadLine();
-                                Console.WriteLine("Enter Listing New Number Of Items:");
-                                int Number = Convert.ToInt32(Console.ReadLine());
-                                this.Change_NumOfItems_For_Existing_Listing(Name7, Number);
-                                break;
-                            default:
-                                Console.WriteLine("Invalid Choice, please try agian...");
-                                break;
-                        }
-                        break;
-                    case 4:
-                        this.ViewAllListings(S);
-                        break;
-
-                    case 5:
-                        this.ViewSoldListings(S);                   
-                        break;
-
-                    case 6:
-                        this.ChangeSellerAccountInformation(ref S);                   
-                        break;
-
-                    case 7:
-                        GlobalFun.Welcoming();
-                        break;
-
-                    default:
-                        Console.WriteLine("Invalid Choice, please try agian...");
-                        break;
-                }
-            }
-            while (choice != 7);
-
-        }
-
-
-
-        //////////////////////////////////////////////////Search If The Account Trying To Log In Exist////////////////////////////////////////   
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////( Find Account )//////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void FindAccount(string email, string Password, ref Seller S)
         {
             //Exist or not:
@@ -1047,13 +922,205 @@ namespace Online_Shoping_Site
 
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////( Function To Edit Data File After Any Change )/////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void EditFile(Seller S)
+        {
+            FileStream FS;
+            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
+            BinaryFormatter BF = new BinaryFormatter();
+            Seller[] arr = new Seller[1000000];
+            int i = 0;
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////Functions Seller Can Do When Log In Pass Successfully///////////////////////////////////
+
+            //read objects & save to array
+            while (FS.Position < FS.Length)
+            {
+                arr[i] = (Seller)BF.Deserialize(FS);
+                i++;
+            }
+
+            //check if any of the objects in the array eqauls the Edited object then Replace it
+            for (int j = 0; j < i; j++)
+            {
+                if (arr[j].GetName() == S.GetName()
+                    && arr[j].GetPhoneNumber() == S.GetPhoneNumber()
+                    && arr[j].GetEmailAddress() == S.GetEmailAddress())
+                {
+                    arr[j] = new Seller();
+                    arr[j] = S;
+                }
+            }
+            FS.Close();
+
+            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Create, FileAccess.ReadWrite);
+            for (int k = 0; k < i; k++) { BF.Serialize(FS, arr[k]); }
 
 
+            FS.Close();
 
-        ////////////////////////////////////////////////////Add Listings//////////////////////////////////////////////////////////
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////( Log In )////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
+        public void LogInSeller()
+        {
+            string email;
+            string Password;
+            Console.WriteLine("\nEnter Your Email:");
+            email = Console.ReadLine();
+            Console.WriteLine("Enter Your Password:");
+            Password = Console.ReadLine();
+            Seller S = new Seller();
+
+            this.FindAccount(email, Password, ref S);
+
+            int choice = 0;
+            do
+            {
+                Console.WriteLine("1. Adding new listing.");
+                Console.WriteLine("2. Delete existing listing");
+                Console.WriteLine("3. Change info and price for existing listing.");
+                Console.WriteLine("4. View all listings.");
+                Console.WriteLine("5. View sold listings information.");
+                Console.WriteLine("6. Change account information.");
+                Console.WriteLine("7. logout.");
+                Console.WriteLine("\nEnter your choice:");
+                string x = Console.ReadLine();
+
+                //To Avoid Exception Of Converting Non Convertable Type To Int:
+                if (x == "1" || x == "2" || x == "3" || x == "4" || x == "5" || x == "6" || x == "7")
+                { choice = Convert.ToInt16(x); }
+
+                else { choice = 8; }
+
+                Console.WriteLine("\n");
+                switch (choice)
+                {
+                    case 1:
+                        //Add New Listing
+                        Listings L = new Listings();
+                        Console.WriteLine("Enter Listing Name:");
+                        string Name = Console.ReadLine();
+                        Console.WriteLine("\n");
+                        L.SetNameOfListing(Name);
+                        Console.WriteLine("Enter Listing Description:");
+                        string Description = Console.ReadLine();
+                        Console.WriteLine("\n");
+                        L.SetDescription(Description);
+                        Console.WriteLine("Enter Listing Price:");
+                        double Price = Convert.ToDouble(Console.ReadLine());
+                        Console.WriteLine("\n");
+                        L.SetPrice(Price);
+                        Console.WriteLine("Enter Listing Number Of Items In Listing:");
+                        int NumOfItmes = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("\n");
+                        L.SetNumberOfItems(NumOfItmes);
+                        S.AddListings(ref L, ref S);
+                        break;
+
+                    case 2:
+                        Console.WriteLine("Enter Listing Name:");
+                        string Name2 = Console.ReadLine();
+                        this.DeleteListings(Name2);
+                        break;
+
+                    case 3:
+                        Console.WriteLine("What Would You Like To Change?");
+                        Console.WriteLine("1-Name");
+                        Console.WriteLine("2-Descreption");
+                        Console.WriteLine("3-Price");
+                        Console.WriteLine("4-Number Of Items");
+                        string X = Console.ReadLine();
+                        Console.WriteLine("\n");
+                        int choice2;
+
+                        if (X == "1" || X == "2" || X == "3" || X == "4") 
+                        { choice2 = Convert.ToInt32(X); }
+
+                        else
+                        {
+                            Console.WriteLine("Choice Not Valid");
+                            choice2 = 0;
+                            goto case 3;
+                        }
+
+                        switch (choice2) 
+                        {
+                            case 1:
+
+                                Console.WriteLine("Enter Listing Name You Want to Edit:");
+                                string Name3 = Console.ReadLine();
+                                Console.WriteLine("Enter Listing New Name:");
+                                string Name4 = Console.ReadLine();
+                                this.Change_Name_For_Existing_Listing(Name3, Name4); 
+                                break;
+
+                            case 2:
+                                Console.WriteLine("Enter Listing Name You Want to Edit:");
+                                string Name5 = Console.ReadLine();
+                                Console.WriteLine("Enter Listing New Descreption:");
+                                string Descreption = Console.ReadLine();
+                                this.Change_Description_For_Existing_Listing(Name5, Descreption);
+                                break;
+
+                            case 3:
+                                Console.WriteLine("Enter Listing Name You Want to Edit:");
+                                string Name6 = Console.ReadLine();
+                                Console.WriteLine("Enter Listing New Price:");
+                                double Price2 = Convert.ToDouble(Console.ReadLine());
+                                this.Change_Price_For_Existing_Listing(Name6, Price2);
+                                break;
+
+                            case 4:
+                                Console.WriteLine("Enter Listing Name You Want to Edit:");
+                                string Name7 = Console.ReadLine();
+                                Console.WriteLine("Enter Listing New Number Of Items:");
+                                int Number = Convert.ToInt32(Console.ReadLine());
+                                this.Change_NumOfItems_For_Existing_Listing(Name7, Number);
+                                break;
+
+                            default:
+                                Console.WriteLine("Invalid Choice, please try agian...");
+                                break;
+                        }
+                        break;
+
+                    case 4:
+                        this.ViewAllListings(S);
+                        break;
+
+                    case 5:
+                        this.ViewSoldListings(S);                   
+                        break;
+
+                    case 6:
+                        this.ChangeSellerAccountInformation(ref S);                   
+                        break;
+
+                    case 7:
+                        GlobalFun.Welcoming();
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid Choice, please try agian...");
+                        break;
+                }
+            }
+            while (choice != 7);
+
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////( Functions Customer Can Do When Log In Pass Successfully )////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////( Add listings )///////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////       
         public void AddListings(ref Listings L, ref Seller S)
         {
             FileStream FS;
@@ -1111,48 +1178,10 @@ namespace Online_Shoping_Site
             }
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////( Delete listings )///////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////      
 
-        ///////////////////////////////////////Function To Edit Data File After Any Change//////////////////////////////////////////////////
-        public void EditFile(Seller S)
-        {
-            FileStream FS;
-            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
-            BinaryFormatter BF = new BinaryFormatter();
-            Seller[] arr = new Seller[1000000];
-            int i = 0;
-
-
-            //read objects & save to array
-            while (FS.Position < FS.Length)
-            {
-                arr[i] = (Seller)BF.Deserialize(FS);
-                i++;
-            }
-
-            //check if any of the objects in the array eqauls the Edited object then Replace it
-            for (int j = 0; j < i; j++)
-            {
-                if (arr[j].GetName() == S.GetName()
-                    && arr[j].GetPhoneNumber() == S.GetPhoneNumber()
-                    && arr[j].GetEmailAddress() == S.GetEmailAddress())
-                {
-                    arr[j] = new Seller();
-                    arr[j] = S;
-                }
-            }
-            FS.Close();
-
-            FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Create, FileAccess.ReadWrite);
-            for (int k = 0; k < i; k++) { BF.Serialize(FS, arr[k]); }
-
-
-            FS.Close();
-
-        }
-
-
-
-        /////////////////////////////////////////////////////////Delete Listing////////////////////////////////////////////////////////
         public void DeleteListings(string name)
         {
             bool x = false;
@@ -1197,7 +1226,9 @@ namespace Online_Shoping_Site
 
 
 
-        /////////////////////////////////////Fun Change Price For Existing Listing///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////( Add listings )///////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////         
         public void Change_Price_For_Existing_Listing(string name, double Price)
         {
             bool x = false;
@@ -1238,8 +1269,11 @@ namespace Online_Shoping_Site
         }
 
 
-
-        ////////////////////////////////////Fun Change Name For Existing Listing///////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////( Change info and price for existing listing )/////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        //Change Name:
         public void Change_Name_For_Existing_Listing(string oldname, string newname)
         {
             bool x = false;
@@ -1260,7 +1294,8 @@ namespace Online_Shoping_Site
 
             //check if any of the objects in the array eqauls the Edited object then Replace it
             for (int j = 0; j < i; j++)
-            { for (int z = 0; z < arr[j].listings.Count; z++)
+            { 
+                for (int z = 0; z < arr[j].listings.Count; z++)
                 {
                     if (arr[j].listings[z].GetNameOfListing() == oldname && arr[j].listings != null)
                     {
@@ -1270,21 +1305,18 @@ namespace Online_Shoping_Site
                         FS.Close();
                         S.EditFile(S);
                         Console.WriteLine("Listing Name Edited Successfully\n");
-
                     }
-
                 }
-                if (arr[j].listings == null) { Console.WriteLine("Cant Edit Name"); Console.WriteLine("The Listing Does Not Exist\n"); }
-            }
 
+                if (arr[j].listings == null) 
+                { Console.WriteLine("Cant Edit Name"); Console.WriteLine("The Listing Does Not Exist\n"); }
+            }
 
             if (x == false)
             { Console.WriteLine("Cant Edit Name"); Console.WriteLine("The Listing Is not In The Seller Data To Edit\n"); }
         }
 
-
-
-        //////////////////////////////////Fun Change Description For Existing Listing////////////////////////////////////////////////////
+        //Change Description:
         public void Change_Description_For_Existing_Listing(string name, string Description)
         {
             bool x = false;
@@ -1306,7 +1338,8 @@ namespace Online_Shoping_Site
             //check if any of the objects in the array eqauls the Edited object then Replace it
             for (int j = 0; j < i; j++)
             {
-                for (int z = 0; z < arr[j].listings.Count; z++) {
+                for (int z = 0; z < arr[j].listings.Count; z++) 
+                {
                     if (arr[j].listings[z].GetNameOfListing() == name && arr[j].listings != null)
                     {
                         x = true;
@@ -1315,19 +1348,18 @@ namespace Online_Shoping_Site
                         FS.Close();
                         S.EditFile(S);
                         Console.WriteLine("Listing Description Edited Successfully\n");
-                    } }
-                if (arr[j].listings == null) { Console.WriteLine("Cant Edit Description"); Console.WriteLine("The Listing Does Not Exist\n"); }
-            }
+                    } 
+                }
 
+                if (arr[j].listings == null) 
+                { Console.WriteLine("Cant Edit Description"); Console.WriteLine("The Listing Does Not Exist\n"); }
+            }
 
             if (x == false)
             { Console.WriteLine("Cant Edit Description"); Console.WriteLine("The Listing Is not In The Seller Data To Edit\n"); }
         }
 
-
-
-
-        //////////////////////////////////Fun Change Number Of Item For Existing Listing////////////////////////////////////////////////
+        //Change Number Of Items:
         public void Change_NumOfItems_For_Existing_Listing(string name, int NumOfItems)
         {
             bool x = false;
@@ -1338,7 +1370,6 @@ namespace Online_Shoping_Site
             Seller[] arr = new Seller[1000000];
             int i = 0;
 
-
             //read objects & save to array
             while (FS.Position < FS.Length)
             {
@@ -1349,7 +1380,8 @@ namespace Online_Shoping_Site
             //check if any of the objects in the array eqauls the Edited object then Replace it
             for (int j = 0; j < i; j++)
             {
-                for (int z = 0; z < arr[j].listings.Count; z++) {
+                for (int z = 0; z < arr[j].listings.Count; z++) 
+                {
                     if (arr[j].listings[z].GetNameOfListing() == name && arr[j].listings != null)
                     {
                         x = true;
@@ -1358,18 +1390,20 @@ namespace Online_Shoping_Site
                         FS.Close();
                         S.EditFile(S);
                         Console.WriteLine("Listing Number Of Item Edited Successfully\n");
-                    } }
-                if (arr[j].listings == null) { Console.WriteLine("Cant Edit Number Of Item"); Console.WriteLine("The Listing Does Not Exist\n"); }
+                    } 
+                }
+                
+                if (arr[j].listings == null) 
+                { Console.WriteLine("Cant Edit Number Of Item"); Console.WriteLine("The Listing Does Not Exist\n"); }
             }
-
 
             if (x == false)
             { Console.WriteLine("Cant Edit Number Of Item"); Console.WriteLine("The Listing Is not In The Seller Data To Edit\n"); }
         }
 
-
-
-        ////////////////////////////////////////////////////////Fun View All Listings/////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////( View All listing )/////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////        
         public void ViewAllListings(Seller S)
         {
             FileStream FS;
@@ -1378,11 +1412,13 @@ namespace Online_Shoping_Site
             //read objects & save to array
             Seller[] arr = new Seller[1000000];
             int i = 0;
+
             while (FS.Position < FS.Length)
             {
                 arr[i] = (Seller)BF.Deserialize(FS);
                 i++;
             }
+
             //check if any of the objects in the array eqauls the Edited object then Replace it
             for (int j = 0; j < i; j++)
             {
@@ -1393,38 +1429,44 @@ namespace Online_Shoping_Site
                     S = arr[j];
                 }
             }
+
             FS.Close();
 
             if (S.listings.Count != 0)
             {
                 for (int J = 0; J < S.listings.Count; J++)
                 {
-
                     S.listings[J].Print();
                     Console.WriteLine("\n");
                 }
             }
+
             else
             { Console.WriteLine("The Listings Is Empty\n"); }
         }
 
 
-        ///////////////////////////////////////////////View Sold Listings////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////( View Sold listing )////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////        
         public void ViewSoldListings(Seller S) 
         {
             FileStream FS;
             bool found = false;
             if (File.Exists(ProgramFilesFolder + "/SoldListings.txt"))
-            { FS = new FileStream(ProgramFilesFolder + "/SoldListings.txt", FileMode.Open, FileAccess.Read);
+            { 
+                FS = new FileStream(ProgramFilesFolder + "/SoldListings.txt", FileMode.Open, FileAccess.Read);
                 BinaryFormatter BF = new BinaryFormatter();
                 //read objects & save to array
                 Seller[] arr = new Seller[1000000];
                 int i = 0;
+
                 while (FS.Position < FS.Length)
                 {
                     arr[i] = (Seller)BF.Deserialize(FS);
                     i++;
                 }
+
                 //check if any of the objects in the array eqauls the Edited object then Replace it
                 for (int j = 0; j < i; j++)
                 {
@@ -1435,7 +1477,10 @@ namespace Online_Shoping_Site
                         found = true;
                     }
                 }
-                if (found == false) { Console.WriteLine("No Sold Listings to Show\n"); }
+
+                if (found == false) 
+                { Console.WriteLine("No Sold Listings to Show\n"); }
+                
                 FS.Close();
 
                 if (S.listings.Count != 0)
@@ -1448,14 +1493,19 @@ namespace Online_Shoping_Site
                     }
                 }
             }
-            else {
+
+            else 
+            {
                 Console.WriteLine("No Sold Listings to Show\n");
             }
-
         }
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////( Change Phone Number)///////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////( Change account information )///////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        //Change Phone Number:  
         public void ChangeSellerPhoneNumber(ref Seller S)
         {
             FileStream FS;
@@ -1466,11 +1516,13 @@ namespace Online_Shoping_Site
             this.GeneratePhoneNumber(newnumber);
             Seller[] arr = new Seller[1000000];
             int i = 0;
+
             while (FS.Position < FS.Length)
             {
                 arr[i] = (Seller)BF.Deserialize(FS);
                 i++;
             }
+
             for (int j = 0; j < i; j++)
             {
                 if (arr[j].GetName() == S.GetName() && arr[j].GetEmailAddress() == S.GetEmailAddress() && arr[j].GetPhoneNumber() == S.GetPhoneNumber())
@@ -1479,12 +1531,13 @@ namespace Online_Shoping_Site
                     arr[j].SetPhoneNumber(newnumber);
                 }
             }
+
             FS.Close();
-            S.EditFile(S); Console.WriteLine("Changed Successfuly.\n");
+            S.EditFile(S); 
+            Console.WriteLine("Changed Successfuly.\n");
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////( Change Passowrd)///////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //Change Password:
         public void ChangeSellerPassword(ref Seller S)
         {
             FileStream FS;
@@ -1497,11 +1550,13 @@ namespace Online_Shoping_Site
             this.GeneratePassword(newpass, Confirmnewpass);
             Seller[] arr = new Seller[1000000];
             int i = 0;
+
             while (FS.Position < FS.Length)
             {
                 arr[i] = (Seller)BF.Deserialize(FS);
                 i++;
             }
+
             for (int j = 0; j < i; j++)
             {
                 if (arr[j].GetName() == S.GetName() && arr[j].GetEmailAddress() == S.GetEmailAddress() && arr[j].GetPhoneNumber() == S.GetPhoneNumber())
@@ -1510,13 +1565,12 @@ namespace Online_Shoping_Site
                     arr[j].SetPassword(newpass);
                 }
             }
+
             FS.Close();
             S.EditFile(S); Console.WriteLine("Changed Successfuly.\n");
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////( Change Email Address)///////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        //Change Email Address:
         public void ChangeSellerEmailAddress(ref Seller S)
         {
             FileStream FS;
@@ -1527,11 +1581,13 @@ namespace Online_Shoping_Site
             this.GenerateEmailAddress(newEmailAddress);
             Seller[] arr = new Seller[1000000];
             int i = 0;
+
             while (FS.Position < FS.Length)
             {
                 arr[i] = (Seller)BF.Deserialize(FS);
                 i++;
             }
+
             for (int j = 0; j < i; j++)
             {
                 if (arr[j].GetName() == S.GetName() && arr[j].GetEmailAddress() == S.GetEmailAddress() && arr[j].GetPhoneNumber() == S.GetPhoneNumber())
@@ -1540,13 +1596,12 @@ namespace Online_Shoping_Site
                     arr[j].SetEmailAddress(newEmailAddress);
                 }
             }
+
             FS.Close();
             S.EditFile(S); Console.WriteLine("Changed Successfuly.\n");
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////( Change Store Name)///////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        //Change Store Name:
         public void ChangeSellerStoreName(ref Seller S)
         {
             FileStream FS;
@@ -1557,11 +1612,13 @@ namespace Online_Shoping_Site
             this.GenerateName(newStoreName);
             Seller[] arr = new Seller[1000000];
             int i = 0;
+
             while (FS.Position < FS.Length)
             {
                 arr[i] = (Seller)BF.Deserialize(FS);
                 i++;
             }
+
             for (int j = 0; j < i; j++)
             {
                 if (arr[j].GetName() == S.GetName()&& arr[j].GetEmailAddress() == S.GetEmailAddress()&& arr[j].GetPhoneNumber() == S.GetPhoneNumber())
@@ -1570,13 +1627,13 @@ namespace Online_Shoping_Site
                     arr[j].SetStoreNumber(newStoreName);
                 }
             }
+
             FS.Close();
             S.EditFile(S);
             Console.WriteLine("Changed Successfuly.\n");
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////( Change Seller Account Information)////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //Change Account Information:
         public void ChangeSellerAccountInformation(ref Seller S)
         {
             bool condition = false;
@@ -1585,40 +1642,41 @@ namespace Online_Shoping_Site
                 
                 Console.WriteLine("What Do you want to change?\nEnter (1) to change phone number.\nEnter (2) to change password.\nEnter (3)to change email address.\nEnter (4) to change the store name.\nEnter (5) to Go Back.");
                 string b = Console.ReadLine();
-              if (b == "1")
+
+                if (b == "1")
                 {
                     condition = true;
                     this.ChangeSellerPhoneNumber(ref S);
                 }
+
                 else if (b == "2")
                 {
                     condition = true;
                     this.ChangeSellerPassword(ref S);
                 }
+
                 else if (b == "3")
                 {
                     condition = true;
                     this.ChangeSellerEmailAddress(ref S);
                 }
+
                 else if(b == "4")
                 {
                     condition = true;
                     this.ChangeSellerStoreName(ref S);
                 }
+
                 else if (b == "5")
                 {
                     condition = true;
-
                 }
+
                 else
                 {
                     condition = false;
                 }
-
-            }
-        
-
+            }    
         }
-
     }
 }

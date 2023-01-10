@@ -15,7 +15,7 @@ namespace Online_Shoping_Site
     class Customer
     {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////// Atributes /////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////( Atributes )///////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         string Name;
@@ -25,15 +25,14 @@ namespace Online_Shoping_Site
         string CustomerId;
         Address ShippingAddress;
         Payment PaymentInformation;
-        List<Listings> cart = new List<Listings> { };
         public static int counter = 0;
+        List<Listings> cart = new List<Listings> { };
         public static Dictionary<string, object> data = new Dictionary<string, object>();
         public static string ProgramFilesFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Data";
 
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////Set Functions//////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////( Set Functions )//////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////      
         public void SetName(string Name) { this.Name = Name; }
         public void SetEmailAddress(string EmailAddress) { this.EmailAddress = EmailAddress; }
         public void SetPhoneNumber(string PhoneNumber) { this.PhoneNumber = PhoneNumber; }
@@ -41,8 +40,9 @@ namespace Online_Shoping_Site
         public void SetCustomerID(string ID) { this.CustomerId = ID; }
         public void SetShippingAddress(Address ShippingAddress) { this.ShippingAddress = ShippingAddress; }
         public void SetCart(List<Listings> cart) { this.cart = cart; }
+
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////Get Functions//////////////////////////////////////////////////////////
+        ////////////////////////////////////////( Get Functions )//////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public string GetName() { return this.Name; }
         public string GetEmailAddress() { return this.EmailAddress; }
@@ -52,13 +52,13 @@ namespace Online_Shoping_Site
         public Address GetShippingAddress() { return this.ShippingAddress; }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////Check the Data Enterd By the User///////////////////////////////////////////////
-        ////////////////////////////When the User Sign Up For The First Time//////////////////////////////////////////
+        ///////////////////////////////( Check the Data Enterd By the User )///////////////////////////////////////////
+        ////////////////////////////( When the User Sign Up For The First Time )//////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////(Generate Name: Letters only, No Numbers, No Special Charachters)/////////////
+        ///////////////////( Generate Customer Name: Letters only, No Numbers, No Special Charachters )/////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void GenerateName(string Name)
         {
@@ -66,8 +66,7 @@ namespace Online_Shoping_Site
             while (condition == false)
             {
                 condition = true;
-
-                //check if enterd name contains any nmubers
+                //check if enterd name contains any nmubers:
                 for (int i = 0; i < Name.Length; i++)
                 {
                     string x = Convert.ToString(Name[i]);
@@ -93,6 +92,7 @@ namespace Online_Shoping_Site
                     condition = false;
                 }
 
+                //Check Condition:
                 if (condition == false)
                 {
                     Console.WriteLine("The Name You Enterd Does Not Meet The Requirements");
@@ -100,6 +100,7 @@ namespace Online_Shoping_Site
                     Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
                     string x = Console.ReadLine();
 
+                    //Try Again or exit:
                     if (x == "1")
                     {
                         int choice = Convert.ToInt32(x);
@@ -127,8 +128,85 @@ namespace Online_Shoping_Site
             this.Name = Name;
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////( Generate Customer Phone Number )///////////////////////////////////////
+        //////( 10 Numbers, start with 0, second number is 7, third number 7/8/9, the rest are numbers )/////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void GeneratePhoneNumber(string PhoneNumber)
+        {
+            bool condition = false;
+            while (condition == false)
+            {
+                condition = true;
+
+                //check if the phone number length is 10 Numbers:
+                if (PhoneNumber.Length != 10)
+                { condition = false; }
+
+                //check if the phone number start with 0:
+                if (PhoneNumber.Length == 10)
+                {
+                    if (Convert.ToString(PhoneNumber[0]) != Convert.ToString("0"))
+                    { condition = false; }
+
+                    //check if the second phone number is 7:
+                    if (Convert.ToString(PhoneNumber[1]) != Convert.ToString("7"))
+                    { condition = false; }
+
+                    //check if the third phone number is 7 or 8 or 9:
+                    if (Convert.ToString(PhoneNumber[2]) != Convert.ToString("7")
+                     && Convert.ToString(PhoneNumber[2]) != Convert.ToString("8")
+                     && Convert.ToString(PhoneNumber[2]) != Convert.ToString("9"))
+                    { condition = false; }
+
+                    //check if the rest of the phone number are numbers:
+                    for (int i = 3; i < PhoneNumber.Length; i++)
+                    {
+                        string x = Convert.ToString(PhoneNumber[i]);
+                        if (x != Convert.ToString("0") && x != Convert.ToString("1") && x != Convert.ToString("2")
+                        && x != Convert.ToString("3") && x != Convert.ToString("4") && x != Convert.ToString("5")
+                        && x != Convert.ToString("6") && x != Convert.ToString("7") && x != Convert.ToString("8")
+                        && x != Convert.ToString("9"))
+                        { condition = false; }
+                    }
+                }
+
+                if (condition == false)
+                {
+                    Console.WriteLine("The Phone Number You Enterd Is Not valid");
+                    Console.WriteLine("To Enter Anthor Phone Number Enter (1)");
+                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
+                    string x = Console.ReadLine();
+
+                    if (x == "1")
+                    {
+                        int choice = Convert.ToInt32(x);
+                        Console.WriteLine("Enter Phone Number:");
+                        PhoneNumber = Console.ReadLine();
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
+                        Console.WriteLine("Are You Sure You Want To Exit? Answer By(Y:N)");
+                        string Answer = Console.ReadLine();
+
+                        if (Answer == "Y" || Answer == "y")
+                        { GlobalFun.Welcoming(); }
+
+                        else
+                        {
+                            Console.WriteLine("Enter Phone Number:");
+                            PhoneNumber = Console.ReadLine();
+                        }
+                    }
+                }
+            }
+            this.PhoneNumber = PhoneNumber;
+        }
+
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////(Generate Email Address)//////////////////////////////////
+        ///////////////////////////////////( Generate Customer Email Address )////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void GenerateEmailAddress(string EmailAddress)
         {
@@ -136,7 +214,8 @@ namespace Online_Shoping_Site
             while (condition == false)
             {
                 condition = true;
-                //check if the email is valid
+
+                //Check if the email is valid:
                 string regex = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$";
                 condition = Regex.IsMatch(EmailAddress, regex, RegexOptions.IgnoreCase);
                 if (condition == false)
@@ -173,92 +252,17 @@ namespace Online_Shoping_Site
             this.EmailAddress = EmailAddress;
         }
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////(Generate Phone Number)////////////////////////////////////////////
-        //////(10 Numbers, start with 0, second number is 7, third number 7/8/9, the rest are numbers)///////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void GeneratePhoneNumber(string PhoneNumber)
-        {
-            bool condition = false;
-            while (condition == false)
-            {
-                condition = true;
-
-                //check if the phone number is 10 Numbers:
-                if (PhoneNumber.Length != 10)
-                { condition = false; }
-
-                //check if the phone number start with 0:
-                if (PhoneNumber.Length == 10)
-                {
-                    if (Convert.ToString(PhoneNumber[0]) != Convert.ToString("0"))
-                    { condition = false; }
-
-                    //check if the second phone number is 7:
-                    if (Convert.ToString(PhoneNumber[1]) != Convert.ToString("7"))
-                    { condition = false; }
-
-                    //check if the third phone number is 7 or 8 or 9:
-                    if (Convert.ToString(PhoneNumber[2]) != Convert.ToString("7")
-                     && Convert.ToString(PhoneNumber[2]) != Convert.ToString("8")
-                     && Convert.ToString(PhoneNumber[2]) != Convert.ToString("9"))
-                    { condition = false; }
-
-                    //check if the rest of the phone number are numbers:
-                    for (int i = 3; i < PhoneNumber.Length; i++)
-                    {
-                        string x = Convert.ToString(PhoneNumber[i]);
-                        if (x != Convert.ToString("0") && x != Convert.ToString("1") && x != Convert.ToString("2")
-                        && x != Convert.ToString("3") && x != Convert.ToString("4") && x != Convert.ToString("5")
-                        && x != Convert.ToString("6") && x != Convert.ToString("7") && x != Convert.ToString("8")
-                        && x != Convert.ToString("9"))
-                        { condition = false; }
-
-                    }
-                }
-
-                if (condition == false)
-                {
-                    Console.WriteLine("The Phone Number You Enterd Is Not valid");
-                    Console.WriteLine("To Enter Anthor Phone Number Enter (1)");
-                    Console.WriteLine("To Exit This Page Enter Any Chratecter Other Than 1");
-                    string x = Console.ReadLine();
-                    if (x == "1")
-                    {
-                        int choice = Convert.ToInt32(x);
-                        Console.WriteLine("Enter Phone Number:");
-                        PhoneNumber = Console.ReadLine();
-                    }
-
-                    else
-                    {
-                        Console.WriteLine("(Any Data You Enterd Will Be Lost)");
-                        Console.WriteLine("Are You Sure You Want To Exit? Answer By(Y:N)");
-                        string Answer = Console.ReadLine();
-                        if (Answer == "Y" || Answer == "y")
-                        { GlobalFun.Welcoming(); }
-
-                        else
-                        {
-                            Console.WriteLine("Enter Phone Number:");
-                            PhoneNumber = Console.ReadLine();
-                        }
-                    }
-                }
-            }
-            this.PhoneNumber = PhoneNumber;
-
-        }
+        
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////(Generate Password)/////////////////////////////////////////////
+        ///////////////////////////////////////( Generate Customer Password )/////////////////////////////////////
         //////////////(Confirm Password, 8 charchters, special charchter, capital & small letters)///////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void GeneratePassword(string Password, string ConfirmSPassword)
         {
             bool condition = false;
 
-            //confirm password:
+            //Confirm password:
             while (condition == false)
             {
                 condition = true;
@@ -284,7 +288,7 @@ namespace Online_Shoping_Site
                 if (Password.Length < 8)
                 { condition = false; }
 
-                //Check if password contains one special charachter at least
+                //Check if password contains one special charachter at least:
                 if (!(Password.ToLower().Contains('~') || Password.ToLower().Contains('!') || Password.ToLower().Contains('@')
                    || Password.ToLower().Contains('#') || Password.ToLower().Contains('$') || Password.ToLower().Contains('^')
                    || Password.ToLower().Contains('&') || Password.ToLower().Contains('*') || Password.ToLower().Contains('(')
@@ -299,25 +303,25 @@ namespace Online_Shoping_Site
                     condition = false;
                 }
 
-
-                //Check if password contains one capital Letter at least & one small Letter at least
+                //Check if password contains one capital Letter at least & one small Letter at least:
                 if (Password.ToLower().Contains(" "))
                 { condition = false; }
 
-                for (int i = 0; i < Password.Length; i++)
+                for (int i=0; i<Password.Length; i++)
                 {
                     if (Char.IsUpper(Password[i]))
                     { break; }
 
-                    else if (i == Password.Length - 1)
+                    else if (i == Password.Length-1)
                     { condition = false; }
                 }
 
-                for (int i = 0; i < Password.Length; i++)
+                for (int i=0; i<Password.Length; i++)
                 {
                     if (Char.IsLower(Password[i]))
                     { break; }
-                    else if (i == Password.Length - 1)
+
+                    else if (i == Password.Length-1)
                     { condition = false; }
                 }
 
@@ -331,7 +335,7 @@ namespace Online_Shoping_Site
                     ConfirmSPassword = Console.ReadLine();
                     bool confirm = false;
 
-                    //confirm password:
+                    //Confirm password:
                     while (confirm == false)
                     {
                         confirm = true;
@@ -373,18 +377,10 @@ namespace Online_Shoping_Site
             }
             this.Password = Password;
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////(Generate Customer ID)////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////
-        public void GenerateCustomerID()
-        {
-            counter++;
-            this.CustomerId = Convert.ToString(counter);
-        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////(Generate Shipping Address: Country, City, Street, Apartment)//////////////////
-        ////////////////////////////(No number, No space, No special charachters)/////////////////////////////
+        ////////////////////////( Generate Shipping Address: Country, City, Street, Apartment )////////////////
+        ////////////////////////////( No number, No space, No special charachters )///////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////
         public void GenerateShippingAddress(string Country, string City, String Street, String ApartmentN)
         {
@@ -653,13 +649,21 @@ namespace Online_Shoping_Site
             this.ShippingAddress.SetApartment(ApartmentN);
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////(Generate Customer ID)////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void GenerateCustomerID()
+        {
+            counter++;
+            this.CustomerId = Convert.ToString(counter);
+        }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////Functions On Customer////////////////////////////////////////
+        ////////////////////////////////////////////( Functions On Customer )////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////(Sign Up  Function)///////////////////////////////////
+        //////////////////////////////////////////////( Sign Up  Function )///////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////////////////
 
         public void SignUpCustomer()
@@ -725,10 +729,10 @@ namespace Online_Shoping_Site
             this.CheckCustomer();
         }
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////Check If Seller Exist/////////////////////////////////////////////////////////
-        ////////////////////////////////////////When New Seller Sign Up/////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////( Check If Customer Exist )////////////////////////////////////////
+        ////////////////////////////////////////( When New Customer Sign Up )//////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////     
         public void CheckCustomer()
         {
             //Exist or not:
@@ -802,10 +806,10 @@ namespace Online_Shoping_Site
             }
         }
 
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////Save Customer Account To CustomerData File///////////////////////////////////////
-        //////////////////////////////////When New Customer Account Pass The Checkup Test////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////( Save Customer Account To Customer Data File )////////////////////////////////
+        //////////////////////////////////( When New Customer Account Pass The Checkup Test )////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////     
         public void SaveToFile()
         {
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "/Data"))
@@ -947,9 +951,10 @@ namespace Online_Shoping_Site
               
                 string x = Console.ReadLine();
 
-                //To Avoid Exception Of Converting Non Convertable Type To Int
+                //To Avoid Exception Of Converting Non Convertable Type To Int:
                 if (x == "1" || x == "2" || x == "3" || x == "4" || x == "5" || x == "6" || x == "7")
                 { choice = Convert.ToInt16(x); }
+
                 else 
                 { choice = 8; }
 
@@ -979,10 +984,15 @@ namespace Online_Shoping_Site
                         Console.WriteLine("2-Edit");
                         Console.WriteLine("Enter Youre Choice:");
                         string s = Console.ReadLine();
-                        if (s == "1") { this.ViewAddedListingsToCart(C); }
-                       else if (s == "2") { this.EditAddedListingsToCart(ref C); }
-                        else { Console.WriteLine("Invalid Choice..."); }
-                       
+
+                        if (s == "1") 
+                        { this.ViewAddedListingsToCart(C); }
+
+                        else if (s == "2") 
+                        { this.EditAddedListingsToCart(ref C); }
+
+                        else 
+                        { Console.WriteLine("Invalid Choice..."); }
 
                         break;
 
@@ -1010,13 +1020,13 @@ namespace Online_Shoping_Site
             while (choice != 8);
         }
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////( Functions Customer Can Do When Log In Pass Successfully )////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////( Functions Customer Can Do When Log In Pass Successfully )////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////( View all available listings )///////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////( View all available listings )///////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void ViewAllAvailableListings()
         {
             FileStream FS;
@@ -1026,6 +1036,7 @@ namespace Online_Shoping_Site
             //read objects & save to array
             Seller[] arr = new Seller[1000000];
             int i = 0;
+
             while (FS.Position < FS.Length)
             {
                 arr[i] = (Seller)BF.Deserialize(FS);
@@ -1034,6 +1045,7 @@ namespace Online_Shoping_Site
 
             FS.Close();
             bool condition = false;
+
             for (int j = 0; j < i; j++)
             {
                 for (int k = 0; k < arr[j].listings.Count; k++)
@@ -1044,6 +1056,7 @@ namespace Online_Shoping_Site
                 }
                
             }
+
             if(condition == false)
             { Console.WriteLine("No Listings To Show\n"); }
         }
@@ -1060,6 +1073,7 @@ namespace Online_Shoping_Site
             //read objects & save to array
             Seller[] arr = new Seller[1000000];
             int i = 0;
+
             while (FS.Position < FS.Length)
             {
                 arr[i] = (Seller)BF.Deserialize(FS);
@@ -1068,7 +1082,9 @@ namespace Online_Shoping_Site
 
             FS.Close();
             bool found = false;
-            for (int j = 0; j < i; j++) {
+
+            for (int j = 0; j < i; j++) 
+            {
                 for (int x = 0; x < arr[j].listings.Count; x++)
                 {
                     if (arr[j].listings[x].GetNameOfListing() == Name)
@@ -1079,15 +1095,14 @@ namespace Online_Shoping_Site
                             Console.WriteLine("Seller PhoneNumber:" + arr[j].GetPhoneNumber());
                             Console.WriteLine("Seller EmailAddress:" + arr[j].GetEmailAddress());
                             Console.WriteLine("Seller StoreNumber:" + arr[j].GetStoreNumber()+"\n");
-                            
                             Console.WriteLine("Listings Information:");
                             arr[j].listings[x].Print();
-                        Console.WriteLine("\n");
-                        found = true;
+                            Console.WriteLine("\n");
+                            found = true;
                     }
                 }
-
             }
+
             if(found==false)
             {
                 Console.WriteLine("\nThe Listings Not Found.\n");
@@ -1106,6 +1121,7 @@ namespace Online_Shoping_Site
             //read objects & save to array
             Customer[] arr = new Customer[1000000];
             int i = 0;
+
             while (FC.Position < FC.Length)
             {
                 arr[i] = (Customer)BF.Deserialize(FC);
@@ -1120,6 +1136,7 @@ namespace Online_Shoping_Site
             //read objects & save to array
             Seller[] arr2 = new Seller[1000000];
             int x = 0;
+
             while (FS.Position < FS.Length)
             {
                 arr2[x] = (Seller)bf.Deserialize(FS);
@@ -1129,10 +1146,12 @@ namespace Online_Shoping_Site
             FS.Close();
             bool condition = false;
             bool condition2 = false;
+
             //check if item is avaliable
             for (int y = 0; y < i; y++)
             {
-               if( arr[y].cart != null){
+               if( arr[y].cart != null)
+                {
                 for (int r = 0; r < arr[y].cart.Count; r++)
                 {
                     if (arr[y].cart[y].GetNameOfListing() == name)
@@ -1141,10 +1160,13 @@ namespace Online_Shoping_Site
                         Console.WriteLine("Try To Edit The Number Of Items.\n");
                         condition2 = true;
                     }
-                } }
+                } 
+                }
             }
-            for (int z = 0; z < x; z++) { for(int r = 0; r < arr2[z].listings.Count; r++) {
-                    if (arr2[z].listings[r].GetNameOfListing() == name && arr2[z].listings[r].GetNumberOfItems() > 0 && condition2==false) {
+            for (int z = 0; z < x; z++) { for(int r = 0; r < arr2[z].listings.Count; r++) 
+                {
+                    if (arr2[z].listings[r].GetNameOfListing() == name && arr2[z].listings[r].GetNumberOfItems() > 0 && condition2==false)
+                    {
                         Listings L = new Listings();
                         L.SetNameOfListing(name);
                         L.SetPrice(arr2[z].listings[r].GetPrice());
@@ -1154,10 +1176,10 @@ namespace Online_Shoping_Site
                         condition = true;
                         this.EditFile(C);
                         Console.WriteLine("\nAdded Succssefuly\n");
-                        
+                    } 
+                } 
+            }        
 
-                    } } }
-          
             if(condition == false) { Console.WriteLine("\nThe Listing Is Not Available.\n"); }
         }
 
@@ -1183,7 +1205,8 @@ namespace Online_Shoping_Site
             bool found = false;
             for (int j = 0; j < i; j++)
             {
-                if (arr[j].GetName()==C.GetName()&& arr[j].GetPhoneNumber()==C.GetPhoneNumber() && arr[j].GetEmailAddress()==C.GetEmailAddress()) {
+                if (arr[j].GetName()==C.GetName()&& arr[j].GetPhoneNumber()==C.GetPhoneNumber() && arr[j].GetEmailAddress()==C.GetEmailAddress()) 
+                {
                     for (int k = 0; k < arr[j].cart.Count; k++)
                     {
                         arr[j].cart[k].Print();
@@ -1192,20 +1215,15 @@ namespace Online_Shoping_Site
                 }
                 
             }
+
             if (found == false) { 
             Console.WriteLine("Empty Cart");
             }
         }
 
-
-
-
-
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////( Edit Added Listings To Cart)/////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-         
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////        
             public void EditAddedListingsToCart(ref Customer C)
         {
             Console.WriteLine("Your Cart:");
@@ -1219,8 +1237,9 @@ namespace Online_Shoping_Site
             Console.WriteLine("4-Go Back.");
             string choice = Console.ReadLine();
             bool condition = false;
-            while (condition == false) {
 
+            while (condition == false) 
+            {
                 if (choice == "1")
                 {
                     FileStream FC;
@@ -1229,15 +1248,15 @@ namespace Online_Shoping_Site
                     //read objects & save to array
                     Customer[] customerarr = new Customer[1000000];
                     int i = 0;
+
                     while (FC.Position < FC.Length)
                     {
                         customerarr[i] = (Customer)BF.Deserialize(FC);
                         i++;
                     }
+
                     FC.Close();     
                     bool condition2 = false;
-            
-                 
 
                     for (int j = 0; j < i; j++)
                     {
@@ -1254,15 +1273,19 @@ namespace Online_Shoping_Site
                                     condition2 = true;
                                     Console.WriteLine("\nEdited Successfully..\n");
                                 }
-                                if (condition2 == true) { break; }
+
+                                if (condition2 == true) 
+                                { break; }
                             }
                         }
                     }
 
+                    if (condition2 == false) 
+                    { Console.WriteLine("\nCant Delete..\n"); }
 
-                    if (condition2 == false) { Console.WriteLine("\nCant Delete..\n"); }
                     condition = true;
                 }
+
                 else if (choice == "2")
                 {
                     FileStream FC;
@@ -1271,16 +1294,19 @@ namespace Online_Shoping_Site
                     //read objects & save to array
                     Customer[] customerarr = new Customer[1000000];
                     int i = 0;
+
                     while (FC.Position < FC.Length)
                     {
                         customerarr[i] = (Customer)BF.Deserialize(FC);
                         i++;
                     }
+
                     FC.Close();
 
                     FileStream FS;
                     FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
                     BinaryFormatter bf = new BinaryFormatter();
+
                     //read objects & save to array
                     Seller[] sellerarr = new Seller[1000000];
                     int x = 0;
@@ -1289,11 +1315,13 @@ namespace Online_Shoping_Site
                         sellerarr[x] = (Seller)bf.Deserialize(FS);
                         x++;
                     }
+
                     FS.Close();
 
                     bool found = false;
                     bool condition2 = false;
                     int NumOfItemForSeller=0;
+
                     for (int y = 0; y < x; y++)
                     {
                         for (int a = 0; a < sellerarr[y].listings.Count; a++)
@@ -1310,57 +1338,66 @@ namespace Online_Shoping_Site
                             {
                                 if (customerarr[j].cart[k].GetNameOfListing() == name && found == true && customerarr[j].cart[k].GetNumberOfItems() + 1 <= NumOfItemForSeller)
                                 {
-
                                     customerarr[j].cart[k].SetNumberOfItems(customerarr[j].cart[k].GetNumberOfItems() + 1);
                                     C = customerarr[j];
                                     C.EditFile(C);
                                     condition2 = true;
                                     Console.WriteLine("\nEdited Successfully..\n");
                                 }
+
                                 if (condition2 == true) { break; }
                             }
                         }
                     }
 
+                    if (condition2 == false) 
+                    { Console.WriteLine("\nCant Edit..\n"); }
 
-                    if (condition2 == false) { Console.WriteLine("\nCant Edit..\n"); }
-
-                    condition = true; }
-                else if (choice == "3") {
+                    condition = true; 
+                }
+                    else if (choice == "3") 
+                    {
                     FileStream FC;
                     FC = new FileStream(ProgramFilesFolder + "/CustomerData.txt", FileMode.Open, FileAccess.Read);
                     BinaryFormatter BF = new BinaryFormatter();
                     //read objects & save to array
                     Customer[] customerarr = new Customer[1000000];
                     int i = 0;
+
                     while (FC.Position < FC.Length)
                     {
                         customerarr[i] = (Customer)BF.Deserialize(FC);
                         i++;
                     }
+
                     FC.Close();
 
                     FileStream FS;
                     FS = new FileStream(ProgramFilesFolder + "/SellerData.txt", FileMode.Open, FileAccess.Read);
                     BinaryFormatter bf = new BinaryFormatter();
+
                     //read objects & save to array
                     Seller[] sellerarr = new Seller[1000000];
                     int x = 0;
+
                     while (FS.Position < FS.Length)
                     {
                         sellerarr[x] = (Seller)bf.Deserialize(FS);
                         x++;
                     }
+
                     FS.Close();
 
                     bool found = false;
                     bool condition2 = false;
                     int NumOfItemForSeller = 0;
+
                     for (int y = 0; y < x; y++)
                     {
                         for (int a = 0; a < sellerarr[y].listings.Count; a++)
                         {
-                            if (sellerarr[y].listings[a].GetNumberOfItems() > 0 && sellerarr[y].listings[a].GetNameOfListing() == name) { found = true; NumOfItemForSeller = sellerarr[y].listings[a].GetNumberOfItems(); }
+                            if (sellerarr[y].listings[a].GetNumberOfItems() > 0 && sellerarr[y].listings[a].GetNameOfListing() == name) 
+                            { found = true; NumOfItemForSeller = sellerarr[y].listings[a].GetNumberOfItems(); }
                         }
                     }
 
@@ -1372,29 +1409,30 @@ namespace Online_Shoping_Site
                             {
                                 if (customerarr[j].cart[k].GetNameOfListing() == name && found == true && customerarr[j].cart[k].GetNumberOfItems() - 1 > 0)
                                 {
-
                                     customerarr[j].cart[k].SetNumberOfItems(customerarr[j].cart[k].GetNumberOfItems() - 1);
                                     C = customerarr[j];
                                     C.EditFile(C);
                                     condition2 = true;
                                     Console.WriteLine("\nEdited Successfully..\n");
                                 }
+                                
                                 if (condition2 == true) { break; }
                             }
                         }
                     }
 
-
-                    if (condition2 == false) { Console.WriteLine("\nCant Edit..\n"); }
+                    if (condition2 == false) 
+                    { Console.WriteLine("\nCant Edit..\n"); }
                     condition = true; }
-                else if (choice == "4") { condition = true; }
-                else { Console.WriteLine("Choice Invalid"); }
+
+                else if (choice == "4") 
+                { condition = true; }
+                   
+                else 
+                    { Console.WriteLine("Choice Invalid"); }
             }
      }
 
-
-            /// 
-            /// 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////( Checkout Listings )/////////////////////////////////////////////
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1495,8 +1533,10 @@ namespace Online_Shoping_Site
 
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////( Change Phone Number)////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////( Change account information )////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        //Change Phone Number:
         public void ChangeCustomerPhoneNumber(ref Customer C)
         {
             FileStream FC;
@@ -1507,11 +1547,13 @@ namespace Online_Shoping_Site
             this.GeneratePhoneNumber(newnumber);
             Customer[] arr = new Customer[1000000];
             int i = 0;
+
             while (FC.Position < FC.Length)
             {
                 arr[i] = (Customer)BF.Deserialize(FC);
                 i++;
             }
+
             for (int j = 0; j < i; j++)
             {
                 if (arr[j].GetPhoneNumber() == C.GetPhoneNumber())
@@ -1520,13 +1562,13 @@ namespace Online_Shoping_Site
                     C.SetPhoneNumber(newnumber);
                 }
             }
+
             FC.Close();
             this.EditFile(C);
             Console.WriteLine("Changed Successfuly.\n");
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////( Change Password)////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //Change Password:
         public void ChangeCustomerPassword(ref Customer C)
         {
             FileStream FC;
@@ -1539,11 +1581,13 @@ namespace Online_Shoping_Site
             this.GeneratePassword(newpass, Confirmnewpass);
             Customer[] arr = new Customer[1000000];
             int i = 0;
+
             while (FC.Position < FC.Length)
             {
                 arr[i] = (Customer)BF.Deserialize(FC);
                 i++;
             }
+
             for (int j = 0; j < i; j++)
             {
                 if (arr[j].GetPassword() == C.GetPassword())
@@ -1552,13 +1596,13 @@ namespace Online_Shoping_Site
                     C.SetPassword(newpass);
                 }
             }
+
             FC.Close();
             C.EditFile(C);
             Console.WriteLine("Changed Successfuly.\n");
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////( Change Email Address)////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //Change Email Address:
         public void ChangeCustomerEmailAddress(ref Customer C)
         {
             FileStream FC;
@@ -1569,11 +1613,13 @@ namespace Online_Shoping_Site
             this.GenerateEmailAddress(newEmailAddress);
             Customer[] arr = new Customer[1000000];
             int i = 0;
+
             while (FC.Position < FC.Length)
             {
                 arr[i] = (Customer)BF.Deserialize(FC);
                 i++;
             }
+
             for (int j = 0; j < i; j++)
             {
                 if (arr[j].GetEmailAddress() == C.GetEmailAddress())
@@ -1582,12 +1628,12 @@ namespace Online_Shoping_Site
                     C.SetEmailAddress(newEmailAddress);
                 }
             }
+
             FC.Close();
             C.EditFile(C); Console.WriteLine("Changed Successfuly.\n");
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////( Change Customer Account Information)////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //Change Account Information:
         public void ChangeCustomerAccountInformation(ref Customer C)
         {
             bool condition = false;
@@ -1596,36 +1642,36 @@ namespace Online_Shoping_Site
                 
                 Console.WriteLine("What Do you want to change?\nEnter (1) to change phone number.\nEnter (2) to change password.\nEnter (3) to change email address.\nEnter (4) to Go Back.");
                 string b = Console.ReadLine();
+
                 if (b == "1")
                 {
                     condition = true;
                     this.ChangeCustomerPhoneNumber(ref C);
                 }
+
                 else if(b == "2")
                 {
                     condition = true;
                     this.ChangeCustomerPassword(ref C);
                 }
+
                 else if (b == "3")
                 {
                     condition = true;
                     this.ChangeCustomerEmailAddress(ref C);
                 }
+
                 else if (b == "4")
                 {
                     condition = true;
-                   
                 }
+
                 else if(b!="1"|| b != "2"||b != "3" || b != "4")
                 {
                     Console.WriteLine("Invalid Choice...");
                     condition = false;
                 }
-
-            }
-         
-           
-
+            }               
         }
         
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1642,11 +1688,13 @@ namespace Online_Shoping_Site
             
             Seller[] arr = new Seller[1000000];
             int i = 0;
+
             while (FS.Position < FS.Length)
             {
                 arr[i] = (Seller)BF.Deserialize(FS);
                 i++;
             }
+
             bool found = false;
             for (int j = 0; j < i; j++)
             {
@@ -1661,10 +1709,11 @@ namespace Online_Shoping_Site
                     }
                 }
             }
-            if (found==false) { Console.WriteLine("Not Found\n"); }
-            FS.Close();
-            
-        }
 
+            if (found==false) 
+            { Console.WriteLine("Not Found\n"); }
+
+            FS.Close(); 
+        }
     }
 }
